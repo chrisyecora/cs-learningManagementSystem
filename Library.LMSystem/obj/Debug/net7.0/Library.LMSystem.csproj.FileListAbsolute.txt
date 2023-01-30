@@ -1,0 +1,12 @@
+/Users/christopheryecora/Projects/LMSystem/Library.LMSystem/bin/Debug/net7.0/Library.LMSystem.deps.json
+/Users/christopheryecora/Projects/LMSystem/Library.LMSystem/bin/Debug/net7.0/Library.LMSystem.dll
+/Users/christopheryecora/Projects/LMSystem/Library.LMSystem/bin/Debug/net7.0/Library.LMSystem.pdb
+/Users/christopheryecora/Projects/LMSystem/Library.LMSystem/obj/Debug/net7.0/Library.LMSystem.csproj.AssemblyReference.cache
+/Users/christopheryecora/Projects/LMSystem/Library.LMSystem/obj/Debug/net7.0/Library.LMSystem.GeneratedMSBuildEditorConfig.editorconfig
+/Users/christopheryecora/Projects/LMSystem/Library.LMSystem/obj/Debug/net7.0/Library.LMSystem.AssemblyInfoInputs.cache
+/Users/christopheryecora/Projects/LMSystem/Library.LMSystem/obj/Debug/net7.0/Library.LMSystem.AssemblyInfo.cs
+/Users/christopheryecora/Projects/LMSystem/Library.LMSystem/obj/Debug/net7.0/Library.LMSystem.csproj.CoreCompileInputs.cache
+/Users/christopheryecora/Projects/LMSystem/Library.LMSystem/obj/Debug/net7.0/Library.LMSystem.dll
+/Users/christopheryecora/Projects/LMSystem/Library.LMSystem/obj/Debug/net7.0/refint/Library.LMSystem.dll
+/Users/christopheryecora/Projects/LMSystem/Library.LMSystem/obj/Debug/net7.0/Library.LMSystem.pdb
+/Users/christopheryecora/Projects/LMSystem/Library.LMSystem/obj/Debug/net7.0/ref/Library.LMSystem.dll
