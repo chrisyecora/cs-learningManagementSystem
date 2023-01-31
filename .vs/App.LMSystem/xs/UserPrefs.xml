@@ -3,16 +3,16 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="LMSystem/Program.cs">
     <Files>
-      <File FileName="LMSystem/Program.cs" Line="67" Column="51" />
-      <File FileName="Library.LMSystem/Models/Course.cs" />
-      <File FileName="Library.LMSystem/Models/Person.cs" />
+      <File FileName="LMSystem/Program.cs" Line="209" Column="55" />
+      <File FileName="Library.LMSystem/Models/Course.cs" Line="7" Column="38" />
+      <File FileName="Library.LMSystem/Models/Person.cs" Line="1" Column="1" />
       <File FileName="Library.LMSystem/Models/Assignment.cs" />
-      <File FileName="Library.LMSystem/Models/Module.cs" />
+      <File FileName="Library.LMSystem/Models/Module.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="App.LMSystem" expanded="True" selected="True">
+          <Node name="App.LMSystem" expanded="True">
             <Node name="App.LMSystem" expanded="True" />
             <Node name="Library.LMSystem" expanded="True">
               <Node name="Models" expanded="True" />
@@ -22,7 +22,9 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.App.LMSystem PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

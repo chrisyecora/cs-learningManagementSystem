@@ -63,13 +63,25 @@ namespace MyApp // Note: actual namespace depends on the project name.
                             } else if (userInt == 3) {
                                 // Creating an assignment
                                 var newAssignment = new Assignment();
+
+                                // get course code from user
                                 Console.WriteLine("\n\n******************************\n");
                                 Console.Write("Course code of course to add assignment to: ");
                                 var courseCode = Console.ReadLine() ?? string.Empty;
-                                // TODO: Search for course in courseList. Make sure it exists.
-                                var queryResult = courseList
-                                    .Where(c => c.Name
-                                    .Equals(courseCode, StringComparison.InvariantCultureIgnoreCase));
+
+                                // query couseList
+                                var queryResult = courseList.Where(c => c.CourseCode.Contains(courseCode));
+
+                                // List results in a menu format for user
+                                Console.WriteLine("Which Course?");
+                                int i = 1;
+                                queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.ShortDisplay}"));
+                                var userSelection = int.Parse(Console.ReadLine() ?? "0");
+
+                                // get selected course
+                                var selectedCourse = queryResult.ElementAt(userSelection - 1);
+
+                                // new assignment properties
                                 Console.WriteLine("Please enter the information below.\n");
                                 Console.Write("Name: ");
                                 newAssignment.Name = Console.ReadLine() ?? string.Empty;
@@ -81,8 +93,9 @@ namespace MyApp // Note: actual namespace depends on the project name.
                                 Console.Write("Due Date (format: MM/DD/YYYY): ");
                                 var assignmentDueDateString = Console.ReadLine() ?? DateTime.Today.ToString();
                                 newAssignment.DueDate = DateTime.Parse(assignmentDueDateString);
-                                // TODO: Add assignment to correct course.
 
+                                // adding to assignments list
+                                selectedCourse.Assignments.Add(newAssignment);
                             } else {
                                 // Invalid input
                                 Console.WriteLine("Invalid input. Please try again.");
@@ -195,7 +208,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                                 // TODO: query for course code, confirm specific course
                             } else if (userInt == 2) {
                                 // update a student
-                                Console.Write("Student name: ");
+                                Console.Write("Enter student's first, last, or middle name: ");
                                 var studentName = Console.ReadLine() ?? string.Empty;
                                 // TODO: query for student, confirm specific student
                             } else {

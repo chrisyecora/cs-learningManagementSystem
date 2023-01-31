@@ -2,6 +2,9 @@
 namespace Library.LMSystem.Models;
 public class Course {
     public Course() {
+        Assignments = new List<Assignment>();
+        Roster = new List<Person>();
+        Modules = new List<Module>();
     }
     // Course code
     public String CourseCode {
