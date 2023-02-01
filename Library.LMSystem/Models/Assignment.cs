@@ -25,5 +25,7 @@ public class Assignment
         get;
         set;
     }
+
+    public String Display => $"{Name} - {TotalPoints} points - {DueDate}";
 }
 

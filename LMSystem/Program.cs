@@ -22,7 +22,6 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 Console.WriteLine("6. Remove a student from a course’s roster");
                 Console.WriteLine("7. Exit program");
                 Console.WriteLine("*******************************************\n\n");
-
                 Console.Write(">>> ");
                 var userInput = Console.ReadLine() ?? string.Empty;
                 if (int.TryParse(userInput, out int userInt)) {
@@ -110,7 +109,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         Console.WriteLine("1. List of students");
                         Console.WriteLine("2. List of courses");
                         Console.WriteLine("3. List all courses a student is taking");
-                        Console.Write(">>>");
+                        Console.Write(">>> ");
                         userInput = Console.ReadLine() ?? string.Empty;
                         if (int.TryParse(userInput, out userInt)) {
                             Console.WriteLine("");
@@ -139,16 +138,35 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         Console.WriteLine("\n\n******************************\n");
                         Console.Write("Course code of course to add student to: ");
                         var courseCode = Console.ReadLine() ?? string.Empty;
+                        var queryResult = courseList
+                            .Where(c => c.CourseCode
+                            .Equals(courseCode, StringComparison.InvariantCultureIgnoreCase));
+                        Console.WriteLine("Which Course?");
+                        int i = 1;
+                        queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.ShortDisplay}"));
+                        Console.Write(">>> ");
+                        var userSelection = int.Parse(Console.ReadLine() ?? "0");
+                        var selectedCourse = queryResult.ElementAt(userSelection - 1);
                         // TODO: query for course in courseList
                         Console.Write("Student name: ");
                         var studentName = Console.ReadLine() ?? string.Empty;
-                        // TODO: query for student in studentList
+                        var queryResult2 = studentList
+                            .Where(s => s.Name
+                            .Contains(studentName, StringComparison.InvariantCultureIgnoreCase));
+                        Console.WriteLine("Which Student?");
+                        i = 1;
+                        queryResult2.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.Name}"));
+                        Console.Write(">>> ");
+                        userSelection = int.Parse(Console.ReadLine() ?? "0");
+                        var selectedStudent = queryResult2.ElementAt(userSelection - 1);
+                        selectedCourse.Roster.Add(selectedStudent);
+                        Console.WriteLine("Student added successfully to roster.");
                     } else if (userInt == 4) {
                         // Search for student or course
                         Console.WriteLine("\n\n******************************\n");
                         Console.WriteLine("1. Search for a student");
                         Console.WriteLine("2. Search for a course");
-                        Console.Write(">>>");
+                        Console.Write(">>> ");
                         userInput = Console.ReadLine() ?? string.Empty;
                         if (int.TryParse(userInput, out userInt)) {
                             if (userInt == 1) {
@@ -161,26 +179,63 @@ namespace MyApp // Note: actual namespace depends on the project name.
                                 Console.WriteLine("1. Search by code");
                                 Console.WriteLine("2. Search by name");
                                 Console.WriteLine("3. Search by description");
+                                Console.Write(">>> ");
                                 userInput = Console.ReadLine() ?? string.Empty;
+                                Course selectedCourse = null;
                                 if (int.TryParse(userInput, out userInt)) {
                                     if (userInt == 1) {
                                         // search by code
                                         Console.Write("Course code: ");
                                         var courseCode = Console.ReadLine() ?? string.Empty;
-                                        // TODO: query for courses
+                                        var queryResult = courseList
+                                            .Where(c => c.CourseCode
+                                            .Equals(courseCode, StringComparison.InvariantCultureIgnoreCase));
+                                        Console.WriteLine("Which Course?");
+                                        int i = 1;
+                                        queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.ShortDisplay}"));
+                                        var userSelection = int.Parse(Console.ReadLine() ?? "0");
+                                        selectedCourse = queryResult.ElementAt(userSelection - 1);
                                     } else if (userInt == 2) {
                                         // search by name
                                         Console.Write("Course name: ");
                                         var courseName = Console.ReadLine() ?? string.Empty;
-                                        // TODO: query for courses
+                                        var queryResult = courseList
+                                            .Where(c => c.Name
+                                            .Contains(courseName, StringComparison.InvariantCultureIgnoreCase));
+                                        Console.WriteLine("Which Course?");
+                                        int i = 1;
+                                        queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.ShortDisplay}"));
+                                        var userSelection = int.Parse(Console.ReadLine() ?? "0");
+                                        selectedCourse = queryResult.ElementAt(userSelection - 1);
                                     } else if (userInt == 3) {
-                                        // search by description
-                                        Console.Write("Description: ");
+                                        Console.Write("Write some of the description here: ");
                                         var courseDescription = Console.ReadLine() ?? string.Empty;
-                                        // TODO: query for courses
+                                        var queryResult = courseList
+                                            .Where(c => c.Description
+                                            .Contains(courseDescription, StringComparison.InvariantCultureIgnoreCase));
+                                        Console.WriteLine("Which Course?");
+                                        int i = 1;
+                                        queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.ShortDisplay}"));
+                                        var userSelection = int.Parse(Console.ReadLine() ?? "0");
+                                        selectedCourse = queryResult.ElementAt(userSelection - 1);
                                     } else {
                                         // Invalid input
                                         Console.WriteLine("Invalid input. Please try again.");
+                                    }
+
+                                    Console.WriteLine($"You have selected {selectedCourse?.CourseCode}. " +
+                                        $"Would you like to see the full information for this course? \n(y/n):");
+                                    userInput = Console.ReadLine() ?? "n";
+                                    if (userInput.Equals("y", StringComparison.InvariantCultureIgnoreCase)) {
+                                        // list full information
+                                        Console.WriteLine("\n\n****************************");
+                                        Console.WriteLine(selectedCourse.Display);
+                                        Console.WriteLine("Roster:");
+                                        selectedCourse.Roster.ForEach(s => Console.WriteLine(s.Display));
+                                        Console.WriteLine("Assignments:");
+                                        selectedCourse.Assignments.ForEach(a => Console.WriteLine(a.Display));
+                                        Console.WriteLine("Modules:");
+                                        Console.WriteLine("**Currently None**");
                                     }
                                 } else {
                                     // Invalid input
@@ -205,7 +260,14 @@ namespace MyApp // Note: actual namespace depends on the project name.
                                 // update a course
                                 Console.Write("Course code: ");
                                 var courseCode = Console.ReadLine() ?? string.Empty;
-                                // TODO: query for course code, confirm specific course
+                                var queryResult = courseList
+                                    .Where(c => c.CourseCode
+                                    .Equals(courseCode, StringComparison.InvariantCultureIgnoreCase));
+                                Console.WriteLine("Which Course?");
+                                int i = 1;
+                                queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.ShortDisplay}"));
+                                var userSelection = int.Parse(Console.ReadLine() ?? "0");
+                                var selectedCourse = queryResult.ElementAt(userSelection - 1);
                             } else if (userInt == 2) {
                                 // update a student
                                 Console.Write("Enter student's first, last, or middle name: ");
@@ -225,6 +287,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         Console.Write("Course code: ");
                         var courseCode = Console.ReadLine() ?? string.Empty;
                         // TODO: query for course code, confirm specific course
+
                         Console.Write("Student name: ");
                         var studentName = Console.ReadLine() ?? string.Empty;
                         // TODO: query for student, confirm specific student
