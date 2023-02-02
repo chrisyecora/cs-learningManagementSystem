@@ -29,6 +29,16 @@ namespace Library.LMSystem.Services
         public IEnumerable<Course> QueryByDescription(String description) {
             return Courses.Where(c => c.Description.Contains(description, StringComparison.InvariantCultureIgnoreCase));
         }
+        public List<Course> QueryByStudentInRosters(Person student){
+            var courses = new List<Course>();
+            foreach (var course in Courses) {
+                var query = course.Roster.Where(stu => stu.Name.Contains(student.Name, StringComparison.InvariantCultureIgnoreCase));
+                if (query.ToList().Count() > 0) {
+                    courses.Add(course);
+                }
+            }
+            return courses;
+        }
     }
 }
 

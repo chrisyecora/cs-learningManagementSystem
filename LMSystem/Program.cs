@@ -6,13 +6,11 @@ namespace MyApp // Note: actual namespace depends on the project name.
 {
     internal class Program {
         static void Main(string[] args) {
-            // student helper for user input
             StudentHelper studentHelper = new StudentHelper();
-            // course helper for user input
             CourseHelper courseHelper = new CourseHelper();
             Console.WriteLine("Welcome to the Learning Management System.");
             Console.WriteLine("Please select from the following options:");
-            // loop control
+
             bool cont = true;
             while (cont) {
                 Console.WriteLine("\n");
@@ -46,7 +44,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         courseHelper.RemoveStudentFromCourse(studentHelper);
                         break;
                     case 5:
-                        // list a student's courses
+                        courseHelper.ListCoursesOfAStudent(studentHelper);
                         break;
                     case 6:
                         studentHelper.ListAllStudents();
@@ -69,8 +67,8 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     default:
                         Console.WriteLine("Invalid selection.");
                         break;
-                } // switch (userInput)
-            } // while (cont)
-        } // Main
-    } // class
-} // namespace
+                }
+            }
+        }
+    }
+}

@@ -60,6 +60,7 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("Which Student?");
             int i = 1;
             queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.Name}"));
+            Console.WriteLine(">>> ");
             var userSelection = int.Parse(Console.ReadLine() ?? string.Empty);
 
             // get selected course
@@ -68,4 +69,3 @@ namespace App.LMSystem.Helpers
 
     }
 }
-

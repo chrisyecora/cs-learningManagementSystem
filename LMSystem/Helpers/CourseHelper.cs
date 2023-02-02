@@ -111,6 +111,14 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("\n....Student removed successfully.\n");
         }
 
+        public void ListCoursesOfAStudent(StudentHelper studentHelper) {
+            var student = studentHelper.GetStudentByName();
+            var coursesOfStudent = courseService.QueryByStudentInRosters(student);
+            Console.WriteLine($"{student.Name}'s current courses:");
+            int i = 1;
+            coursesOfStudent.ForEach(c => Console.WriteLine($"{i++}. {c.ShortDisplay}"));
+        }
+
         public Course GetCourseByCode() {
             // get course code from user
             Console.WriteLine("\n******************************\n");
@@ -189,4 +197,3 @@ namespace App.LMSystem.Helpers
         }
     }
 }
-
