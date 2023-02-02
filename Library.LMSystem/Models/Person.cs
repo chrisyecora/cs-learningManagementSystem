@@ -3,8 +3,6 @@ namespace Library.LMSystem.Models;
 public class Person
 {
     public Person() {
-        Name = "JOHN DOE";
-        Classification = "N/A";
         Grades = new Dictionary<string, float>();
     }
     // Name

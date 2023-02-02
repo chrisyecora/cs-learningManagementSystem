@@ -66,6 +66,5 @@ namespace App.LMSystem.Helpers
             // get selected course
             return queryResult.ElementAt(userSelection - 1);
         }
-
     }
 }
