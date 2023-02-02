@@ -11,4 +11,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Library.LMSystem\Library.LMSystem.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
 </Project>
