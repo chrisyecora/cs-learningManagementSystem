@@ -26,6 +26,6 @@ public class Assignment
         set;
     }
 
-    public String Display => $"{Name} - {TotalPoints} points - {DueDate}";
+    public String Display => $"{Name}: {TotalPoints} points. Due {DueDate.Date}";
 }
 

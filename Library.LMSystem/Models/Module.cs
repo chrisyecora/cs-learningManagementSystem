@@ -4,6 +4,7 @@ public class Module
 {
     public Module()
     {
+        Content = new List<ContentItem>();
     }
     // Name
     public String Name {
