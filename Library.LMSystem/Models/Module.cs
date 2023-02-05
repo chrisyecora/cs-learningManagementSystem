@@ -5,6 +5,8 @@ public class Module
     public Module()
     {
         Content = new List<ContentItem>();
+        Name = string.Empty;
+        Description = string.Empty;
     }
     // Name
     public String Name {

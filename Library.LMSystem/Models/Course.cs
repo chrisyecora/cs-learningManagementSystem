@@ -5,6 +5,9 @@ public class Course {
         Assignments = new List<Assignment>();
         Roster = new List<Person>();
         Modules = new List<Module>();
+        CourseCode = string.Empty;
+        Name = string.Empty;
+        Description = string.Empty;
     }
     // Course code
     public String CourseCode {

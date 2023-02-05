@@ -4,6 +4,8 @@ public class Assignment
 {
     public Assignment()
     {
+        Name = string.Empty;
+        Description = string.Empty;
     }
     // Name
     public String Name {

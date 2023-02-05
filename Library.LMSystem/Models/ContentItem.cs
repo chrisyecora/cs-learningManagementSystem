@@ -2,6 +2,9 @@
 public class ContentItem
 {
     public ContentItem() {
+        Name = string.Empty;
+        Description = string.Empty;
+        Path = string.Empty;
     }
 
     public String Name {

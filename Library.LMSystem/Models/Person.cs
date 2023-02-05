@@ -4,6 +4,8 @@ public class Person
 {
     public Person() {
         Grades = new Dictionary<string, float>();
+        Name = string.Empty;
+        Classification = string.Empty;
     }
     // Name
     public String Name {
