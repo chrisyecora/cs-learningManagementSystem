@@ -213,6 +213,8 @@ namespace App.LMSystem.Helpers
                 course.Roster.ForEach(s => Console.WriteLine(s.Display));
                 Console.WriteLine("* Assignments *");
                 course.Assignments.ForEach(a => Console.WriteLine(a.Display));
+                Console.WriteLine("* Announcements *");
+                course.Announcements.ForEach(a => Console.WriteLine(a.Display));
             }
         }
     }

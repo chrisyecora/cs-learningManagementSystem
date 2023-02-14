@@ -12,6 +12,8 @@ namespace Library.LMSystem.Models
             get;
             set;
         }
+
+        public string Display => $"{Title}: {Body}";
         public Announcement() {
         }
     }
