@@ -51,6 +51,26 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("\n....Assignment created successfully.\n");
         }
 
+        public void CreateAnnouncement() {
+            // Creating an announcement
+            var newAnnouncement = new Announcement();
+
+            // get course from code
+            var selectedCourse = GetCourseByCode();
+
+            // new assignment properties
+            Console.WriteLine("Please enter the information below.\n");
+            Console.Write("Title: ");
+            newAnnouncement.Title = Console.ReadLine() ?? string.Empty;
+            Console.Write("Body of announcement: ");
+            newAnnouncement.Body = Console.ReadLine() ?? string.Empty;
+            
+            // adding announcement to course
+            courseService.AddAnnouncementToCourse(selectedCourse, newAnnouncement);
+
+            Console.WriteLine("\n....Announcement created successfully.\n");
+        }
+
         public void UpdateCourse() {
             Console.WriteLine("How would you like to search?");
             Console.WriteLine("1. Code");

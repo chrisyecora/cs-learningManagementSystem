@@ -39,6 +39,11 @@ public class Course {
         get;
         set;
     }
+    // Announcements
+    public List<Announcement> Announcements {
+        get;
+        set;
+    }
 
     public String Display => $"{CourseCode}: {Name} - {Description}";
 
