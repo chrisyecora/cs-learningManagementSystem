@@ -12,8 +12,8 @@ namespace Library.LMSystem.Models
             get;
             set;
         }
-        public Announcement()
-        {
+        public Announcement() {
+        }
     }
 }
 
