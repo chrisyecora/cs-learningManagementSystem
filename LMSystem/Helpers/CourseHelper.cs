@@ -118,7 +118,8 @@ namespace App.LMSystem.Helpers
         }
 
         public void UpdateAnnouncement() {
-            var announcement = GetAnnouncement();
+            var course = GetCourseByCode();
+            var announcement = GetAnnouncement(course);
             Console.WriteLine("Please enter the information below.");
             Console.WriteLine("NOTE: If you do not wish to modify the current property, press enter.");
             Console.WriteLine($"Current Title: {announcement.Title}");
@@ -134,6 +135,17 @@ namespace App.LMSystem.Helpers
                 announcement.Body = newBody;
             }
             Console.WriteLine("\n....Announcement updated successfully.\n");
+        }
+
+        public void DeleteAnnouncement() {
+            var course = GetCourseByCode();
+            var announcement = GetAnnouncement(course);
+            Console.Write("Are you sure you would like to delete this announcement? (y/n): ");
+            var userChoice = Console.ReadLine() ?? "n";
+            if (userChoice.Equals("y", StringComparison.InvariantCultureIgnoreCase)) {
+                course.Announcements.Remove(announcement);
+                Console.WriteLine("....Announcement has been deleted successfully.\n");
+            }
         }
 
         public void AddStudentToCourse(StudentHelper studentHelper) {
@@ -218,14 +230,13 @@ namespace App.LMSystem.Helpers
             return queryResult.ElementAt(userSelection - 1);
         }
 
-        public Announcement GetAnnouncement() {
-            var selectedCourse = GetCourseByCode();
+        public Announcement GetAnnouncement(Course course) {
             Console.WriteLine("\n******************************\n");
             Console.Write("Enter some of the title of the announcement: ");
             var query = Console.ReadLine() ?? string.Empty;
 
             // query courseList
-            var queryResult = courseService.QueryForAnnouncements(selectedCourse, query);
+            var queryResult = courseService.QueryForAnnouncements(course, query);
 
             // List results in a menu format for user
             Console.WriteLine("Which Announcement?");
