@@ -117,6 +117,25 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("\n....Course updated successfully.\n");
         }
 
+        public void UpdateAnnouncement() {
+            var announcement = GetAnnouncement();
+            Console.WriteLine("Please enter the information below.");
+            Console.WriteLine("NOTE: If you do not wish to modify the current property, press enter.");
+            Console.WriteLine($"Current Title: {announcement.Title}");
+            Console.Write("New title: ");
+            var newTitle = Console.ReadLine() ?? string.Empty;
+            if (!newTitle.Equals(string.Empty)) {
+                announcement.Title = newTitle;
+            }
+            Console.WriteLine($"Current body: {announcement.Body}");
+            Console.Write("New body: ");
+            var newBody = Console.ReadLine() ?? string.Empty;
+            if (!newBody.Equals(string.Empty)) {
+                announcement.Body = newBody;
+            }
+            Console.WriteLine("\n....Announcement updated successfully.\n");
+        }
+
         public void AddStudentToCourse(StudentHelper studentHelper) {
             var student = studentHelper.GetStudentByName();
             var course = GetCourseByCode();
@@ -192,6 +211,26 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("Which Course?");
             int i = 1;
             queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.ShortDisplay}"));
+            Console.Write(">>> ");
+            var userSelection = int.Parse(Console.ReadLine() ?? string.Empty);
+
+            // get selected course
+            return queryResult.ElementAt(userSelection - 1);
+        }
+
+        public Announcement GetAnnouncement() {
+            var selectedCourse = GetCourseByCode();
+            Console.WriteLine("\n******************************\n");
+            Console.Write("Enter some of the title of the announcement: ");
+            var query = Console.ReadLine() ?? string.Empty;
+
+            // query courseList
+            var queryResult = courseService.QueryForAnnouncements(selectedCourse, query);
+
+            // List results in a menu format for user
+            Console.WriteLine("Which Announcement?");
+            int i = 1;
+            queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.Display}"));
             Console.Write(">>> ");
             var userSelection = int.Parse(Console.ReadLine() ?? string.Empty);
 

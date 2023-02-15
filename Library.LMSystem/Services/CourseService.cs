@@ -48,6 +48,10 @@ namespace Library.LMSystem.Services
             }
             return courses;
         }
+
+        public IEnumerable<Announcement> QueryForAnnouncements(Course course, String query) {
+            return course.Announcements.Where(announcement => announcement.Title.Contains(query));
+        }
     }
 }
 

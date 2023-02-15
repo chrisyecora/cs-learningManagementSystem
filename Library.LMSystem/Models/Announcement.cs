@@ -3,7 +3,7 @@ namespace Library.LMSystem.Models
 {
     public class Announcement
     {
-        public string? Title {
+        public string Title {
             get;
             set;
         }
@@ -15,6 +15,7 @@ namespace Library.LMSystem.Models
 
         public string Display => $"{Title}: {Body}";
         public Announcement() {
+            Title = string.Empty;
         }
     }
 }
