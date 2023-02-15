@@ -26,8 +26,11 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 Console.WriteLine("7. Create a course.");
                 Console.WriteLine("8. Update a course.");
                 Console.WriteLine("9. Create an assignment for a course.");
-                Console.WriteLine("10. List all courses");
-                Console.WriteLine("11. Exit program\n\n");
+                Console.WriteLine("10. Create an announcement for a course");
+                Console.WriteLine("11. Update an annoucement from a course");
+                Console.WriteLine("12. Delete an annoucement from a course");
+                Console.WriteLine("13. List all courses");
+                Console.WriteLine("14. Exit program\n\n");
                 Console.Write(">>> ");
                 var userInput = int.Parse(Console.ReadLine() ?? "11");
                 switch (userInput) {
@@ -59,9 +62,18 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         courseHelper.CreateAssignment();
                         break;
                     case 10:
-                        courseHelper.ListAllCourses();
+                        courseHelper.CreateAnnouncement();
                         break;
                     case 11:
+                        courseHelper.UpdateAnnouncement();
+                        break;
+                    case 12:
+                        courseHelper.DeleteAnnouncement();
+                        break;
+                    case 13:
+                        courseHelper.ListAllCourses();
+                        break;
+                    case 14:
                         cont = false;
                         break;
                     default:

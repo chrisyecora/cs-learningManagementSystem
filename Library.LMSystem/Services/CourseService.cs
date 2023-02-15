@@ -22,6 +22,10 @@ namespace Library.LMSystem.Services
             course.Assignments.Add(assignment);
         }
 
+        public void AddAnnouncementToCourse(Course course, Announcement announcement) {
+            course.Announcements.Add(announcement);
+        }
+
         public IEnumerable<Course> QueryByCode(String code) {
             return Courses.Where(c => c.CourseCode.Equals(code, StringComparison.InvariantCultureIgnoreCase));
         }
@@ -43,6 +47,10 @@ namespace Library.LMSystem.Services
                 }
             }
             return courses;
+        }
+
+        public IEnumerable<Announcement> QueryForAnnouncements(Course course, String query) {
+            return course.Announcements.Where(announcement => announcement.Title.Contains(query));
         }
     }
 }

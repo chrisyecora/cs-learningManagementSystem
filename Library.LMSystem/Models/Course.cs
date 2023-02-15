@@ -5,6 +5,7 @@ public class Course {
         Assignments = new List<Assignment>();
         Roster = new List<Person>();
         Modules = new List<Module>();
+        Announcements = new List<Announcement>();
         CourseCode = string.Empty;
         Name = string.Empty;
         Description = string.Empty;
@@ -36,6 +37,11 @@ public class Course {
     }
     // Modules
     public List<Module> Modules {
+        get;
+        set;
+    }
+    // Announcements
+    public List<Announcement> Announcements {
         get;
         set;
     }
