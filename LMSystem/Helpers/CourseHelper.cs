@@ -148,6 +148,22 @@ namespace App.LMSystem.Helpers
             }
         }
 
+        public void CUDModule() {
+            // Choose between Create, Update, or Delete option
+            Console.WriteLine("\n\n******************************\n");
+            Console.WriteLine("1. Create module");
+            Console.WriteLine("2. Update module");
+            Console.WriteLine("3. Delete module");
+            Console.Write(">>> ");
+            var userChoice = int.Parse(Console.ReadLine() ?? string.Empty);
+            var selectedCourse = GetCourseByCode();
+            if (userChoice == 1) {
+                // Creating a module
+                var newModule = new Module();
+
+            }
+        }
+
         public void AddStudentToCourse(StudentHelper studentHelper) {
             var student = studentHelper.GetStudentByName();
             var course = GetCourseByCode();
