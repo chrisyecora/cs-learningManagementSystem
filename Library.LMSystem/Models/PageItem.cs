@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Library.LMSystem.Models
 {
-    public class PageItem
+    public class PageItem : ContentItem
     {
         public string? HTMLBody {
             get;
