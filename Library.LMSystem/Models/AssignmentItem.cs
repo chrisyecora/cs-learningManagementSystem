@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Library.LMSystem.Models
 {
-    public class AssignmentItem
+    public class AssignmentItem : ContentItem
     {
         public Assignment? assignment {
             get;
