@@ -7,6 +7,11 @@ public class Person
         Name = string.Empty;
         Classification = string.Empty;
     }
+
+    public int Id {
+        get;
+        set;
+    }
     // Name
     public String Name {
         get;
@@ -23,6 +28,6 @@ public class Person
         set;
     }
     // Display
-    public String Display => $"{Name} - {Classification}";
+    public String Display => $"[{Id}] {Name} - {Classification}";
 }
 

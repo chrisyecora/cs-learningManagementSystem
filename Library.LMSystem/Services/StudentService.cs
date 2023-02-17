@@ -10,13 +10,23 @@ namespace Library.LMSystem.Services
             set;
         }
 
+        private HashSet<int> StudentIds {
+            get;
+            set;
+        }
+
         public StudentService()
         {
             Students = new List<Person>();
+            StudentIds = new HashSet<int>();
         }
 
-        public void AddStudent(Person person) {
-            Students.Add(person);
+        public bool AddStudent(Person person) {
+            if (StudentIds.Add(person.Id)) {
+                Students.Add(person);
+                return true;
+            }
+            return false;
         }
 
         public IEnumerable<Person> QueryByName(String name) {

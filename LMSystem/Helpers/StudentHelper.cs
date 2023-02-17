@@ -16,12 +16,18 @@ namespace App.LMSystem.Helpers
             var newPerson = new Person();
             Console.WriteLine("\n\n******************************\n");
             Console.WriteLine("Please enter the information below.\n");
+            Console.Write("ID: ");
+            newPerson.Id = int.Parse(Console.ReadLine() ?? "0");
             Console.Write("Name: ");
             newPerson.Name = Console.ReadLine() ?? string.Empty;
             Console.Write("Classification: ");
             newPerson.Classification = Console.ReadLine() ?? string.Empty;
-            studentService.AddStudent(newPerson);
-            Console.WriteLine("\n....Student created successfully.");
+            if (studentService.AddStudent(newPerson)) {
+                Console.WriteLine("\n....Student created successfully.");
+            } else {
+                Console.WriteLine("\n....Error creating student. Most likely, this id is taken.");
+            }
+            
         }
 
         public void UpdateStudent() {
