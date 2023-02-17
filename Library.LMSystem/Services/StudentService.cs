@@ -5,7 +5,7 @@ namespace Library.LMSystem.Services
 {
     public class StudentService
     {
-        public List<Person> Students {
+        public List<Student> Students {
             get;
             set;
         }
@@ -17,19 +17,19 @@ namespace Library.LMSystem.Services
 
         public StudentService()
         {
-            Students = new List<Person>();
+            Students = new List<Student>();
             StudentIds = new HashSet<int>();
         }
 
-        public bool AddStudent(Person person) {
-            if (StudentIds.Add(person.Id)) {
-                Students.Add(person);
+        public bool AddStudent(Student student) {
+            if (StudentIds.Add(student.Id)) {
+                Students.Add(student);
                 return true;
             }
             return false;
         }
 
-        public IEnumerable<Person> QueryByName(String name) {
+        public IEnumerable<Student> QueryByName(String name) {
             return Students.Where(s => s.Name.Contains(name, StringComparison.InvariantCultureIgnoreCase));
         }
     }

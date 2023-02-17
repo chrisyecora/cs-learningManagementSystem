@@ -13,7 +13,7 @@ namespace App.LMSystem.Helpers
 
         public void CreateStudent() {
             // Creating a student
-            var newPerson = new Person();
+            var newPerson = new Student();
             Console.WriteLine("\n\n******************************\n");
             Console.WriteLine("Please enter the information below.\n");
             Console.Write("ID: ");
@@ -53,7 +53,7 @@ namespace App.LMSystem.Helpers
             studentService.Students.ForEach(s => Console.WriteLine(s.Display));
         }
 
-        public Person GetStudentByName() {
+        public Student GetStudentByName() {
             // get course code from user
             Console.WriteLine("\n******************************\n");
             Console.Write("Enter student's first or last name: ");
@@ -65,7 +65,7 @@ namespace App.LMSystem.Helpers
             // List results in a menu format for user
             Console.WriteLine("Which Student?");
             int i = 1;
-            queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.Name}"));
+            queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.Display}"));
             Console.WriteLine(">>> ");
             var userSelection = int.Parse(Console.ReadLine() ?? string.Empty);
 
