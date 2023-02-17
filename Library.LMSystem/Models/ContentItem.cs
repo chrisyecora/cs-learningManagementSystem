@@ -21,4 +21,6 @@ public class ContentItem
         get;
         set;
     }
+
+    public virtual string Display => $"{Name}: {Description}";
 }

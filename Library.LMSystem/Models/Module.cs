@@ -22,5 +22,8 @@ public class Module
         get;
         set;
     }
+
+    public string Display =>
+    $"{Name}: {Description}\n\t{string.Join("\n\t", Content.Select(content => content.Display))}";
 }
 

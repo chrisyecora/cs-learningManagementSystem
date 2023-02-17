@@ -148,6 +148,56 @@ namespace App.LMSystem.Helpers
             }
         }
 
+        public void CUDModule() {
+            // Choose between Create, Update, or Delete option
+            Console.WriteLine("\n\n******************************\n");
+            Console.WriteLine("1. Create module");
+            Console.WriteLine("2. Update module");
+            Console.WriteLine("3. Delete module");
+            Console.Write(">>> ");
+            var userChoice = int.Parse(Console.ReadLine() ?? string.Empty);
+            var selectedCourse = GetCourseByCode();
+            if (userChoice == 1) {
+                // Creating a module
+                var newModule = new Module();
+                Console.WriteLine("Please enter the following information.");
+                Console.Write("Name: ");
+                newModule.Name = Console.ReadLine() ?? string.Empty;
+                Console.Write("Description: ");
+                newModule.Description = Console.ReadLine() ?? string.Empty;
+                selectedCourse.Modules.Add(newModule);
+                Console.WriteLine("....Module has been created successfully.\n");
+            } else if (userChoice == 2) {
+                // Updating a module
+                var module = GetModuleFromCourse(selectedCourse);
+                Console.WriteLine("Please enter the information below.");
+                Console.WriteLine("NOTE: If you do not wish to modify the current property, press enter.");
+                Console.WriteLine($"Current Name: {module.Name}");
+                Console.Write("New Name: ");
+                var newName = Console.ReadLine() ?? string.Empty;
+                if (!newName.Equals(string.Empty)) {
+                    module.Name = newName;
+                }
+                Console.WriteLine($"Current description: {module.Description}");
+                Console.Write("New description: ");
+                var newDesc = Console.ReadLine() ?? string.Empty;
+                if (!newDesc.Equals(string.Empty)) {
+                    module.Description = newDesc;
+                }
+                Console.WriteLine("\n....Module updated successfully.\n");
+            } else if (userChoice == 3) {
+                // Deleting a module
+                var module = GetModuleFromCourse(selectedCourse);
+                // delete module
+                Console.Write("Are you sure you would like to delete this module? (y/n): ");
+                var userConfirmation = Console.ReadLine() ?? "n";
+                if (userConfirmation.Equals("y", StringComparison.InvariantCultureIgnoreCase)) {
+                    selectedCourse.Modules.Remove(module);
+                    Console.WriteLine("....Module has been deleted successfully.\n");
+                }
+            }
+        }
+
         public void AddStudentToCourse(StudentHelper studentHelper) {
             var student = studentHelper.GetStudentByName();
             var course = GetCourseByCode();
@@ -249,6 +299,25 @@ namespace App.LMSystem.Helpers
             return queryResult.ElementAt(userSelection - 1);
         }
 
+        public Module GetModuleFromCourse(Course course) {
+            Console.WriteLine("\n******************************\n");
+            Console.Write("Enter the name of the Module: ");
+            var query = Console.ReadLine() ?? string.Empty;
+
+            // query courseList
+            var queryResult = courseService.QueryForModules(course, query);
+
+            // List results in a menu format for user
+            Console.WriteLine("Which Module?");
+            int i = 1;
+            queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.Display}"));
+            Console.Write(">>> ");
+            var userSelection = int.Parse(Console.ReadLine() ?? string.Empty);
+
+            // get selected course
+            return queryResult.ElementAt(userSelection - 1);
+        }
+
         public void ListAllCourses() {
             int i = 1;
             courseService.Courses.ForEach(c => Console.WriteLine($"{i++}. {c.ShortDisplay}"));
@@ -265,6 +334,8 @@ namespace App.LMSystem.Helpers
                 course.Assignments.ForEach(a => Console.WriteLine(a.Display));
                 Console.WriteLine("* Announcements *");
                 course.Announcements.ForEach(a => Console.WriteLine(a.Display));
+                Console.WriteLine("* Modules *");
+                course.Modules.ForEach(module => Console.WriteLine(module.Display));
             }
         }
     }
