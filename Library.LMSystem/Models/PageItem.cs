@@ -8,8 +8,6 @@ namespace Library.LMSystem.Models
             set;
         }
 
-        public override string Display => base.Display;
-
         public PageItem()
         {
         }

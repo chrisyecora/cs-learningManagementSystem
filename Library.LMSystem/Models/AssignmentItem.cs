@@ -7,8 +7,6 @@ namespace Library.LMSystem.Models
             get;
             set;
         }
-
-        public override string Display => base.Display;
         public AssignmentItem()
         {
         }

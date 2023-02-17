@@ -1,23 +1,17 @@
 ﻿namespace Library.LMSystem.Models;
 public class ContentItem
 {
-    public ContentItem() {
-        Name = string.Empty;
-        Description = string.Empty;
-        Path = string.Empty;
-    }
-
-    public String Name {
+    public int Id {
         get;
         set;
     }
 
-    public String Description {
+    public string? Name {
         get;
         set;
     }
 
-    public String Path {
+    public string? Description {
         get;
         set;
     }

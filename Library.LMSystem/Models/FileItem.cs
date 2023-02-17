@@ -3,12 +3,10 @@ namespace Library.LMSystem.Models
 {
     public class FileItem : ContentItem
     {
-        public string? FilePath {
+        public string? Path {
             get;
             set;
         }
-
-        public override string Display => base.Display;
 
         public FileItem()
         {
