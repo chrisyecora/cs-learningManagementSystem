@@ -160,7 +160,24 @@ namespace App.LMSystem.Helpers
             if (userChoice == 1) {
                 // Creating a module
                 var newModule = new Module();
-
+                Console.WriteLine("Please enter the following information.");
+                Console.Write("Name: ");
+                newModule.Name = Console.ReadLine() ?? string.Empty;
+                Console.Write("Description: ");
+                newModule.Description = Console.ReadLine() ?? string.Empty;
+                selectedCourse.Modules.Add(newModule);
+                Console.WriteLine("....Module has been created successfully.\n");
+            } else if (userChoice == 2) {
+                // Updating a module
+                // func for locating module
+                // var module = GetModuleFromCourse(selectedCourse)
+                // query for module inside of course.
+                // run update func for name and decsription
+            } else if (userChoice == 3) {
+                // Deleting a module
+                // func for locating module
+                // var module = GetModuleFromCourse(selectedCourse)
+                // delete module
             }
         }
 
@@ -281,6 +298,8 @@ namespace App.LMSystem.Helpers
                 course.Assignments.ForEach(a => Console.WriteLine(a.Display));
                 Console.WriteLine("* Announcements *");
                 course.Announcements.ForEach(a => Console.WriteLine(a.Display));
+                Console.WriteLine("* Modules *");
+                course.Modules.ForEach(module => Console.WriteLine(module.Display));
             }
         }
     }

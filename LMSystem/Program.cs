@@ -72,7 +72,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         courseHelper.DeleteAnnouncement();
                         break;
                     case 13:
-                        // C,U,D modules
+                        courseHelper.CUDModule();
                         break;
                     case 14:
                         courseHelper.ListAllCourses();
