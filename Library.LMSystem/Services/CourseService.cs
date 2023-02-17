@@ -52,6 +52,10 @@ namespace Library.LMSystem.Services
         public IEnumerable<Announcement> QueryForAnnouncements(Course course, String query) {
             return course.Announcements.Where(announcement => announcement.Title.Contains(query));
         }
+
+        public IEnumerable<Module> QueryForModules(Course course, String query) {
+            return course.Modules.Where(announcement => announcement.Name.Contains(query));
+        }
     }
 }
 
