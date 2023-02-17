@@ -22,8 +22,11 @@ namespace App.LMSystem.Helpers
             newCourse.Name = Console.ReadLine() ?? string.Empty;
             Console.Write("Description: ");
             newCourse.Description = Console.ReadLine() ?? string.Empty;
-            courseService.AddCourse(newCourse);
-            Console.WriteLine("\n....Course created successfully.\n");
+            if (courseService.AddCourse(newCourse)) {
+                Console.WriteLine("\n....Course created successfully.\n");
+            } else {
+                Console.WriteLine("\n....Error adding course. Most probably this course code is taken.");
+            }
         }
         public void CreateAssignment() {
             // Creating an assignment

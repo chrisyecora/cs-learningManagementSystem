@@ -9,13 +9,23 @@ namespace Library.LMSystem.Services
             get;
             set;
         }
+
+        private HashSet<string> CourseCodes {
+            get;
+            set;
+        }
         public CourseService()
         {
             Courses = new List<Course>();
+            CourseCodes = new HashSet<string>();
         }
 
-        public void AddCourse(Course course) {
-            Courses.Add(course);
+        public bool AddCourse(Course course) {
+            if (CourseCodes.Add(course.CourseCode)) {
+                Courses.Add(course);
+                return true;
+            }
+            return false;
         }
 
         public void AddAssignmentToCourse(Course course, Assignment assignment) {
