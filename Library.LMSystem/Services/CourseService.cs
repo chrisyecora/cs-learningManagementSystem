@@ -29,6 +29,11 @@ namespace Library.LMSystem.Services
         }
 
         public void AddAssignmentToCourse(Course course, Assignment assignment) {
+            if (course.Assignments.Count > 0) {
+                assignment.Id = course.Assignments.Max(a => a.Id) + 1;
+            } else {
+                assignment.Id = 1;
+            }
             course.Assignments.Add(assignment);
         }
 

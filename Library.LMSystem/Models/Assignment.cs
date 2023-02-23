@@ -7,6 +7,11 @@ public class Assignment
         Name = string.Empty;
         Description = string.Empty;
     }
+    // Id
+    public int Id {
+        get;
+        set;
+    }
     // Name
     public String Name {
         get;
@@ -28,6 +33,6 @@ public class Assignment
         set;
     }
 
-    public String Display => $"{Name}: {TotalPoints} points. Due {DueDate.Date}";
+    public String Display => $"[{Id}] {Name}: {TotalPoints} points. Due {DueDate.Date}";
 }
 
