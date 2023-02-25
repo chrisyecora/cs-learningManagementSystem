@@ -48,9 +48,15 @@ namespace App.LMSystem.Helpers
             var assignmentDueDateString = Console.ReadLine() ?? DateTime.Today.ToString();
             newAssignment.DueDate = DateTime.Parse(assignmentDueDateString);
 
-            // adding assignment to course
-            courseService.AddAssignmentToCourse(selectedCourse, newAssignment);
-
+            Console.Write("Would you like to add this assignment to a group? (y/n):");
+            var addToGroup = Console.ReadLine() ?? string.Empty;
+            if (addToGroup.Equals("y", StringComparison.InvariantCultureIgnoreCase)) {
+                var assignmentGroup = FindOrCreateAssignmentGroup(selectedCourse);
+                courseService.AddAssignmentToCourse(selectedCourse, newAssignment, assignmentGroup);
+            } else {
+                // adding assignment to course
+                courseService.AddAssignmentToCourse(selectedCourse, newAssignment);
+            }
             Console.WriteLine("\n....Assignment created successfully.\n");
         }
 
@@ -320,6 +326,28 @@ namespace App.LMSystem.Helpers
             // get selected course
             return queryResult.ElementAt(userSelection - 1);
         }
+        public AssignmentGroup FindOrCreateAssignmentGroup(Course course) {
+            int i = 1;
+            course.AssignmentGroups.ForEach(group => Console.WriteLine($"{i++}. {group.Name}"));
+            Console.WriteLine($"{i}. Create a new group");
+            Console.Write(">>> ");
+            var choice = int.Parse(Console.ReadLine()?? i.ToString());
+            if (choice == i) {
+                // creating a new assignment group
+                var newAssignmentGroup = new AssignmentGroup();
+                Console.WriteLine("Please enter the following information for the new Assignment group.");
+                Console.Write("Name: ");
+                newAssignmentGroup.Name = Console.ReadLine() ?? string.Empty;
+                Console.Write("Weight: ");
+                newAssignmentGroup.Weight = double.Parse(Console.ReadLine() ?? "0.00");
+                courseService.AddAssignmentGroup(course, newAssignmentGroup);
+                return newAssignmentGroup;
+
+            } else {
+                // existing assignment group
+                return course.AssignmentGroups[choice - 1];
+            }
+        }
 
         public void ListAllCourses() {
             int i = 1;
@@ -333,12 +361,19 @@ namespace App.LMSystem.Helpers
                 Console.WriteLine(course.Display);
                 Console.WriteLine("* Roster *");
                 course.Roster.ForEach(s => Console.WriteLine(s.Display));
+                Console.WriteLine("\n");
                 Console.WriteLine("* Assignments *");
-                course.Assignments.ForEach(a => Console.WriteLine(a.Display));
+                foreach (var group in course.AssignmentGroups) {
+                    Console.WriteLine($"Group: {group.Display}");
+                    group.Assignments.ForEach(a => Console.WriteLine(a.Display));
+                    Console.WriteLine("\n");
+                }
                 Console.WriteLine("* Announcements *");
                 course.Announcements.ForEach(a => Console.WriteLine(a.Display));
+                Console.WriteLine("\n");
                 Console.WriteLine("* Modules *");
                 course.Modules.ForEach(module => Console.WriteLine(module.Display));
+                Console.WriteLine("\n");
             }
         }
     }

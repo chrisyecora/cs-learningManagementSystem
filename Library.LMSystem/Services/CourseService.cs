@@ -28,8 +28,17 @@ namespace Library.LMSystem.Services
             return false;
         }
 
-        public void AddAssignmentToCourse(Course course, Assignment assignment) {
-            course.Assignments.Add(assignment);
+        public void AddAssignmentToCourse(Course course, Assignment assignment, AssignmentGroup? assignmentGroup = null) {
+            if (assignmentGroup == null) {
+                var defaultGroup = course.AssignmentGroups.Find(group => group.Name == "Uncategorized");
+                defaultGroup.Assignments.Add(assignment);
+            } else {
+                assignmentGroup.Assignments.Add(assignment);
+            }
+        }
+
+        public void AddAssignmentGroup(Course course, AssignmentGroup assignmentGroup) {
+            course.AssignmentGroups.Add(assignmentGroup);
         }
 
         public void AddAnnouncementToCourse(Course course, Announcement announcement) {

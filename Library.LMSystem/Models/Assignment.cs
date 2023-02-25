@@ -2,10 +2,16 @@
 namespace Library.LMSystem.Models;
 public class Assignment
 {
+    private static int id = 0;
     public Assignment()
     {
         Name = string.Empty;
         Description = string.Empty;
+        Id = id++;
+    }
+    // Id
+    public int Id {
+        get;
     }
     // Name
     public String Name {
@@ -28,6 +34,6 @@ public class Assignment
         set;
     }
 
-    public String Display => $"{Name}: {TotalPoints} points. Due {DueDate.Date}";
+    public String Display => $"[{Id}] {Name}: {TotalPoints} points. Due {DueDate.Date}";
 }
 
