@@ -2,15 +2,16 @@
 namespace Library.LMSystem.Models;
 public class Assignment
 {
+    private static int id = 0;
     public Assignment()
     {
         Name = string.Empty;
         Description = string.Empty;
+        Id = id++;
     }
     // Id
     public int Id {
         get;
-        set;
     }
     // Name
     public String Name {

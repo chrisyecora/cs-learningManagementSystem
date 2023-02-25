@@ -2,7 +2,13 @@
 namespace Library.LMSystem.Models;
 public class Course {
     public Course() {
-        Assignments = new List<Assignment>();
+        AssignmentGroups = new List<AssignmentGroup>();
+        // adding default assignment group
+        AssignmentGroups.Add(new AssignmentGroup {
+            Assignments = new List<Assignment>(),
+            Name = "Uncategorized",
+            Weight = 0.00,
+        });
         Roster = new List<Person>();
         Modules = new List<Module>();
         Announcements = new List<Announcement>();
@@ -31,7 +37,7 @@ public class Course {
         set;
     }
     // Assignments
-    public List<Assignment> Assignments {
+    public List<AssignmentGroup> AssignmentGroups {
         get;
         set;
     }
