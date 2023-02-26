@@ -49,6 +49,24 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("\n....Student updated successfully.\n");
         }
 
+        public void GradeAssignment(CourseHelper courseHelper) {
+            // find course
+            var course = courseHelper.GetCourseByCode();
+            // find student from course's roster
+            var student = GetStudentFromRoster(course);
+            // find assignment
+            var assignment = courseHelper.GetAssignmentFromCourse(course);
+            // update grade
+            Console.Write($"Enter points earned ({assignment.TotalPoints} points possible): ");
+            var grade = double.Parse(Console.ReadLine() ?? "0.00") / (double)assignment.TotalPoints;
+            studentService.AddGrade(student, assignment.Id, grade);
+            Console.WriteLine("\n....Grade successfully recorded.\n");
+            Console.WriteLine("TESTING OUTPUT");
+            foreach (KeyValuePair<int, double> entry in student.Grades) {
+                Console.WriteLine($"{entry.Key}: {entry.Value}");
+            }
+        }
+
         public void ListAllStudents() {
             studentService.Students.ForEach(s => Console.WriteLine(s.Display));
         }
@@ -66,11 +84,20 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("Which Student?");
             int i = 1;
             queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.Display}"));
-            Console.WriteLine(">>> ");
+            Console.Write(">>> ");
             var userSelection = int.Parse(Console.ReadLine() ?? string.Empty);
 
             // get selected course
             return queryResult.ElementAt(userSelection - 1);
+        }
+        public Student GetStudentFromRoster(Course course) {
+            int i = 1;
+            var students = course.Roster.Where(person => person is Student).ToList();
+            Console.WriteLine("Which student?");
+            students.ForEach(stu => Console.WriteLine($"{i++}. {stu.Name}"));
+            Console.Write(">>> ");
+            var choice = int.Parse(Console.ReadLine() ?? "0");
+            return (Student)students[choice - 1];
         }
     }
 }

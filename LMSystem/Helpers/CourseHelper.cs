@@ -326,6 +326,36 @@ namespace App.LMSystem.Helpers
             // get selected course
             return queryResult.ElementAt(userSelection - 1);
         }
+
+        public Assignment GetAssignmentFromCourse(Course course) {
+            Console.WriteLine("Which group is the assignment in?");
+            int i = 1;
+            course.AssignmentGroups.ForEach(group => Console.WriteLine($"{i++}. {group.Display}"));
+            Console.WriteLine($"{i}. Forgot the group? Show all assignments");
+            Console.Write(">>> ");
+            var choice = int.Parse(Console.ReadLine() ?? i.ToString());
+            if (choice == i) {
+                foreach (var group in course.AssignmentGroups) {
+                    Console.WriteLine($"Group: {group.Display}");
+                    group.Assignments.ForEach(a => Console.WriteLine(a.Display));
+                    Console.WriteLine("\n");
+                    i = 1;
+                    course.AssignmentGroups.ForEach(group => Console.WriteLine($"{i++}. {group.Display}"));
+                }
+                Console.WriteLine("Which group is the assignment in?");
+                Console.Write(">>> ");
+                choice = int.Parse(Console.ReadLine() ?? "0");
+            }
+
+            var chosenGroup = course.AssignmentGroups[choice - 1];
+            Console.WriteLine("Which assignment?");
+            i = 1;
+            chosenGroup.Assignments.ForEach(assignment => Console.WriteLine($"{i++}. {assignment.Name}"));
+            Console.Write(">>> ");
+            choice = int.Parse(Console.ReadLine() ?? "0");
+            return chosenGroup.Assignments[choice - 1];
+
+        }
         public AssignmentGroup FindOrCreateAssignmentGroup(Course course) {
             int i = 1;
             course.AssignmentGroups.ForEach(group => Console.WriteLine($"{i++}. {group.Name}"));
@@ -338,8 +368,8 @@ namespace App.LMSystem.Helpers
                 Console.WriteLine("Please enter the following information for the new Assignment group.");
                 Console.Write("Name: ");
                 newAssignmentGroup.Name = Console.ReadLine() ?? string.Empty;
-                Console.Write("Weight: ");
-                newAssignmentGroup.Weight = double.Parse(Console.ReadLine() ?? "0.00");
+                Console.Write("Weight (as a %): ");
+                newAssignmentGroup.Weight = double.Parse(Console.ReadLine() ?? "0.00") / 100;
                 courseService.AddAssignmentGroup(course, newAssignmentGroup);
                 return newAssignmentGroup;
 

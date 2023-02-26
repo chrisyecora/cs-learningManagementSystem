@@ -29,6 +29,10 @@ namespace Library.LMSystem.Services
             return false;
         }
 
+        public void AddGrade(Student student, int assignmentId, double grade) {
+            student.Grades.Add(assignmentId, grade);
+        }
+
         public IEnumerable<Student> QueryByName(String name) {
             return Students.Where(s => s.Name.Contains(name, StringComparison.InvariantCultureIgnoreCase));
         }

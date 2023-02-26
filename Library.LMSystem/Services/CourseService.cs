@@ -31,7 +31,7 @@ namespace Library.LMSystem.Services
         public void AddAssignmentToCourse(Course course, Assignment assignment, AssignmentGroup? assignmentGroup = null) {
             if (assignmentGroup == null) {
                 var defaultGroup = course.AssignmentGroups.Find(group => group.Name == "Uncategorized");
-                defaultGroup.Assignments.Add(assignment);
+                defaultGroup?.Assignments.Add(assignment);
             } else {
                 assignmentGroup.Assignments.Add(assignment);
             }
