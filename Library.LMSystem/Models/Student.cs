@@ -4,7 +4,7 @@ namespace Library.LMSystem.Models
     public class Student : Person
     {
         // Grades
-        public Dictionary<String, float> Grades {
+        public Dictionary<int, double> Grades {
             get;
             set;
         }
@@ -19,7 +19,7 @@ namespace Library.LMSystem.Models
 
         public Student()
         {
-            Grades = new Dictionary<string, float>();
+            Grades = new Dictionary<int, double>();
             Classification = string.Empty;
         }
     }

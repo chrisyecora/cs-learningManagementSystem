@@ -15,23 +15,24 @@ namespace MyApp // Note: actual namespace depends on the project name.
             while (cont) {
                 Console.WriteLine("\n");
                 Console.WriteLine("* Student Services *");
-                Console.WriteLine("1. Create a student.");
-                Console.WriteLine("2. Update a student.");
-                Console.WriteLine("3. Add a student to a course's roster.");
-                Console.WriteLine("4. Remove a student from a course's roster.");
-                Console.WriteLine("5. List a student's courses.");
-                Console.WriteLine("6. List all students.");
+                Console.WriteLine("1. Create a student");
+                Console.WriteLine("2. Update a student");
+                Console.WriteLine("3. Add a student to a course's roster");
+                Console.WriteLine("4. Remove a student from a course's roster");
+                Console.WriteLine("5. Grade a student's assignemnt");
+                Console.WriteLine("6. List a student's courses");
+                Console.WriteLine("7. List all students");
                 Console.WriteLine("");
                 Console.WriteLine("* Course Services *");
-                Console.WriteLine("7. Create a course.");
-                Console.WriteLine("8. Update a course.");
-                Console.WriteLine("9. Create an assignment for a course.");
-                Console.WriteLine("10. Create an announcement for a course");
-                Console.WriteLine("11. Update an annoucement from a course");
-                Console.WriteLine("12. Delete an annoucement from a course");
-                Console.WriteLine("13. Create, Update, Delete a Module in a course.");
-                Console.WriteLine("14. List all courses");
-                Console.WriteLine("15. Exit program\n\n");
+                Console.WriteLine("8. Create a course");
+                Console.WriteLine("9. Update a course");
+                Console.WriteLine("10. Create an assignment for a course.");
+                Console.WriteLine("11. Create an announcement for a course");
+                Console.WriteLine("12. Update an annoucement from a course");
+                Console.WriteLine("13. Delete an annoucement from a course");
+                Console.WriteLine("14. Create, Update, or Delete a Module in a course");
+                Console.WriteLine("15. List all courses");
+                Console.WriteLine("16. Exit program\n\n");
                 Console.Write(">>> ");
                 var userInput = int.Parse(Console.ReadLine() ?? "11");
                 switch (userInput) {
@@ -48,36 +49,39 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         courseHelper.RemoveStudentFromCourse(studentHelper);
                         break;
                     case 5:
-                        courseHelper.ListCoursesOfAStudent(studentHelper);
+                         studentHelper.GradeAssignment(courseHelper);
                         break;
                     case 6:
-                        studentHelper.ListAllStudents();
+                        courseHelper.ListCoursesOfAStudent(studentHelper);
                         break;
                     case 7:
-                        courseHelper.CreateCourse();
+                        studentHelper.ListAllStudents();
                         break;
                     case 8:
-                        courseHelper.UpdateCourse();
+                        courseHelper.CreateCourse();
                         break;
                     case 9:
-                        courseHelper.CreateAssignment();
+                        courseHelper.UpdateCourse();
                         break;
                     case 10:
-                        courseHelper.CreateAnnouncement();
+                        courseHelper.CreateAssignment();
                         break;
                     case 11:
-                        courseHelper.UpdateAnnouncement();
+                        courseHelper.CreateAnnouncement();
                         break;
                     case 12:
-                        courseHelper.DeleteAnnouncement();
+                        courseHelper.UpdateAnnouncement();
                         break;
                     case 13:
-                        courseHelper.CUDModule();
+                        courseHelper.DeleteAnnouncement();
                         break;
                     case 14:
-                        courseHelper.ListAllCourses();
+                        courseHelper.CUDModule();
                         break;
                     case 15:
+                        courseHelper.ListAllCourses();
+                        break;
+                    case 16:
                         cont = false;
                         break;
                     default:
