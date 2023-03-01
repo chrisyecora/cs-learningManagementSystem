@@ -1,9 +1,10 @@
 ﻿namespace Library.LMSystem.Models;
 public class ContentItem
 {
+    private protected static int id = 0;
     public int Id {
         get;
-        set;
+        private protected set;
     }
 
     public string? Name {

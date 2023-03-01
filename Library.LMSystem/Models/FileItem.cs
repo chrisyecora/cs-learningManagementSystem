@@ -10,6 +10,13 @@ namespace Library.LMSystem.Models
 
         public FileItem()
         {
+            Id = id++;
+        }
+
+        public FileItem(ContentItem item) {
+            Id = item.Id;
+            Name = item.Name;
+            Description = item.Description;
         }
     }
 }

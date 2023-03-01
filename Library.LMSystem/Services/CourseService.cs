@@ -45,6 +45,20 @@ namespace Library.LMSystem.Services
             course.Announcements.Add(announcement);
         }
 
+        public void AddModuleToCourse(Course course, Module module) {
+            course.Modules.Add(module);
+        }
+
+        public void AddAssignmentItemToModule(Module module, AssignmentItem item) {
+            module.Content.Add(item);
+        }
+        public void AddPageItemToModule(Module module, PageItem item) {
+            module.Content.Add(item);
+        }
+        public void AddFileItemToModule(Module module, FileItem item) {
+            module.Content.Add(item);
+        }
+
         public IEnumerable<Course> QueryByCode(String code) {
             return Courses.Where(c => c.CourseCode.Equals(code, StringComparison.InvariantCultureIgnoreCase));
         }

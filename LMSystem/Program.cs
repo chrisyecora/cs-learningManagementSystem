@@ -29,8 +29,9 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 Console.WriteLine("10. Create an assignment for a course.");
                 Console.WriteLine("11. Create, Update, or Delete an Announcement");
                 Console.WriteLine("12. Create, Update, or Delete a Module");
-                Console.WriteLine("13. List all courses");
-                Console.WriteLine("14. Exit program\n\n");
+                Console.WriteLine("13. Create, Update, or Delete Content on an Existing Module");
+                Console.WriteLine("14. List all courses");
+                Console.WriteLine("15. Exit program\n\n");
                 Console.Write(">>> ");
                 var userInput = int.Parse(Console.ReadLine() ?? "11");
                 switch (userInput) {
@@ -71,9 +72,12 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         courseHelper.CUDModule();
                         break;
                     case 13:
-                        courseHelper.ListAllCourses();
+                        courseHelper.CUDContentItem();
                         break;
                     case 14:
+                        courseHelper.ListAllCourses();
+                        break;
+                    case 15:
                         cont = false;
                         break;
                     default:
