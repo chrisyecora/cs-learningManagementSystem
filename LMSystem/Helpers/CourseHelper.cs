@@ -60,24 +60,62 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("\n....Assignment created successfully.\n");
         }
 
-        public void CreateAnnouncement() {
-            // Creating an announcement
-            var newAnnouncement = new Announcement();
-
-            // get course from code
+        public void CUDAnnouncement() {
+            // Choose between Create, Update, or Delete option
+            Console.WriteLine("\n\n******************************\n");
+            Console.WriteLine("1. Create announcement");
+            Console.WriteLine("2. Update announcement");
+            Console.WriteLine("3. Delete announcement");
+            Console.Write(">>> ");
+            var userChoice = int.Parse(Console.ReadLine() ?? string.Empty);
             var selectedCourse = GetCourseByCode();
+            if (userChoice == 1) {
+                // Creating an announcement
+                var newAnnouncement = new Announcement();
 
-            // new assignment properties
-            Console.WriteLine("Please enter the information below.\n");
-            Console.Write("Title: ");
-            newAnnouncement.Title = Console.ReadLine() ?? string.Empty;
-            Console.Write("Body of announcement: ");
-            newAnnouncement.Body = Console.ReadLine() ?? string.Empty;
+                // new assignment properties
+                Console.WriteLine("Please enter the information below.\n");
+                Console.Write("Title: ");
+                newAnnouncement.Title = Console.ReadLine() ?? string.Empty;
+                Console.Write("Body of announcement: ");
+                newAnnouncement.Body = Console.ReadLine() ?? string.Empty;
+
+                // adding announcement to course
+                courseService.AddAnnouncementToCourse(selectedCourse, newAnnouncement);
+
+                Console.WriteLine("\n....Announcement created successfully.\n");
+            } else if (userChoice == 2) {
+                // Update an announcement
+                var announcement = GetAnnouncement(selectedCourse);
+                Console.WriteLine("Please enter the information below.");
+                Console.WriteLine("NOTE: If you do not wish to modify the current property, press enter.");
+                Console.WriteLine($"Current Title: {announcement.Title}");
+                Console.Write("New title: ");
+                var newTitle = Console.ReadLine() ?? string.Empty;
+                if (!newTitle.Equals(string.Empty)) {
+                    announcement.Title = newTitle;
+                }
+                Console.WriteLine($"Current body: {announcement.Body}");
+                Console.Write("New body: ");
+                var newBody = Console.ReadLine() ?? string.Empty;
+                if (!newBody.Equals(string.Empty)) {
+                    announcement.Body = newBody;
+                }
+                Console.WriteLine("\n....Announcement updated successfully.\n");
+            } else if (userChoice == 3) {
+                // Delete an announcement
+                var announcement = GetAnnouncement(selectedCourse);
+                Console.Write("Are you sure you would like to delete this announcement? (y/n): ");
+                var userConfirmation = Console.ReadLine() ?? "n";
+                if (userConfirmation.Equals("y", StringComparison.InvariantCultureIgnoreCase)) {
+                    selectedCourse.Announcements.Remove(announcement);
+                    Console.WriteLine("....Announcement has been deleted successfully.\n");
+                } else {
+                    Console.WriteLine("....Announcement deletion aborted.\n");
+                }
+            }
+ 
             
-            // adding announcement to course
-            courseService.AddAnnouncementToCourse(selectedCourse, newAnnouncement);
-
-            Console.WriteLine("\n....Announcement created successfully.\n");
         }
 
         public void UpdateCourse() {
@@ -126,37 +164,6 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("\n....Course updated successfully.\n");
         }
 
-        public void UpdateAnnouncement() {
-            var course = GetCourseByCode();
-            var announcement = GetAnnouncement(course);
-            Console.WriteLine("Please enter the information below.");
-            Console.WriteLine("NOTE: If you do not wish to modify the current property, press enter.");
-            Console.WriteLine($"Current Title: {announcement.Title}");
-            Console.Write("New title: ");
-            var newTitle = Console.ReadLine() ?? string.Empty;
-            if (!newTitle.Equals(string.Empty)) {
-                announcement.Title = newTitle;
-            }
-            Console.WriteLine($"Current body: {announcement.Body}");
-            Console.Write("New body: ");
-            var newBody = Console.ReadLine() ?? string.Empty;
-            if (!newBody.Equals(string.Empty)) {
-                announcement.Body = newBody;
-            }
-            Console.WriteLine("\n....Announcement updated successfully.\n");
-        }
-
-        public void DeleteAnnouncement() {
-            var course = GetCourseByCode();
-            var announcement = GetAnnouncement(course);
-            Console.Write("Are you sure you would like to delete this announcement? (y/n): ");
-            var userChoice = Console.ReadLine() ?? "n";
-            if (userChoice.Equals("y", StringComparison.InvariantCultureIgnoreCase)) {
-                course.Announcements.Remove(announcement);
-                Console.WriteLine("....Announcement has been deleted successfully.\n");
-            }
-        }
-
         public void CUDModule() {
             // Choose between Create, Update, or Delete option
             Console.WriteLine("\n\n******************************\n");
@@ -203,6 +210,8 @@ namespace App.LMSystem.Helpers
                 if (userConfirmation.Equals("y", StringComparison.InvariantCultureIgnoreCase)) {
                     selectedCourse.Modules.Remove(module);
                     Console.WriteLine("....Module has been deleted successfully.\n");
+                } else {
+                    Console.WriteLine("....Module deletion aborted.\n");
                 }
             }
         }

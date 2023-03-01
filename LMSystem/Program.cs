@@ -27,12 +27,10 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 Console.WriteLine("8. Create a course");
                 Console.WriteLine("9. Update a course");
                 Console.WriteLine("10. Create an assignment for a course.");
-                Console.WriteLine("11. Create an announcement for a course");
-                Console.WriteLine("12. Update an annoucement from a course");
-                Console.WriteLine("13. Delete an annoucement from a course");
-                Console.WriteLine("14. Create, Update, or Delete a Module in a course");
-                Console.WriteLine("15. List all courses");
-                Console.WriteLine("16. Exit program\n\n");
+                Console.WriteLine("11. Create, Update, or Delete an Announcement");
+                Console.WriteLine("12. Create, Update, or Delete a Module");
+                Console.WriteLine("13. List all courses");
+                Console.WriteLine("14. Exit program\n\n");
                 Console.Write(">>> ");
                 var userInput = int.Parse(Console.ReadLine() ?? "11");
                 switch (userInput) {
@@ -67,21 +65,15 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         courseHelper.CreateAssignment();
                         break;
                     case 11:
-                        courseHelper.CreateAnnouncement();
+                        courseHelper.CUDAnnouncement();
                         break;
                     case 12:
-                        courseHelper.UpdateAnnouncement();
-                        break;
-                    case 13:
-                        courseHelper.DeleteAnnouncement();
-                        break;
-                    case 14:
                         courseHelper.CUDModule();
                         break;
-                    case 15:
+                    case 13:
                         courseHelper.ListAllCourses();
                         break;
-                    case 16:
+                    case 14:
                         cont = false;
                         break;
                     default:
