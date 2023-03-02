@@ -210,6 +210,7 @@ namespace App.LMSystem.Helpers
                 // Creating a ContentItem
                 var newContentItem = new ContentItem();
                 // name and description can be set here
+                Console.WriteLine("Enter the following information for the content item.");
                 Console.Write("Name: ");
                 newContentItem.Name = Console.ReadLine() ?? string.Empty;
                 Console.Write("Description: ");
@@ -238,10 +239,43 @@ namespace App.LMSystem.Helpers
                 }
 
                 Console.WriteLine("....Content created successfully.\n");
-            } else if (userChoice == 2) {
-                // Updating a ContentItem
-            } else if (userChoice == 3) {
-                // Deleting a ContentItem
+            } else if (userChoice == 2 || userChoice == 3) {
+                // First find the ContentItem
+                var items = courseService.GetContentItems(selectedModule);
+                Console.WriteLine("Please select an item from the list below.");
+                int i = 1;
+                items.ForEach(item => Console.WriteLine($"{i++}. {item.Display}"));
+                var userSelection = int.Parse(Console.ReadLine() ?? "0");
+                var selectedItem = items[userSelection - 1];
+                if (userChoice == 2) {
+                    // update
+                    Console.WriteLine("Please enter the information below.");
+                    Console.WriteLine("NOTE: If you do not wish to modify the current property, press enter.");
+                    Console.WriteLine($"Current Name: {selectedItem.Name}");
+                    Console.Write("New Name: ");
+                    var newName = Console.ReadLine() ?? string.Empty;
+                    if (!newName.Equals(string.Empty)) {
+                        selectedItem.Name = newName;
+                    }
+                    Console.WriteLine($"Current description: {selectedItem.Description}");
+                    Console.Write("New description: ");
+                    var newDesc = Console.ReadLine() ?? string.Empty;
+                    if (!newDesc.Equals(string.Empty)) {
+                        selectedItem.Description = newDesc;
+                    }
+                    Console.WriteLine("\n....Item updated successfully.\n");
+                } else {
+                    // delete
+                    Console.Write("Are you sure you would like to delete this item? (y/n): ");
+                    var userConfirmation = Console.ReadLine() ?? "n";
+                    if (userConfirmation.Equals("y", StringComparison.InvariantCultureIgnoreCase)) {
+                        selectedModule.Content.Remove(selectedItem);
+                        Console.WriteLine("....Item has been deleted successfully.\n");
+                    } else {
+                        Console.WriteLine("....Item deletion aborted.\n");
+                    }
+                }
+
             }
         }
 

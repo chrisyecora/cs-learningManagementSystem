@@ -59,6 +59,14 @@ namespace Library.LMSystem.Services
             module.Content.Add(item);
         }
 
+        public List<ContentItem> GetContentItems(Module module) {
+            return module.Content;
+        }
+
+        public void RemoveContentItem(Module module, ContentItem contentItem) {
+            
+        }
+
         public IEnumerable<Course> QueryByCode(String code) {
             return Courses.Where(c => c.CourseCode.Equals(code, StringComparison.InvariantCultureIgnoreCase));
         }
