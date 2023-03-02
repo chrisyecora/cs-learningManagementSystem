@@ -60,64 +60,6 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("\n....Assignment created successfully.\n");
         }
 
-        public void CUDAnnouncement() {
-            // Choose between Create, Update, or Delete option
-            Console.WriteLine("\n\n******************************\n");
-            Console.WriteLine("1. Create announcement");
-            Console.WriteLine("2. Update announcement");
-            Console.WriteLine("3. Delete announcement");
-            Console.Write(">>> ");
-            var userChoice = int.Parse(Console.ReadLine() ?? string.Empty);
-            var selectedCourse = GetCourseByCode();
-            if (userChoice == 1) {
-                // Creating an announcement
-                var newAnnouncement = new Announcement();
-
-                // new assignment properties
-                Console.WriteLine("Please enter the information below.\n");
-                Console.Write("Title: ");
-                newAnnouncement.Title = Console.ReadLine() ?? string.Empty;
-                Console.Write("Body of announcement: ");
-                newAnnouncement.Body = Console.ReadLine() ?? string.Empty;
-
-                // adding announcement to course
-                courseService.AddAnnouncementToCourse(selectedCourse, newAnnouncement);
-
-                Console.WriteLine("\n....Announcement created successfully.\n");
-            } else if (userChoice == 2) {
-                // Update an announcement
-                var announcement = GetAnnouncement(selectedCourse);
-                Console.WriteLine("Please enter the information below.");
-                Console.WriteLine("NOTE: If you do not wish to modify the current property, press enter.");
-                Console.WriteLine($"Current Title: {announcement.Title}");
-                Console.Write("New title: ");
-                var newTitle = Console.ReadLine() ?? string.Empty;
-                if (!newTitle.Equals(string.Empty)) {
-                    announcement.Title = newTitle;
-                }
-                Console.WriteLine($"Current body: {announcement.Body}");
-                Console.Write("New body: ");
-                var newBody = Console.ReadLine() ?? string.Empty;
-                if (!newBody.Equals(string.Empty)) {
-                    announcement.Body = newBody;
-                }
-                Console.WriteLine("\n....Announcement updated successfully.\n");
-            } else if (userChoice == 3) {
-                // Delete an announcement
-                var announcement = GetAnnouncement(selectedCourse);
-                Console.Write("Are you sure you would like to delete this announcement? (y/n): ");
-                var userConfirmation = Console.ReadLine() ?? "n";
-                if (userConfirmation.Equals("y", StringComparison.InvariantCultureIgnoreCase)) {
-                    selectedCourse.Announcements.Remove(announcement);
-                    Console.WriteLine("....Announcement has been deleted successfully.\n");
-                } else {
-                    Console.WriteLine("....Announcement deletion aborted.\n");
-                }
-            }
- 
-            
-        }
-
         public void UpdateCourse() {
             Console.WriteLine("How would you like to search?");
             Console.WriteLine("1. Code");
@@ -164,14 +106,58 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("\n....Course updated successfully.\n");
         }
 
+        public void CUDAnnouncement() {
+            var userChoice = PromptCUD("Announcement");
+            var selectedCourse = GetCourseByCode();
+            if (userChoice == 1) {
+                // Creating an announcement
+                var newAnnouncement = new Announcement();
+
+                // new assignment properties
+                Console.WriteLine("Please enter the information below.\n");
+                Console.Write("Title: ");
+                newAnnouncement.Title = Console.ReadLine() ?? string.Empty;
+                Console.Write("Body of announcement: ");
+                newAnnouncement.Body = Console.ReadLine() ?? string.Empty;
+
+                // adding announcement to course
+                courseService.AddAnnouncementToCourse(selectedCourse, newAnnouncement);
+
+                Console.WriteLine("\n....Announcement created successfully.\n");
+            } else if (userChoice == 2) {
+                // Updating an announcement
+                var announcement = GetAnnouncement(selectedCourse);
+                Console.WriteLine("Please enter the information below.");
+                Console.WriteLine("NOTE: If you do not wish to modify the current property, press enter.");
+                Console.WriteLine($"Current Title: {announcement.Title}");
+                Console.Write("New title: ");
+                var newTitle = Console.ReadLine() ?? string.Empty;
+                if (!newTitle.Equals(string.Empty)) {
+                    announcement.Title = newTitle;
+                }
+                Console.WriteLine($"Current body: {announcement.Body}");
+                Console.Write("New body: ");
+                var newBody = Console.ReadLine() ?? string.Empty;
+                if (!newBody.Equals(string.Empty)) {
+                    announcement.Body = newBody;
+                }
+                Console.WriteLine("\n....Announcement updated successfully.\n");
+            } else if (userChoice == 3) {
+                // Deleting an announcement
+                var announcement = GetAnnouncement(selectedCourse);
+                Console.Write("Are you sure you would like to delete this announcement? (y/n): ");
+                var userConfirmation = Console.ReadLine() ?? "n";
+                if (userConfirmation.Equals("y", StringComparison.InvariantCultureIgnoreCase)) {
+                    selectedCourse.Announcements.Remove(announcement);
+                    Console.WriteLine("....Announcement has been deleted successfully.\n");
+                } else {
+                    Console.WriteLine("....Announcement deletion aborted.\n");
+                }
+            }
+        }
+
         public void CUDModule() {
-            // Choose between Create, Update, or Delete option
-            Console.WriteLine("\n\n******************************\n");
-            Console.WriteLine("1. Create module");
-            Console.WriteLine("2. Update module");
-            Console.WriteLine("3. Delete module");
-            Console.Write(">>> ");
-            var userChoice = int.Parse(Console.ReadLine() ?? string.Empty);
+            var userChoice = PromptCUD("Module");
             var selectedCourse = GetCourseByCode();
             if (userChoice == 1) {
                 // Creating a module
@@ -181,7 +167,7 @@ namespace App.LMSystem.Helpers
                 newModule.Name = Console.ReadLine() ?? string.Empty;
                 Console.Write("Description: ");
                 newModule.Description = Console.ReadLine() ?? string.Empty;
-                selectedCourse.Modules.Add(newModule);
+                courseService.AddModuleToCourse(selectedCourse, newModule);
                 Console.WriteLine("....Module has been created successfully.\n");
             } else if (userChoice == 2) {
                 // Updating a module
@@ -214,6 +200,94 @@ namespace App.LMSystem.Helpers
                     Console.WriteLine("....Module deletion aborted.\n");
                 }
             }
+        }
+
+        public void CUDContentItem() {
+            var userChoice = PromptCUD("Content");
+            var selectedCourse = GetCourseByCode();
+            var selectedModule = GetModuleFromCourse(selectedCourse);
+            if (userChoice == 1) {
+                // Creating a ContentItem
+                var newContentItem = new ContentItem();
+                // name and description can be set here
+                Console.WriteLine("Enter the following information for the content item.");
+                Console.Write("Name: ");
+                newContentItem.Name = Console.ReadLine() ?? string.Empty;
+                Console.Write("Description: ");
+                newContentItem.Description = Console.ReadLine() ?? string.Empty;
+                // choose between creating an AssignmentItem, FileItem, or PageItem
+                Console.WriteLine("Which of the following would you like to create?");
+                int i = 1;
+                Console.WriteLine($"{i++}. Assignment Item");
+                Console.WriteLine($"{i++}. Page Item");
+                Console.WriteLine($"{i++}. File Item");
+                Console.Write(">>> ");
+                userChoice = int.Parse(Console.ReadLine() ?? "0");
+                if (userChoice == 1) {
+                    // Assignment Item
+                    var newAssignmentItem = new AssignmentItem(newContentItem);
+                    newAssignmentItem.Assignment = GetAssignmentFromCourse(selectedCourse);
+                    courseService.AddAssignmentItemToModule(selectedModule, newAssignmentItem);
+                } else if (userChoice == 2) {
+                    // Page item
+                    var newPageItem = new PageItem(newContentItem);
+                    courseService.AddPageItemToModule(selectedModule, newPageItem);
+                } else if (userChoice == 3) {
+                    // File item
+                    var newFileItem = new FileItem(newContentItem);
+                    courseService.AddFileItemToModule(selectedModule, newFileItem);
+                }
+
+                Console.WriteLine("....Content created successfully.\n");
+            } else if (userChoice == 2 || userChoice == 3) {
+                // First find the ContentItem
+                var items = courseService.GetContentItems(selectedModule);
+                Console.WriteLine("Please select an item from the list below.");
+                int i = 1;
+                items.ForEach(item => Console.WriteLine($"{i++}. {item.Display}"));
+                var userSelection = int.Parse(Console.ReadLine() ?? "0");
+                var selectedItem = items[userSelection - 1];
+                if (userChoice == 2) {
+                    // update
+                    Console.WriteLine("Please enter the information below.");
+                    Console.WriteLine("NOTE: If you do not wish to modify the current property, press enter.");
+                    Console.WriteLine($"Current Name: {selectedItem.Name}");
+                    Console.Write("New Name: ");
+                    var newName = Console.ReadLine() ?? string.Empty;
+                    if (!newName.Equals(string.Empty)) {
+                        selectedItem.Name = newName;
+                    }
+                    Console.WriteLine($"Current description: {selectedItem.Description}");
+                    Console.Write("New description: ");
+                    var newDesc = Console.ReadLine() ?? string.Empty;
+                    if (!newDesc.Equals(string.Empty)) {
+                        selectedItem.Description = newDesc;
+                    }
+                    Console.WriteLine("\n....Item updated successfully.\n");
+                } else {
+                    // delete
+                    Console.Write("Are you sure you would like to delete this item? (y/n): ");
+                    var userConfirmation = Console.ReadLine() ?? "n";
+                    if (userConfirmation.Equals("y", StringComparison.InvariantCultureIgnoreCase)) {
+                        selectedModule.Content.Remove(selectedItem);
+                        Console.WriteLine("....Item has been deleted successfully.\n");
+                    } else {
+                        Console.WriteLine("....Item deletion aborted.\n");
+                    }
+                }
+
+            }
+        }
+
+        public int PromptCUD(string topic) {
+            // Choose between Create, Update, or Delete option
+            Console.WriteLine("\n\n******************************\n");
+            Console.WriteLine($"1. Create {topic}");
+            Console.WriteLine($"2. Update {topic}");
+            Console.WriteLine($"3. Delete {topic}");
+            Console.Write(">>> ");
+            var userChoice = int.Parse(Console.ReadLine() ?? string.Empty);
+            return userChoice;
         }
 
         public void AddStudentToCourse(StudentHelper studentHelper) {

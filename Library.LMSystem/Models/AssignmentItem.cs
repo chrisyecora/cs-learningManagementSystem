@@ -9,6 +9,13 @@ namespace Library.LMSystem.Models
         }
         public AssignmentItem()
         {
+            Id = id++;
+        }
+
+        public AssignmentItem(ContentItem item) {
+            Id = item.Id;
+            Name = item.Name;
+            Description = item.Description;
         }
     }
 }
