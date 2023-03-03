@@ -29,10 +29,22 @@ namespace Library.LMSystem.Services
             return false;
         }
 
+        public void UpdateStudent(Student student, string name, string classification) {
+            if (!name.Equals(string.Empty)) {
+                student.Name = name;
+            }
+            if (!classification.Equals(string.Empty)) {
+                student.Classification = classification;
+            }
+        }
+
         public void AddGrade(Student student, int assignmentId, double grade) {
             student.Grades.Add(assignmentId, grade);
         }
 
+        public Dictionary<int, double> GetStudentGrades(Student student) {
+            return student.Grades;
+        }
         public IEnumerable<Student> QueryByName(String name) {
             return Students.Where(s => s.Name.Contains(name, StringComparison.InvariantCultureIgnoreCase));
         }

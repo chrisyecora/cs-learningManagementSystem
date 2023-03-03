@@ -67,7 +67,7 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("3. Description");
             Console.Write(">>> ");
             var userSelection = int.Parse(Console.ReadLine() ?? "1");
-            Course? selectedCourse = null;
+            Course? selectedCourse;
             switch (userSelection) {
                 case 1:
                     selectedCourse = GetCourseByCode();
@@ -88,21 +88,16 @@ namespace App.LMSystem.Helpers
             Console.WriteLine($"Current code: {selectedCourse.CourseCode}");
             Console.Write("New code: ");
             var newCode = Console.ReadLine() ?? string.Empty;
-            if (!newCode.Equals(string.Empty)) {
-                selectedCourse.CourseCode = newCode;
-            }
+
             Console.WriteLine($"Current name: {selectedCourse.Name}");
             Console.Write("New name: ");
             var newName = Console.ReadLine() ?? string.Empty;
-            if (!newName.Equals(string.Empty)) {
-                selectedCourse.Name = newName;
-            }
+
             Console.WriteLine($"Current description: {selectedCourse.Description}");
             Console.Write("New description: ");
             var newDescription = Console.ReadLine() ?? string.Empty;
-            if (!newDescription.Equals(string.Empty)) {
-                selectedCourse.Description = newDescription;
-            }
+
+            courseService.UpdateCourse(selectedCourse, newCode, newName, newDescription);
             Console.WriteLine("\n....Course updated successfully.\n");
         }
 
@@ -132,15 +127,12 @@ namespace App.LMSystem.Helpers
                 Console.WriteLine($"Current Title: {announcement.Title}");
                 Console.Write("New title: ");
                 var newTitle = Console.ReadLine() ?? string.Empty;
-                if (!newTitle.Equals(string.Empty)) {
-                    announcement.Title = newTitle;
-                }
+
                 Console.WriteLine($"Current body: {announcement.Body}");
                 Console.Write("New body: ");
                 var newBody = Console.ReadLine() ?? string.Empty;
-                if (!newBody.Equals(string.Empty)) {
-                    announcement.Body = newBody;
-                }
+
+                courseService.UpdateAnnouncement(announcement, newTitle, newBody);
                 Console.WriteLine("\n....Announcement updated successfully.\n");
             } else if (userChoice == 3) {
                 // Deleting an announcement
@@ -148,7 +140,7 @@ namespace App.LMSystem.Helpers
                 Console.Write("Are you sure you would like to delete this announcement? (y/n): ");
                 var userConfirmation = Console.ReadLine() ?? "n";
                 if (userConfirmation.Equals("y", StringComparison.InvariantCultureIgnoreCase)) {
-                    selectedCourse.Announcements.Remove(announcement);
+                    courseService.DeleteAnnouncement(selectedCourse, announcement);
                     Console.WriteLine("....Announcement has been deleted successfully.\n");
                 } else {
                     Console.WriteLine("....Announcement deletion aborted.\n");
@@ -177,15 +169,12 @@ namespace App.LMSystem.Helpers
                 Console.WriteLine($"Current Name: {module.Name}");
                 Console.Write("New Name: ");
                 var newName = Console.ReadLine() ?? string.Empty;
-                if (!newName.Equals(string.Empty)) {
-                    module.Name = newName;
-                }
+
                 Console.WriteLine($"Current description: {module.Description}");
                 Console.Write("New description: ");
                 var newDesc = Console.ReadLine() ?? string.Empty;
-                if (!newDesc.Equals(string.Empty)) {
-                    module.Description = newDesc;
-                }
+
+                courseService.UpdateModule(module, newName, newDesc);
                 Console.WriteLine("\n....Module updated successfully.\n");
             } else if (userChoice == 3) {
                 // Deleting a module
@@ -194,7 +183,7 @@ namespace App.LMSystem.Helpers
                 Console.Write("Are you sure you would like to delete this module? (y/n): ");
                 var userConfirmation = Console.ReadLine() ?? "n";
                 if (userConfirmation.Equals("y", StringComparison.InvariantCultureIgnoreCase)) {
-                    selectedCourse.Modules.Remove(module);
+                    courseService.DeleteModule(selectedCourse, module);
                     Console.WriteLine("....Module has been deleted successfully.\n");
                 } else {
                     Console.WriteLine("....Module deletion aborted.\n");
@@ -221,8 +210,7 @@ namespace App.LMSystem.Helpers
                 Console.WriteLine($"{i++}. Assignment Item");
                 Console.WriteLine($"{i++}. Page Item");
                 Console.WriteLine($"{i++}. File Item");
-                Console.Write(">>> ");
-                userChoice = int.Parse(Console.ReadLine() ?? "0");
+                userChoice = userIntPrompt();
                 if (userChoice == 1) {
                     // Assignment Item
                     var newAssignmentItem = new AssignmentItem(newContentItem);
@@ -240,12 +228,12 @@ namespace App.LMSystem.Helpers
 
                 Console.WriteLine("....Content created successfully.\n");
             } else if (userChoice == 2 || userChoice == 3) {
-                // First find the ContentItem
+                // find the ContentItem
                 var items = courseService.GetContentItems(selectedModule);
                 Console.WriteLine("Please select an item from the list below.");
                 int i = 1;
                 items.ForEach(item => Console.WriteLine($"{i++}. {item.Display}"));
-                var userSelection = int.Parse(Console.ReadLine() ?? "0");
+                var userSelection = userIntPrompt();
                 var selectedItem = items[userSelection - 1];
                 if (userChoice == 2) {
                     // update
@@ -254,28 +242,24 @@ namespace App.LMSystem.Helpers
                     Console.WriteLine($"Current Name: {selectedItem.Name}");
                     Console.Write("New Name: ");
                     var newName = Console.ReadLine() ?? string.Empty;
-                    if (!newName.Equals(string.Empty)) {
-                        selectedItem.Name = newName;
-                    }
+
                     Console.WriteLine($"Current description: {selectedItem.Description}");
                     Console.Write("New description: ");
                     var newDesc = Console.ReadLine() ?? string.Empty;
-                    if (!newDesc.Equals(string.Empty)) {
-                        selectedItem.Description = newDesc;
-                    }
+
+                    courseService.UpdateContentItem(selectedItem, newName, newDesc);
                     Console.WriteLine("\n....Item updated successfully.\n");
                 } else {
                     // delete
                     Console.Write("Are you sure you would like to delete this item? (y/n): ");
                     var userConfirmation = Console.ReadLine() ?? "n";
                     if (userConfirmation.Equals("y", StringComparison.InvariantCultureIgnoreCase)) {
-                        selectedModule.Content.Remove(selectedItem);
+                        courseService.DeleteContentItem(selectedModule, selectedItem);
                         Console.WriteLine("....Item has been deleted successfully.\n");
                     } else {
                         Console.WriteLine("....Item deletion aborted.\n");
                     }
                 }
-
             }
         }
 
@@ -285,15 +269,14 @@ namespace App.LMSystem.Helpers
             Console.WriteLine($"1. Create {topic}");
             Console.WriteLine($"2. Update {topic}");
             Console.WriteLine($"3. Delete {topic}");
-            Console.Write(">>> ");
-            var userChoice = int.Parse(Console.ReadLine() ?? string.Empty);
+            var userChoice = userIntPrompt();
             return userChoice;
         }
 
         public void AddStudentToCourse(StudentHelper studentHelper) {
             var student = studentHelper.GetStudentByName();
             var course = GetCourseByCode();
-            course.Roster.Add(student);
+            courseService.AddStudent(course, student);
             Console.WriteLine("\n....Student added successfully.\n");
         }
 
@@ -325,8 +308,7 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("Which Course?");
             int i = 1;
             queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.ShortDisplay}"));
-            Console.Write(">>> ");
-            var userSelection = int.Parse(Console.ReadLine() ?? string.Empty);
+            var userSelection = userIntPrompt();
 
             // get selected course
             return queryResult.ElementAt(userSelection - 1);
@@ -345,8 +327,7 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("Which Course?");
             int i = 1;
             queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.ShortDisplay}"));
-            Console.Write(">>> ");
-            var userSelection = int.Parse(Console.ReadLine() ?? string.Empty);
+            var userSelection = userIntPrompt();
 
             // get selected course
             return queryResult.ElementAt(userSelection - 1);
@@ -365,8 +346,7 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("Which Course?");
             int i = 1;
             queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.ShortDisplay}"));
-            Console.Write(">>> ");
-            var userSelection = int.Parse(Console.ReadLine() ?? string.Empty);
+            var userSelection = userIntPrompt();
 
             // get selected course
             return queryResult.ElementAt(userSelection - 1);
@@ -374,77 +354,38 @@ namespace App.LMSystem.Helpers
 
         public Announcement GetAnnouncement(Course course) {
             Console.WriteLine("\n******************************\n");
-            Console.Write("Enter some of the title of the announcement: ");
-            var query = Console.ReadLine() ?? string.Empty;
-
-            // query courseList
-            var queryResult = courseService.QueryForAnnouncements(course, query);
-
-            // List results in a menu format for user
-            Console.WriteLine("Which Announcement?");
+            var announcements = courseService.GetAnnouncements(course);
+            Console.WriteLine("Please select an announcement.");
             int i = 1;
-            queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.Display}"));
-            Console.Write(">>> ");
-            var userSelection = int.Parse(Console.ReadLine() ?? string.Empty);
-
-            // get selected course
-            return queryResult.ElementAt(userSelection - 1);
+            announcements.ForEach(ann => Console.WriteLine($"{i++}. {ann.Display}"));
+            var selection = userIntPrompt();
+            return announcements[selection - 1];
         }
 
         public Module GetModuleFromCourse(Course course) {
+            var modules = courseService.GetModules(course);
             Console.WriteLine("\n******************************\n");
-            Console.Write("Enter the name of the Module: ");
-            var query = Console.ReadLine() ?? string.Empty;
-
-            // query courseList
-            var queryResult = courseService.QueryForModules(course, query);
-
-            // List results in a menu format for user
-            Console.WriteLine("Which Module?");
+            Console.WriteLine("Please select a module.");
             int i = 1;
-            queryResult.ToList().ForEach(res => Console.WriteLine($"{i++}. {res.Display}"));
-            Console.Write(">>> ");
-            var userSelection = int.Parse(Console.ReadLine() ?? string.Empty);
-
-            // get selected course
-            return queryResult.ElementAt(userSelection - 1);
+            modules.ForEach(mod => Console.WriteLine($"{i++}. {mod.Display}"));
+            var selection = userIntPrompt();
+            return modules[selection - 1];
         }
 
         public Assignment GetAssignmentFromCourse(Course course) {
-            Console.WriteLine("Which group is the assignment in?");
+            var assignments = courseService.GetAssignments(course);
+            Console.WriteLine("Please select an assignment.");
             int i = 1;
-            course.AssignmentGroups.ForEach(group => Console.WriteLine($"{i++}. {group.Display}"));
-            Console.WriteLine($"{i}. Forgot the group? Show all assignments");
-            Console.Write(">>> ");
-            var choice = int.Parse(Console.ReadLine() ?? i.ToString());
-            if (choice == i) {
-                foreach (var group in course.AssignmentGroups) {
-                    Console.WriteLine($"Group: {group.Display}");
-                    group.Assignments.ForEach(a => Console.WriteLine(a.Display));
-                    Console.WriteLine("\n");
-                    i = 1;
-                    course.AssignmentGroups.ForEach(group => Console.WriteLine($"{i++}. {group.Display}"));
-                }
-                Console.WriteLine("Which group is the assignment in?");
-                Console.Write(">>> ");
-                choice = int.Parse(Console.ReadLine() ?? "0");
-            }
-
-            var chosenGroup = course.AssignmentGroups[choice - 1];
-            Console.WriteLine("Which assignment?");
-            i = 1;
-            chosenGroup.Assignments.ForEach(assignment => Console.WriteLine($"{i++}. {assignment.Name}"));
-            Console.Write(">>> ");
-            choice = int.Parse(Console.ReadLine() ?? "0");
-            return chosenGroup.Assignments[choice - 1];
-
+            assignments.ToList().ForEach(a => Console.WriteLine($"{i++}. {a.Display}"));
+            var selection = userIntPrompt();
+            return assignments.ElementAt(selection - 1);
         }
+
         public AssignmentGroup FindOrCreateAssignmentGroup(Course course) {
             int i = 1;
             course.AssignmentGroups.ForEach(group => Console.WriteLine($"{i++}. {group.Name}"));
             Console.WriteLine($"{i}. Create a new group");
-            Console.Write(">>> ");
-            var choice = int.Parse(Console.ReadLine()?? i.ToString());
+            var choice = userIntPrompt();
             if (choice == i) {
                 // creating a new assignment group
                 var newAssignmentGroup = new AssignmentGroup();
@@ -467,13 +408,12 @@ namespace App.LMSystem.Helpers
             courseService.Courses.ForEach(c => Console.WriteLine($"{i++}. {c.ShortDisplay}"));
             Console.WriteLine("To show full information, select a course from the numbered list.");
             Console.WriteLine("If you do not wish to select a course, press enter to return to the main menu.");
-            Console.Write(">>> ");
-            var userInput = Console.ReadLine() ?? string.Empty;
+            var userInput = userStringPrompt();
             if (!userInput.Equals(string.Empty)) {
                 var course = courseService.Courses[int.Parse(userInput) - 1];
                 Console.WriteLine(course.Display);
                 Console.WriteLine("* Roster *");
-                course.Roster.ForEach(s => Console.WriteLine(s.Display));
+                courseService.GetRoster(course).ForEach(s => Console.WriteLine(s.Display));
                 Console.WriteLine("\n");
                 Console.WriteLine("* Assignments *");
                 foreach (var group in course.AssignmentGroups) {
@@ -482,12 +422,22 @@ namespace App.LMSystem.Helpers
                     Console.WriteLine("\n");
                 }
                 Console.WriteLine("* Announcements *");
-                course.Announcements.ForEach(a => Console.WriteLine(a.Display));
+                courseService.GetAnnouncements(course).ToList().ForEach(a => Console.WriteLine(a.Display));
                 Console.WriteLine("\n");
                 Console.WriteLine("* Modules *");
-                course.Modules.ForEach(module => Console.WriteLine(module.Display));
+                courseService.GetModules(course).ToList().ForEach(module => Console.WriteLine(module.Display));
                 Console.WriteLine("\n");
             }
+        }
+
+        public int userIntPrompt() {
+            Console.Write(">>> ");
+            return int.Parse(Console.ReadLine() ?? "1");
+        }
+
+        public string userStringPrompt() {
+            Console.Write(">>> ");
+            return Console.ReadLine() ?? string.Empty;
         }
     }
 }

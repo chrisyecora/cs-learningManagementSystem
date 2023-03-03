@@ -28,6 +28,24 @@ namespace Library.LMSystem.Services
             return false;
         }
 
+        public void AddStudent(Course course, Person person) {
+            if (!course.Roster.Contains(person)) {
+                course.Roster.Add(person);
+            }
+        }
+
+        public void UpdateCourse(Course course, string code, string name, string desc) {
+            if (!code.Equals(string.Empty)) {
+                course.CourseCode = code;
+            }
+            if (!name.Equals(string.Empty)) {
+                course.Name = name;
+            }
+            if (!desc.Equals(string.Empty)) {
+                course.Description = desc;
+            }
+        }
+
         public void AddAssignmentToCourse(Course course, Assignment assignment, AssignmentGroup? assignmentGroup = null) {
             if (assignmentGroup == null) {
                 var defaultGroup = course.AssignmentGroups.Find(group => group.Name == "Uncategorized");
@@ -45,8 +63,34 @@ namespace Library.LMSystem.Services
             course.Announcements.Add(announcement);
         }
 
+        public void UpdateAnnouncement(Announcement announcement, string title, string body) {
+            if (!title.Equals(string.Empty)) {
+                announcement.Title = title;
+            }
+            if (!body.Equals(string.Empty)) {
+                announcement.Body = body;
+            }
+        }
+
+        public void DeleteAnnouncement(Course course, Announcement announcement) {
+            course.Announcements.Remove(announcement);
+        }
+
         public void AddModuleToCourse(Course course, Module module) {
             course.Modules.Add(module);
+        }
+
+        public void UpdateModule(Module module, string name, string desc) {
+            if (!name.Equals(string.Empty)) {
+                module.Name = name;
+            }
+            if (!desc.Equals(string.Empty)) {
+                module.Description = desc;
+            }
+        }
+
+        public void DeleteModule(Course course, Module module) {
+            course.Modules.Remove(module);
         }
 
         public void AddAssignmentItemToModule(Module module, AssignmentItem item) {
@@ -59,12 +103,37 @@ namespace Library.LMSystem.Services
             module.Content.Add(item);
         }
 
+        public void UpdateContentItem(ContentItem item, string name, string desc) {
+            if (!name.Equals(string.Empty)) {
+                item.Name = name;
+            }
+            if (!desc.Equals(string.Empty)) {
+                item.Description = desc;
+            }
+        }
+
+        public void DeleteContentItem(Module module, ContentItem item) {
+            module.Content.Remove(item);
+        }
+
         public List<ContentItem> GetContentItems(Module module) {
             return module.Content;
         }
 
-        public void RemoveContentItem(Module module, ContentItem contentItem) {
-            
+        public IEnumerable<Assignment> GetAssignments(Course course) {
+            return course.AssignmentGroups.SelectMany(c => c.Assignments);
+        }
+
+        public List<Module> GetModules(Course course) {
+            return course.Modules;
+        }
+
+        public List<Announcement> GetAnnouncements(Course course) {
+            return course.Announcements;
+        }
+
+        public List<Person> GetRoster(Course course) {
+            return course.Roster;
         }
 
         public IEnumerable<Course> QueryByCode(String code) {

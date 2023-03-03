@@ -37,15 +37,12 @@ namespace App.LMSystem.Helpers
             Console.WriteLine($"Current name: {selectedStudent.Name}");
             Console.Write("New name: ");
             var newName = Console.ReadLine() ?? string.Empty;
-            if (!newName.Equals(string.Empty)) {
-                selectedStudent.Name = newName;
-            }
+
             Console.WriteLine($"Current Classification: {selectedStudent.Classification}");
             Console.Write("New classification: ");
             var newClassification = Console.ReadLine() ?? string.Empty;
-            if (!newClassification.Equals(string.Empty)) {
-                selectedStudent.Classification = newClassification;
-            }
+
+            studentService.UpdateStudent(selectedStudent, newName, newClassification);
             Console.WriteLine("\n....Student updated successfully.\n");
         }
 
@@ -61,10 +58,6 @@ namespace App.LMSystem.Helpers
             var grade = double.Parse(Console.ReadLine() ?? "0.00") / (double)assignment.TotalPoints;
             studentService.AddGrade(student, assignment.Id, grade);
             Console.WriteLine("\n....Grade successfully recorded.\n");
-            Console.WriteLine("TESTING OUTPUT");
-            foreach (KeyValuePair<int, double> entry in student.Grades) {
-                Console.WriteLine($"{entry.Key}: {entry.Value}");
-            }
         }
 
         public void ListAllStudents() {

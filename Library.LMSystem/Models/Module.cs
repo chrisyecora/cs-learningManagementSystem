@@ -24,6 +24,6 @@ public class Module
     }
 
     public string Display =>
-    $"{Name}: {Description}\n\t{string.Join("\n\t-", Content.Select(content => content.Display))}";
+    $"{Name}: {Description}\n\t{string.Join("\n  ", Content.Select(content => content.Display))}";
 }
 
