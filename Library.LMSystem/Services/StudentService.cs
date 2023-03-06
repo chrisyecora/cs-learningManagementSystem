@@ -5,48 +5,60 @@ namespace Library.LMSystem.Services
 {
     public class StudentService
     {
-        public List<Student> Students {
+        private static int personId = 0;
+        public List<Person> People {
             get;
             set;
         }
 
-        private HashSet<int> StudentIds {
+       
+        private HashSet<int> PersonIds {
             get;
             set;
         }
 
         public StudentService()
         {
-            Students = new List<Student>();
-            StudentIds = new HashSet<int>();
+            People = new List<Person>();
+            PersonIds = new HashSet<int>();
         }
 
-        public bool AddStudent(Student student) {
-            if (StudentIds.Add(student.Id)) {
-                Students.Add(student);
+        public bool AddPerson(Person person) {
+            person.Id = personId++;
+            if (PersonIds.Add(person.Id)) {
+                People.Add(person);
                 return true;
             }
             return false;
         }
 
-        public void UpdateStudent(Student student, string name, string classification) {
+        public void UpdatePerson(Person person, string name, string? classification = null) {
             if (!name.Equals(string.Empty)) {
-                student.Name = name;
+                person.Name = name;
             }
-            if (!classification.Equals(string.Empty)) {
+
+            var student = person as Student;
+            if (classification != null && !classification.Equals(string.Empty) && student != null) {
                 student.Classification = classification;
             }
         }
 
-        public void AddGrade(Student student, int assignmentId, double grade) {
-            student.Grades.Add(assignmentId, grade);
+        public void AddGrade(Person person, int assignmentId, double grade) {
+            var student = person as Student;
+            if (student != null) {
+                student.Grades.Add(assignmentId, grade);
+            }
         }
 
         public Dictionary<int, double> GetStudentGrades(Student student) {
             return student.Grades;
         }
-        public IEnumerable<Student> QueryByName(String name) {
-            return Students.Where(s => s.Name.Contains(name, StringComparison.InvariantCultureIgnoreCase));
+
+        public IEnumerable<Person> GetRoster(Course course) {
+            return course.Roster;
+        }
+        public IEnumerable<Person> QueryByName(String name) {
+            return People.Where(s => s.Name.Contains(name, StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }

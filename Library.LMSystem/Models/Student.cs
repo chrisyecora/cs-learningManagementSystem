@@ -10,7 +10,7 @@ namespace Library.LMSystem.Models
         }
 
         // Classification
-        public String Classification {
+        public string Classification {
             get;
             set;
         }
@@ -19,6 +19,12 @@ namespace Library.LMSystem.Models
 
         public Student()
         {
+            Grades = new Dictionary<int, double>();
+            Classification = string.Empty;
+        }
+
+        public Student(Person person) {
+            Name = person.Name;
             Grades = new Dictionary<int, double>();
             Classification = string.Empty;
         }

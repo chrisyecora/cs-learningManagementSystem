@@ -274,21 +274,21 @@ namespace App.LMSystem.Helpers
         }
 
         public void AddStudentToCourse(StudentHelper studentHelper) {
-            var student = studentHelper.GetStudentByName();
+            var student = studentHelper.GetPersonByName();
             var course = GetCourseByCode();
             courseService.AddStudent(course, student);
             Console.WriteLine("\n....Student added successfully.\n");
         }
 
         public void RemoveStudentFromCourse(StudentHelper studentHelper) {
-            var student = studentHelper.GetStudentByName();
+            var student = studentHelper.GetPersonByName();
             var course = GetCourseByCode();
             course.Roster.Remove(student);
             Console.WriteLine("\n....Student removed successfully.\n");
         }
 
         public void ListCoursesOfAStudent(StudentHelper studentHelper) {
-            var student = studentHelper.GetStudentByName();
+            var student = studentHelper.GetPersonByName();
             var coursesOfStudent = courseService.QueryByStudentInRosters(student);
             Console.WriteLine($"{student.Name}'s current courses:");
             int i = 1;
