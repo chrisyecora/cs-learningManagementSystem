@@ -6,6 +6,10 @@ namespace Library.LMSystem.Models
         public Instructor()
         {
         }
+
+        public Instructor(Person person) {
+            Name = person.Name;
+        }
     }
 }
 

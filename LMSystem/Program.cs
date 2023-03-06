@@ -14,32 +14,33 @@ namespace MyApp // Note: actual namespace depends on the project name.
             bool cont = true;
             while (cont) {
                 Console.WriteLine("\n");
-                Console.WriteLine("* Student Services *");
-                Console.WriteLine("1. Create a student");
-                Console.WriteLine("2. Update a student");
+                Console.WriteLine("* Person Services *");
+                Console.WriteLine("1. Create a person");
+                Console.WriteLine("2. Update a person");
                 Console.WriteLine("3. Add a student to a course's roster");
                 Console.WriteLine("4. Remove a student from a course's roster");
                 Console.WriteLine("5. Grade a student's assignemnt");
                 Console.WriteLine("6. List a student's courses");
                 Console.WriteLine("7. List all students");
+                Console.WriteLine("8. List all persons");
                 Console.WriteLine("");
                 Console.WriteLine("* Course Services *");
-                Console.WriteLine("8. Create a course");
-                Console.WriteLine("9. Update a course");
-                Console.WriteLine("10. Create an assignment for a course.");
-                Console.WriteLine("11. Create, Update, or Delete an Announcement");
-                Console.WriteLine("12. Create, Update, or Delete a Module");
-                Console.WriteLine("13. Create, Update, or Delete Content on an Existing Module");
-                Console.WriteLine("14. List all courses");
-                Console.WriteLine("15. Exit program\n\n");
+                Console.WriteLine("9. Create a course");
+                Console.WriteLine("10. Update a course");
+                Console.WriteLine("11. Create an assignment for a course.");
+                Console.WriteLine("12. Create, Update, or Delete an Announcement");
+                Console.WriteLine("13. Create, Update, or Delete a Module");
+                Console.WriteLine("14. Create, Update, or Delete Content on an Existing Module");
+                Console.WriteLine("15. List all courses");
+                Console.WriteLine("16. Exit program\n\n");
                 Console.Write(">>> ");
                 var userInput = int.Parse(Console.ReadLine() ?? "11");
                 switch (userInput) {
                     case 1:
-                        studentHelper.CreateStudent();
+                        studentHelper.CreatePerson();
                         break;
                     case 2:
-                        studentHelper.UpdateStudent();
+                        studentHelper.UpdatePerson();
                         break;
                     case 3:
                         courseHelper.AddStudentToCourse(studentHelper);
@@ -57,27 +58,30 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         studentHelper.ListAllStudents();
                         break;
                     case 8:
-                        courseHelper.CreateCourse();
+                        studentHelper.ListAllPersons();
                         break;
                     case 9:
-                        courseHelper.UpdateCourse();
+                        courseHelper.CreateCourse();
                         break;
                     case 10:
-                        courseHelper.CreateAssignment();
+                        courseHelper.UpdateCourse();
                         break;
                     case 11:
-                        courseHelper.CUDAnnouncement();
+                        courseHelper.CreateAssignment();
                         break;
                     case 12:
-                        courseHelper.CUDModule();
+                        courseHelper.CUDAnnouncement();
                         break;
                     case 13:
-                        courseHelper.CUDContentItem();
+                        courseHelper.CUDModule();
                         break;
                     case 14:
-                        courseHelper.ListAllCourses();
+                        courseHelper.CUDContentItem();
                         break;
                     case 15:
+                        courseHelper.ListAllCourses();
+                        break;
+                    case 16:
                         cont = false;
                         break;
                     default:

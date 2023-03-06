@@ -6,6 +6,9 @@ namespace Library.LMSystem.Models
         public TeachingAssistant()
         {
         }
+        public TeachingAssistant(Person person) {
+            Name = person.Name;
+        }
     }
 }
 
