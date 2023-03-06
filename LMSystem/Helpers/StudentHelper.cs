@@ -88,6 +88,15 @@ namespace App.LMSystem.Helpers
             Console.WriteLine("\n....Grade successfully recorded.\n");
         }
 
+        public void CalculateGPA(CourseHelper courseHelper) {
+            var course = courseHelper.GetCourseByCode();
+
+            var student = GetStudentFromRoster(course);
+
+            // IDEA: loop through student's courses and call the calcCourseGrade func for each.
+            // - need to add credit hour property to Courses first
+        }
+
         public void ListAllStudents() {
             studentService.People.
                 Where(person => person is Student).
