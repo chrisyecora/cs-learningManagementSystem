@@ -21,6 +21,11 @@ public class Course {
         get;
         set;
     }
+    // Credit hours
+    public int CreditHours {
+        get;
+        set;
+    }
     // Name
     public String Name {
         get;
