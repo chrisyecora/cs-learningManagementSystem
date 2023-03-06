@@ -1,14 +1,17 @@
 ﻿using System;
 using Library.LMSystem.Models;
 using Library.LMSystem.Services;
+using MyApp;
 
 namespace App.LMSystem.Helpers
 {
     public class StudentHelper
     {
         private StudentService studentService;
+        private ListNavigator<Person> listNavigator;
         public StudentHelper() {
             studentService = new StudentService();
+            listNavigator = new ListNavigator<Person>(studentService.People);
         }
 
         public void CreatePerson() {
@@ -95,21 +98,47 @@ namespace App.LMSystem.Helpers
                 var studentCourses = courseHelper.CoursesStudentIsTaking(student);
                 var gpa = studentService.CalcStudentGPA(studentCourses, student);
                 Console.WriteLine($"{student.Name}'s Term GPA: {String.Format("{0:0.00}", gpa.ToString())}");
-                // IDEA: loop through student's courses and call the calcCourseGrade func for each.
-                // - need to add credit hour property to Courses first
             } else {
                 Console.WriteLine($"Error. {person.Name} is not a student");
             }
         }
 
+        private void NavigatePersons(List<Person>? queryList = null) {
+            ListNavigator<Person> currentNavigator;
+            if (queryList != null) {
+                currentNavigator = new ListNavigator<Person>(queryList);
+            } else {
+                currentNavigator = listNavigator;
+            }
+            bool keepPaging = true;
+            while (keepPaging) {
+                foreach (var pair in currentNavigator.GetCurrentPage()) {
+                    Console.WriteLine($"{pair.Value.Display}");
+                }
+                if (currentNavigator.HasPreviousPage) {
+                    Console.Write("  p: previous  ");
+                }
+                if (currentNavigator.HasNextPage) {
+                    Console.Write("  n: next  ");
+                }
+                Console.WriteLine("  x: exit  ");
+                var userChoice = userStringPrompt();
+                if (userChoice.Equals("p", StringComparison.InvariantCultureIgnoreCase)) {
+                    currentNavigator.GoBackward();
+                } else if (userChoice.Equals("n", StringComparison.InvariantCultureIgnoreCase)) {
+                    currentNavigator.GoForward();
+                } else {
+                    keepPaging = false;
+                } 
+            }
+        }
+
         public void ListAllStudents() {
-            studentService.People.
-                Where(person => person is Student).
-                ToList().ForEach(s => Console.WriteLine(s.Display));
+            NavigatePersons(studentService.People.Where(p => p is Student).ToList());
         }
 
         public void ListAllPersons() {
-            studentService.People.ToList().ForEach(s => Console.WriteLine(s.Display));
+            NavigatePersons();
         }
 
         public Person GetPersonByName() {
