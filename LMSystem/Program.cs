@@ -33,6 +33,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 Console.WriteLine("14. Create, Update, or Delete Content on an Existing Module");
                 Console.WriteLine("15. List all courses");
                 Console.WriteLine("16. Exit program\n\n");
+                Console.WriteLine("17. Show a student's course grades");
                 Console.Write(">>> ");
                 var userInput = int.Parse(Console.ReadLine() ?? "11");
                 switch (userInput) {
@@ -83,6 +84,9 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         break;
                     case 16:
                         cont = false;
+                        break;
+                    case 17:
+                        studentHelper.CalculateGPA(courseHelper);
                         break;
                     default:
                         Console.WriteLine("Invalid selection.");
