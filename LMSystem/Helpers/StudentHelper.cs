@@ -89,12 +89,17 @@ namespace App.LMSystem.Helpers
         }
 
         public void CalculateGPA(CourseHelper courseHelper) {
-            var course = courseHelper.GetCourseByCode();
-
-            var student = GetStudentFromRoster(course);
-
-            // IDEA: loop through student's courses and call the calcCourseGrade func for each.
-            // - need to add credit hour property to Courses first
+            var person = GetPersonByName();
+            var student = person as Student;
+            if (student != null) {
+                var studentCourses = courseHelper.CoursesStudentIsTaking(student);
+                var gpa = studentService.CalcStudentGPA(studentCourses, student);
+                Console.WriteLine($"{student.Name}'s Term GPA: {String.Format("{0:0.00}", gpa.ToString())}");
+                // IDEA: loop through student's courses and call the calcCourseGrade func for each.
+                // - need to add credit hour property to Courses first
+            } else {
+                Console.WriteLine($"Error. {person.Name} is not a student");
+            }
         }
 
         public void ListAllStudents() {

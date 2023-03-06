@@ -22,6 +22,8 @@ namespace App.LMSystem.Helpers
             newCourse.Name = Console.ReadLine() ?? string.Empty;
             Console.Write("Description: ");
             newCourse.Description = Console.ReadLine() ?? string.Empty;
+            Console.Write("Credit Hours: ");
+            newCourse.CreditHours = int.Parse(Console.ReadLine() ?? "0");
             if (courseService.AddCourse(newCourse)) {
                 Console.WriteLine("\n....Course created successfully.\n");
             } else {
@@ -312,6 +314,10 @@ namespace App.LMSystem.Helpers
 
             // get selected course
             return queryResult.ElementAt(userSelection - 1);
+        }
+
+        public List<Course> CoursesStudentIsTaking(Student student) {
+            return courseService.QueryByStudentInRosters(student);
         }
 
         public Course GetCourseByName() {
