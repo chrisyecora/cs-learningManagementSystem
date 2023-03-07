@@ -1,15 +1,18 @@
 ﻿using System;
 using Library.LMSystem.Models;
 using Library.LMSystem.Services;
+using MyApp;
 
 namespace App.LMSystem.Helpers
 {
     public class CourseHelper
     {
         private CourseService courseService;
+        private ListNavigator<Course> courseNavigator;
         public CourseHelper()
         {
             courseService = new CourseService();
+            courseNavigator = new ListNavigator<Course>(courseService.Courses);
         }
         public void CreateCourse() {
             // Creating a course
@@ -409,31 +412,58 @@ namespace App.LMSystem.Helpers
             }
         }
 
-        public void ListAllCourses() {
-            int i = 1;
-            courseService.Courses.ForEach(c => Console.WriteLine($"{i++}. {c.ShortDisplay}"));
-            Console.WriteLine("To show full information, select a course from the numbered list.");
-            Console.WriteLine("If you do not wish to select a course, press enter to return to the main menu.");
-            var userInput = userStringPrompt();
-            if (!userInput.Equals(string.Empty)) {
-                var course = courseService.Courses[int.Parse(userInput) - 1];
-                Console.WriteLine(course.Display);
-                Console.WriteLine("* Roster *");
-                courseService.GetRoster(course).ForEach(s => Console.WriteLine(s.Display));
-                Console.WriteLine("\n");
-                Console.WriteLine("* Assignments *");
-                foreach (var group in course.AssignmentGroups) {
-                    Console.WriteLine($"Group: {group.Display}");
-                    group.Assignments.ForEach(a => Console.WriteLine(a.Display));
-                    Console.WriteLine("\n");
-                }
-                Console.WriteLine("* Announcements *");
-                courseService.GetAnnouncements(course).ToList().ForEach(a => Console.WriteLine(a.Display));
-                Console.WriteLine("\n");
-                Console.WriteLine("* Modules *");
-                courseService.GetModules(course).ToList().ForEach(module => Console.WriteLine(module.Display));
-                Console.WriteLine("\n");
+        private void NavigateCourses(List<Course>? queryList = null) {
+            ListNavigator<Course> currentNavigator;
+            if (queryList != null) {
+                currentNavigator = new ListNavigator<Course>(queryList);
+            } else {
+                currentNavigator = courseNavigator;
             }
+
+            bool keepPaging = true;
+            while (keepPaging) {
+                foreach (var pair in currentNavigator.GetCurrentPage()) {
+                    Console.WriteLine($"{pair.Key}. {pair.Value.ShortDisplay}");
+                }
+                if (currentNavigator.HasPreviousPage) {
+                    Console.Write("  p: previous  ");
+                }
+                if (currentNavigator.HasNextPage) {
+                    Console.Write("  n: next  ");
+                }
+                Console.WriteLine("  x: exit ");
+                Console.WriteLine("To show full information, select a course from the numbered list.");
+                var userInput = userStringPrompt();
+                if (userInput.Equals("x", StringComparison.InvariantCultureIgnoreCase)) {
+                    keepPaging = false;
+                } else if (userInput.Equals("p", StringComparison.InvariantCultureIgnoreCase)) {
+                    currentNavigator.GoBackward();
+                } else if (userInput.Equals("n", StringComparison.InvariantCultureIgnoreCase)) {
+                    currentNavigator.GoForward();
+                } else if (int.TryParse(userInput, out int userNumInput)) {
+                    var course = currentNavigator.GetCurrentPage()[userNumInput];
+                    Console.WriteLine(course.Display);
+                    Console.WriteLine("* Roster *");
+                    courseService.GetRoster(course).ForEach(s => Console.WriteLine(s.Display));
+                    Console.WriteLine("\n");
+                    Console.WriteLine("* Assignments *");
+                    foreach (var group in course.AssignmentGroups) {
+                        Console.WriteLine($"Group: {group.Display}");
+                        group.Assignments.ForEach(a => Console.WriteLine(a.Display));
+                        Console.WriteLine("\n");
+                    }
+                    Console.WriteLine("* Announcements *");
+                    courseService.GetAnnouncements(course).ToList().ForEach(a => Console.WriteLine(a.Display));
+                    Console.WriteLine("\n");
+                    Console.WriteLine("* Modules *");
+                    courseService.GetModules(course).ToList().ForEach(module => Console.WriteLine(module.Display));
+                    Console.WriteLine("\n\n");
+                }
+            }
+        }
+
+        public void ListAllCourses() {
+            NavigateCourses();
         }
 
         public int userIntPrompt() {
