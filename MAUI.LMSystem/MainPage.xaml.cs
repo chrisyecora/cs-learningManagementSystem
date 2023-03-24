@@ -20,6 +20,7 @@ public partial class MainPage : ContentPage
 
     void CreatePersonButton_Clicked(System.Object sender, System.EventArgs e)
     {
+        (BindingContext as MainViewModel).CreatePerson(this);
     }
 
     void UpdatePersonButton_Clicked(System.Object sender, System.EventArgs e)

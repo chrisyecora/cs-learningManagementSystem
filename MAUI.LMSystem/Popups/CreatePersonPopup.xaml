@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:local="clr-namespace:MAUI.LMSystem.ViewModels"
+               x:DataType="local:CreatePersonViewModel"
+               x:Class="MAUI.LMSystem.Popups.CreatePersonPopup"
+               xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+               CanBeDismissedByTappingOutsideOfPopup="False"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Size="500, 500"
+               >
+    <Grid RowDefinitions="60, 60, *,60" VerticalOptions="FillAndExpand">
+        <Label
+            Grid.Row="0"
+            Text="Create Person"
+            TextColor="Black"
+            FontSize="Title"
+            FontAttributes="Bold"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            />
+        <HorizontalStackLayout Grid.Row="1" Padding="5" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <RadioButton Margin="5" Content="Student" IsChecked="{Binding IsStudent, Mode=TwoWay}"/>
+            <RadioButton Margin="5" Content="TA" IsChecked="{Binding IsTA, Mode=TwoWay}"/>
+            <RadioButton Margin="5" Content="Professor" IsChecked="{Binding IsProfessor, Mode=TwoWay}"/>
+        </HorizontalStackLayout>
+
+        <!--start of entry fields stack layout-->
+        <VerticalStackLayout Grid.Row="2" Padding="5">
+            <Grid ColumnDefinitions="Auto, Auto">
+                <Label
+                    Grid.Column="0"
+                    Text="Name:"
+                    Margin="5"
+                    />
+                <Entry
+                    Grid.Column="1"
+                    x:Name="PersonName"
+                    Placeholder="Person Name"
+                    Text="{Binding Name, Mode=TwoWay}"
+                    />
+            </Grid>
+            <Grid ColumnDefinitions="Auto, Auto">
+                <Label
+                    Grid.Column="0"
+                    Text="Classification"
+                    Margin="5"
+                    />
+                <Picker
+                    x:Name="ClassificationPicker"
+                    IsVisible="{Binding IsStudent, Mode=OneWay}"
+                    Title="Classification"
+                    SelectedIndex="{Binding Classification, Mode=TwoWay}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Freshman</x:String>
+                                <x:String>Sophomore</x:String>
+                                <x:String>Junior</x:String>
+                                <x:String>Senior</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                </Picker>
+            </Grid>
+        </VerticalStackLayout>
+        <!--cancel and submit button grid-->
+        <Grid Grid.Row="3" Padding="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Text="Cancel"
+                TextColor="White"
+                x:Name="CancelButton"
+                BackgroundColor="Grey"
+                Clicked="CancelButton_Clicked"
+                />
+            <Button
+                Grid.Column="1"
+                Text="Submit"
+                TextColor="White"
+                x:Name="SumbitButton"
+                BackgroundColor="Blue"
+                Clicked="SumbitButton_Clicked"
+                />
+        </Grid>
+    </Grid>
+</toolkit:Popup>
