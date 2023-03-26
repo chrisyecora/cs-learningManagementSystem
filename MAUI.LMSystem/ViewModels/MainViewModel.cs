@@ -21,6 +21,13 @@ namespace MAUI.LMSystem.ViewModels
                 page.ShowPopup(popup);
             }
         }
+
+        public void CreateCourse(ContentPage page) {
+            var popup = new CreateCoursePopup(courseService);
+            if (popup != null) {
+                page.ShowPopup(popup);
+            }
+        }
     }
 }
 

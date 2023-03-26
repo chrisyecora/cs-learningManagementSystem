@@ -2,9 +2,10 @@
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                xmlns:local="clr-namespace:MAUI.LMSystem.ViewModels"
-               x:DataType="local:CreatePersonViewModel"
-               x:Class="MAUI.LMSystem.Popups.CreatePersonPopup"
+               x:DataType="local:CreateCourseViewModel"
+               x:Class="MAUI.LMSystem.Popups.CreateCoursePopup"
                xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+               xmlns:toolkit1="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                CanBeDismissedByTappingOutsideOfPopup="False"
                HorizontalOptions="Center"
                VerticalOptions="Center"
@@ -12,7 +13,7 @@
     <Grid RowDefinitions="60, 60, *,60" VerticalOptions="FillAndExpand">
         <Label
             Grid.Row="0"
-            Text="Create Person"
+            Text="Create Course"
             TextColor="Black"
             FontSize="Title"
             FontAttributes="Bold"
@@ -20,9 +21,9 @@
             VerticalOptions="CenterAndExpand"
             />
         <HorizontalStackLayout Grid.Row="1" Padding="5" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-            <RadioButton Margin="5" Content="Student" TextColor="Black" IsChecked="{Binding IsStudent, Mode=TwoWay}"/>
-            <RadioButton Margin="5" Content="TA" TextColor="Black" IsChecked="{Binding IsTA, Mode=TwoWay}"/>
-            <RadioButton Margin="5" Content="Professor" TextColor="Black" IsChecked="{Binding IsProfessor, Mode=TwoWay}"/>
+            <RadioButton Margin="5" Content="Fall" TextColor="Black" IsChecked="True"/>
+            <RadioButton Margin="5" Content="Spring" TextColor="Black"/>
+            <RadioButton Margin="5" Content="Summer" TextColor="Black"/>
         </HorizontalStackLayout>
 
         <!--start of entry fields stack layout-->
@@ -31,34 +32,65 @@
                   HorizontalOptions="StartAndExpand">
                 <Label
                     Grid.Column="0"
-                    Text="Name"
+                    Text="Course Code"
                     Margin="10"
                     TextColor="Black"
                     />
                 <Entry
                     Grid.Column="1"
-                    x:Name="PersonName"
-                    Placeholder="Person Name"
+                    x:Name="CourseCode"
+                    Placeholder="Code"
+                    Text="{Binding Code, Mode=TwoWay}"
+                    TextColor="Black"
+                    />
+            </Grid>
+            <Grid ColumnDefinitions="125, 225"
+                  HorizontalOptions="StartAndExpand">
+                <Label
+                    Grid.Column="0"
+                    Text="Name"
+                    TextColor="Black"
+                    Margin="10"
+                    />
+                <Entry
+                    Grid.Column="1"
+                    x:Name="CourseName"
+                    Placeholder="Name"
                     Text="{Binding Name, Mode=TwoWay}"
                     TextColor="Black"
                     />
             </Grid>
             <Grid ColumnDefinitions="125, 225"
-                  HorizontalOptions="StartAndExpand"
-                  IsVisible="{Binding IsStudent, Mode=OneWay}">
+                  HorizontalOptions="StartAndExpand">
                 <Label
                     Grid.Column="0"
-                    Text="Classification"
+                    Text="Description"
                     TextColor="Black"
                     Margin="10"
                     />
                 <Entry
                     Grid.Column="1"
-                    x:Name="PersonClassification"
-                    Placeholder="Classification"
-                    Text="{Binding Classification, Mode=TwoWay}"
+                    x:Name="CourseDescription"
+                    Placeholder="Description"
+                    Keyboard="Chat"
+                    Text="{Binding Description, Mode=TwoWay}"
                     TextColor="Black"
                     />
+            </Grid>
+            <Grid ColumnDefinitions="125, 225"
+                  HorizontalOptions="StartAndExpand">
+                <Label
+                    Grid.Column="0"
+                    Text="Credit Hours"
+                    TextColor="Black"
+                    Margin="10"
+                    />
+                <Entry
+                    Grid.Column="1"
+                    x:Name="CourseCreditHours"
+                    Keyboard="Numeric"
+                    Text="{Binding CreditHours, Mode=TwoWay}"
+                    TextColor="Black" />
             </Grid>
             
         </VerticalStackLayout>
@@ -87,3 +119,4 @@
         </Grid>
     </Grid>
 </toolkit:Popup>
+
