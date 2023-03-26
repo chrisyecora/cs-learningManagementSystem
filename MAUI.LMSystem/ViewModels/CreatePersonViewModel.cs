@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
+using Library.LMSystem.Models;
 using Library.LMSystem.Services;
 
 namespace MAUI.LMSystem.ViewModels
 {
-    public class CreatePersonViewModel : INotifyPropertyChanged
-    {
+    public class CreatePersonViewModel : INotifyPropertyChanged {
         public string Name {
             get; set;
         }
@@ -17,7 +17,7 @@ namespace MAUI.LMSystem.ViewModels
             }
             set {
                 isStudent = value;
-                //OnPropertyChanged(nameof(IsStudent));
+                OnPropertyChanged(nameof(IsStudent));
             }
         }
 
@@ -28,7 +28,7 @@ namespace MAUI.LMSystem.ViewModels
             }
             set {
                 isTA = value;
-                //OnPropertyChanged(nameof(IsTA));
+                OnPropertyChanged(nameof(IsTA));
             }
         }
 
@@ -39,17 +39,15 @@ namespace MAUI.LMSystem.ViewModels
             }
             set {
                 isProf = value;
-                //OnPropertyChanged(nameof(IsProfessor));
+                OnPropertyChanged(nameof(IsProfessor));
             }
         } 
 
         public string Classification {
             get;set;
         }
-        public int Type;
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         void OnPropertyChanged(string name) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
@@ -59,9 +57,19 @@ namespace MAUI.LMSystem.ViewModels
             isStudent = true;
             isTA = false;
             isProf = false;
+            Classification = string.Empty;
         }
 
         public void CreatePerson(StudentService studentService) {
+            var person = new Person();
+            person.Name = Name;
+            if (IsStudent) {
+                var student = new Student(person);
+                student.Classification = Classification;
+                studentService.AddPerson(student);
+            } else {
+                studentService.AddPerson(person);
+            }
         }
     }
 }

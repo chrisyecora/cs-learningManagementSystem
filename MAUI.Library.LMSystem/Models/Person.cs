@@ -4,9 +4,7 @@ public class Person
 {
     public Person() {
         Name = string.Empty;
-        
     }
-
     public int Id {
         get;
         set;
