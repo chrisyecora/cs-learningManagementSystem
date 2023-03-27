@@ -1,8 +1,6 @@
-﻿using System;
+﻿using CommunityToolkit.Maui.Views;
 using Library.LMSystem.Services;
 using MAUI.LMSystem.Popups;
-using CommunityToolkit.Maui.Views;
-
 namespace MAUI.LMSystem.ViewModels
 {
     public class MainViewModel
@@ -20,6 +18,10 @@ namespace MAUI.LMSystem.ViewModels
             if (popup != null) {
                 page.ShowPopup(popup);
             }
+        }
+
+        public async void ViewPersons(ContentPage page) {
+            await page.Navigation.PushAsync(new ViewPersonsPage(studentService));
         }
 
         public void CreateCourse(ContentPage page) {

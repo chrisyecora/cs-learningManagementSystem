@@ -29,6 +29,7 @@ public partial class MainPage : ContentPage
 
     void ViewPersonButton_Clicked(System.Object sender, System.EventArgs e)
     {
+        (BindingContext as MainViewModel).ViewPersons(this);
     }
 
     void CreateCourseButton_Clicked(System.Object sender, System.EventArgs e)
@@ -43,6 +44,8 @@ public partial class MainPage : ContentPage
     void ViewCoursesButton_Clicked(System.Object sender, System.EventArgs e)
     {
     }
+
+    
 }
 
 
