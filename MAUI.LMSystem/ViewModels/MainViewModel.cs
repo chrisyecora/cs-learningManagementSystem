@@ -30,6 +30,10 @@ namespace MAUI.LMSystem.ViewModels
                 page.ShowPopup(popup);
             }
         }
+
+        public async void ViewCourses(ContentPage page) {
+            await page.Navigation.PushAsync(new ViewCoursesPage(courseService));
+        }
     }
 }
 

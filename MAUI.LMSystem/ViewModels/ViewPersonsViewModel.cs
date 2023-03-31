@@ -1,13 +1,24 @@
 ﻿using System;
+using Library.LMSystem.Services;
+using Library.LMSystem.Models;
 namespace MAUI.LMSystem.ViewModels
 {
     public class ViewPersonsViewModel
     {
-        public ViewPersonsViewModel()
+        private StudentService studentService;
+        public ViewPersonsViewModel(StudentService service)
         {
+            studentService = service;
+            Persons = studentService.GetPeople();
         }
 
-        public Task Back() => Shell.Current.GoToAsync("..");
+        public IEnumerable<Person> Persons {
+            get; set;
+        }
+
+        public string SearchQuery {
+            get; set;
+        }
     }
 }
 

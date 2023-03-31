@@ -20,6 +20,10 @@ namespace Library.LMSystem.Services
             CourseCodes = new HashSet<string>();
         }
 
+        public IEnumerable<Course> GetCourses() {
+            return (IEnumerable<Course>)Courses;
+        }
+
         public bool AddCourse(Course course) {
             if (CourseCodes.Add(course.CourseCode)) {
                 Courses.Add(course);

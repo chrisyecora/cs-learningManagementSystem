@@ -23,6 +23,10 @@ namespace Library.LMSystem.Services
             PersonIds = new HashSet<int>();
         }
 
+        public IEnumerable<Person> GetPeople() {
+            return (IEnumerable<Person>)People;
+        }
+
         public bool AddPerson(Person person) {
             person.Id = personId++;
             if (PersonIds.Add(person.Id)) {

@@ -43,6 +43,7 @@ public partial class MainPage : ContentPage
 
     void ViewCoursesButton_Clicked(System.Object sender, System.EventArgs e)
     {
+        (BindingContext as MainViewModel).ViewCourses(this);
     }
 
     

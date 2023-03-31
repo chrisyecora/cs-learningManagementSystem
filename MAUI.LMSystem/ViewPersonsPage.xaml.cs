@@ -9,11 +9,10 @@ public partial class ViewPersonsPage : ContentPage
     {
         InitializeComponent();
         studentService = service;
-        BindingContext = new ViewPersonsViewModel();
+        BindingContext = new ViewPersonsViewModel(service);
     }
 
-    void BackToHome_Clicked(System.Object sender, System.EventArgs e)
+    void Search_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as ViewPersonsViewModel).Back();
     }
 }
