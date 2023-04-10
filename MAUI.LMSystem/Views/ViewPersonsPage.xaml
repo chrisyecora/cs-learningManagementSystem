@@ -4,7 +4,7 @@
              xmlns:model="clr-namespace:Library.LMSystem.Models;assembly=MAUI.Library.LMSystem"
              xmlns:local="clr-namespace:MAUI.LMSystem.ViewModels"
              x:DataType="local:ViewPersonsViewModel"
-             x:Class="MAUI.LMSystem.ViewPersonsPage">
+             x:Class="MAUI.LMSystem.Views.ViewPersonsPage">
     <StackLayout>
         <Label Text="List of Persons" FontSize="Title" Padding="10" HorizontalOptions="Center"/>
         <Grid ColumnDefinitions="*, 100" Margin="15">

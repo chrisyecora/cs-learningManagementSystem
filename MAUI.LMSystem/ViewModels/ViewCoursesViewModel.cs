@@ -1,23 +1,30 @@
-﻿using System;
-using Library.LMSystem.Services;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Library.LMSystem.Models;
+using Library.LMSystem.Services;
+
 namespace MAUI.LMSystem.ViewModels
 {
-    public class ViewCoursesViewModel
+    [QueryProperty(nameof(CourseService), "courseService")]
+    [QueryProperty(nameof(Courses), "courses")]
+    public partial class ViewCoursesViewModel : ObservableObject
     {
-        private CourseService courseService;
-        public ViewCoursesViewModel(CourseService service)
+        [ObservableProperty]
+        private CourseService courseService; 
+        public ViewCoursesViewModel()
         {
-            courseService = service;
-            Courses = courseService.GetCourses();
         }
 
-        public IEnumerable<Course> Courses {
-            get; set;
-        }
+        [ObservableProperty]
+        public IEnumerable<Course> courses;
 
         public string SearchQuery {
             get; set;
+        }
+
+        [RelayCommand]
+        async Task GoBack() {
+            await Shell.Current.GoToAsync("//MainPage");
         }
     }
 }

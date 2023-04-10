@@ -4,10 +4,14 @@
              xmlns:local="clr-namespace:MAUI.LMSystem.ViewModels"
              xmlns:model="clr-namespace:Library.LMSystem.Models;assembly=MAUI.Library.LMSystem"
              x:DataType="local:ViewCoursesViewModel"
-             x:Class="MAUI.LMSystem.ViewCoursesPage"
-             Title="ViewCoursesPage">
+             x:Class="MAUI.LMSystem.Views.ViewCoursesPage"
+             Title="CoursesPage">
     <VerticalStackLayout>
-        <Label Text="List of Courses" FontSize="Title" Padding="10" HorizontalOptions="Center"/>
+        <Grid ColumnDefinitions="100, *" ColumnSpacing="10">
+            <Button Grid.Column="0" Text="Go Back" Command="{Binding GoBackCommand}"/>
+            <Label Grid.Column="1" Text="List of Courses" FontSize="Title" Padding="10" HorizontalOptions="Center"/>
+        </Grid>
+        
         <Grid ColumnDefinitions="*, 100" Margin="15">
             <Entry Grid.Column="0" Placeholder="Search" Text="{Binding SearchQuery, Mode=TwoWay}"
                    TextColor="Black" FontSize="Medium" BackgroundColor="LightGray"

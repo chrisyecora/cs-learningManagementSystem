@@ -3,19 +3,18 @@ namespace MAUI.LMSystem;
 
 public partial class MainPage : ContentPage
 {
-    public MainPage()
+    public MainPage(MainViewModel vm)
     {
         InitializeComponent();
-        BindingContext = new MainViewModel();
+        BindingContext = vm;
     }
 
     void ProfessorViewButton_Clicked(System.Object sender, System.EventArgs e) {
-        // change to professor view
+        Shell.Current.GoToAsync("//Instructor");
     }
 
     void StudentViewButton_Clicked(System.Object sender, System.EventArgs e) {
-        // change to student view
-        // probably launch a dialog box to search for a student
+        Shell.Current.GoToAsync("//Student");
     }
 
     void CreatePersonButton_Clicked(System.Object sender, System.EventArgs e)
@@ -39,11 +38,6 @@ public partial class MainPage : ContentPage
 
     void ManageCoursesButton_Clicked(System.Object sender, System.EventArgs e)
     {
-    }
-
-    void ViewCoursesButton_Clicked(System.Object sender, System.EventArgs e)
-    {
-        (BindingContext as MainViewModel).ViewCourses(this);
     }
 
     

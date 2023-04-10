@@ -1,9 +1,13 @@
 ﻿using CommunityToolkit.Maui.Views;
 using Library.LMSystem.Services;
+using CommunityToolkit.Mvvm.Input;
 using MAUI.LMSystem.Popups;
+using MAUI.LMSystem.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace MAUI.LMSystem.ViewModels
 {
-    public class MainViewModel
+    public partial class MainViewModel : ObservableObject
     {
         private StudentService studentService;
         private CourseService courseService;
@@ -31,8 +35,12 @@ namespace MAUI.LMSystem.ViewModels
             }
         }
 
-        public async void ViewCourses(ContentPage page) {
-            await page.Navigation.PushAsync(new ViewCoursesPage(courseService));
+        [RelayCommand]
+        async Task ViewCoursesAsync() {
+            var navParam = new Dictionary<string, object>();
+            navParam.Add("courseService", courseService);
+            navParam.Add("courses", courseService.GetCourses());
+            await Shell.Current.GoToAsync("//CoursesPage", navParam);
         }
     }
 }
