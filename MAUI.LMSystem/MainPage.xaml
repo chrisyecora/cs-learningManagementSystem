@@ -104,8 +104,7 @@
                 WidthRequest="300"
                 HeightRequest="200"
                 Text="View Courses"
-                x:Name="ViewCoursesButton"
-                Clicked="ViewCoursesButton_Clicked"
+                Command="{Binding ViewCoursesCommand}"
                 />
         </Grid>
     </Grid>

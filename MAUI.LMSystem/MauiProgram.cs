@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using MAUI.LMSystem.ViewModels;
+using MAUI.LMSystem.Views;
+
 namespace MAUI.LMSystem;
 
 public static class MauiProgram
@@ -16,9 +19,11 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-#if DEBUG
-        builder.Logging.AddDebug();
-#endif
+        builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddSingleton<MainViewModel>();
+
+        builder.Services.AddTransient<ViewCoursesPage>();
+        builder.Services.AddTransient<ViewCoursesViewModel>();
 
         return builder.Build();
     }
