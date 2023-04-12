@@ -23,10 +23,10 @@
         Title="Courses"
         ContentTemplate="{DataTemplate local2:ViewCoursesPage}"
         Route="CoursesPage" />
-    <!--<ShellContent
-        Title="Students"
-        ContentTemplate="{DataTemplate local2:ViewStudentsPage}"
-        Route="Students" />-->
+    <ShellContent
+        Title="Persons"
+        ContentTemplate="{DataTemplate local2:ViewPersonsPage}"
+        Route="PersonsPage" />
 
 </Shell>
 

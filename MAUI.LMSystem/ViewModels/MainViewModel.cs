@@ -25,14 +25,9 @@ namespace MAUI.LMSystem.ViewModels
             Shell.Current.GoToAsync("//Instructor", parameters);
         }
 
-        
-
         [RelayCommand]
-        async Task ViewCoursesAsync() {
-            var navParam = new Dictionary<string, object>();
-            navParam.Add("courseService", courseService);
-            navParam.Add("courses", courseService.GetCourses());
-            await Shell.Current.GoToAsync("//CoursesPage", navParam);
+        void StudentView() {
+            throw new NotImplementedException();
         }
     }
 }

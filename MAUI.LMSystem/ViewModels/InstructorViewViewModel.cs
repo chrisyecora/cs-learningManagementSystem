@@ -47,6 +47,13 @@ namespace MAUI.LMSystem.ViewModels
             Shell.Current.GoToAsync("//CoursesPage", parameters);
         }
 
+        [RelayCommand]
+        void ViewPersons() {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("studentService", studentService);
+            Shell.Current.GoToAsync("//PersonsPage", parameters);
+        }
+
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             studentService = query["studentService"] as StudentService;

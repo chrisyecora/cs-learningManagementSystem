@@ -21,10 +21,6 @@ public partial class InstructorView : ContentPage
     void UpdatePersonButton_Clicked(System.Object sender, System.EventArgs e) {
     }
 
-    void ViewPersonButton_Clicked(System.Object sender, System.EventArgs e) {
-        (BindingContext as InstructorViewViewModel).ViewPersons(this);
-    }
-
     void CreateCourseButton_Clicked(System.Object sender, System.EventArgs e) {
         (BindingContext as InstructorViewViewModel).CreateCourse(this);
     }

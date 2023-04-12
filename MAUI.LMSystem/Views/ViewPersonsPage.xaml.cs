@@ -3,12 +3,10 @@ using Library.LMSystem.Services;
 using MAUI.LMSystem.ViewModels;
 public partial class ViewPersonsPage : ContentPage
 {
-    private StudentService studentService;
-    public ViewPersonsPage(StudentService service)
+    public ViewPersonsPage()
     {
         InitializeComponent();
-        studentService = service;
-        BindingContext = new ViewPersonsViewModel(service);
+        BindingContext = new ViewPersonsViewModel();
     }
 
     void Search_Clicked(System.Object sender, System.EventArgs e)

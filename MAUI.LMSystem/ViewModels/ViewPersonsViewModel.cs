@@ -1,15 +1,16 @@
 ﻿using System;
 using Library.LMSystem.Services;
 using Library.LMSystem.Models;
+using System.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+
 namespace MAUI.LMSystem.ViewModels
 {
-    public class ViewPersonsViewModel
+    public partial class ViewPersonsViewModel : INotifyPropertyChanged, IQueryAttributable
     {
         private StudentService studentService;
-        public ViewPersonsViewModel(StudentService service)
+        public ViewPersonsViewModel()
         {
-            studentService = service;
-            Persons = studentService.GetPeople();
         }
 
         public IEnumerable<Person> Persons {
@@ -18,6 +19,23 @@ namespace MAUI.LMSystem.ViewModels
 
         public string SearchQuery {
             get; set;
+        }
+
+        [RelayCommand]
+        void GoBack() {
+            Shell.Current.GoToAsync("//Instructor");
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query) {
+            studentService = query["studentService"] as StudentService;
+            Persons = studentService.GetPeople();
+            NotifyPropertyChanged(nameof(Persons));
+        }
+
+        private void NotifyPropertyChanged(String propertyName) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
