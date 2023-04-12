@@ -17,23 +17,15 @@ namespace MAUI.LMSystem.ViewModels
             courseService = new CourseService();
         }
 
-        public void CreatePerson(ContentPage page) {
-            var popup = new CreatePersonPopup(studentService);
-            if (popup != null) {
-                page.ShowPopup(popup);
-            }
+        [RelayCommand]
+        void InstructorView() {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("studentService", studentService);
+            parameters.Add("courseService", courseService);
+            Shell.Current.GoToAsync("//Instructor", parameters);
         }
 
-        public async void ViewPersons(ContentPage page) {
-            await page.Navigation.PushAsync(new ViewPersonsPage(studentService));
-        }
-
-        public void CreateCourse(ContentPage page) {
-            var popup = new CreateCoursePopup(courseService);
-            if (popup != null) {
-                page.ShowPopup(popup);
-            }
-        }
+        
 
         [RelayCommand]
         async Task ViewCoursesAsync() {

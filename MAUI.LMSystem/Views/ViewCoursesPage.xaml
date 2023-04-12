@@ -20,22 +20,25 @@
                     x:Name="Search" Clicked="Search_Clicked"/>
         </Grid>
         <ListView BackgroundColor="Transparent"
-                  ItemsSource="{Binding Courses}"
+                  ItemsSource="{Binding Courses, Mode=OneWay}"
                   HasUnevenRows="True">
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="model:Course">
                 <ViewCell>
                     <VerticalStackLayout>
-                        <Grid Padding="10" ColumnDefinitions="*, 100">
-                            <Label VerticalOptions="Center"
-                                Text="{Binding Display}"
-                                FontSize="Medium"
-                                Grid.Column="0"
-                                />
-                            <Button Text="Details" Grid.Column="1"/>
+                        <Grid Padding="10" RowDefinitions="Auto, Auto">
+                            <Grid Grid.Row="0" ColumnDefinitions="*, 100">
+                                <Label VerticalOptions="Center"
+                                    Text="{Binding ShortDisplay}"
+                                    FontSize="Medium"
+                                    Grid.Column="0"
+                                    />
+                                <Button Text="Details" Grid.Column="1"/>
+                            </Grid>
+                            <Label Grid.Row="1" FontAttributes ="Italic" FontSize="Small"
+                                    Text="{Binding Description}" />
                         </Grid>
-                        <Label FontAttributes="Italic" FontSize="Small"
-                               Text="{Binding Description}" />
+                        
                     </VerticalStackLayout>
                     
                 </ViewCell>

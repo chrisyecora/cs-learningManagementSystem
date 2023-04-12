@@ -1,31 +1,47 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
+using System.ComponentModel;
 using Library.LMSystem.Models;
 using Library.LMSystem.Services;
+using System.Runtime.CompilerServices;
 
 namespace MAUI.LMSystem.ViewModels
 {
-    [QueryProperty(nameof(CourseService), "courseService")]
-    [QueryProperty(nameof(Courses), "courses")]
-    public partial class ViewCoursesViewModel : ObservableObject
+    public partial class ViewCoursesViewModel : IQueryAttributable, INotifyPropertyChanged
     {
-        [ObservableProperty]
-        private CourseService courseService; 
+        private CourseService courseService {
+            get;
+            set;
+        }
         public ViewCoursesViewModel()
         {
         }
 
-        [ObservableProperty]
-        public IEnumerable<Course> courses;
+
+        public IEnumerable<Course> Courses {
+            get; set;
+        }
 
         public string SearchQuery {
             get; set;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         [RelayCommand]
         async Task GoBack() {
-            await Shell.Current.GoToAsync("//MainPage");
+            await Shell.Current.GoToAsync("//Instructor");
         }
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query) {
+            courseService = query["courseService"] as CourseService;
+            Courses = courseService.GetCourses();
+            NotifyPropertyChanged(nameof(Courses));
+        }
+
+        private void NotifyPropertyChanged(String propertyName) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 }
 
