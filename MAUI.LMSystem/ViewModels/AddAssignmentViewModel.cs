@@ -39,6 +39,8 @@ namespace MAUI.LMSystem.ViewModels
                 DueDate = DateTime.Parse(this.DueDate)
             };
 
+            courseService.AddAssignmentToCourse(course, assignment);
+
         }
     }
 }

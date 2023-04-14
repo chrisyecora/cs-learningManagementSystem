@@ -14,11 +14,9 @@ namespace MAUI.LMSystem.ViewModels
             set;
         }
 
-        private IEnumerable<Assignment> assignments;
         public IEnumerable<Assignment> Assignments {
-            get {
-                return assignments;
-            }
+            get;
+            set;
         }
 
         [RelayCommand]
@@ -30,7 +28,7 @@ namespace MAUI.LMSystem.ViewModels
 
         public void ApplyQueryAttributes(IDictionary<string, object> query) {
             Course = query["course"] as Course;
-            assignments = Course.AssignmentGroups.SelectMany(c => c.Assignments);
+            Assignments = Course.AssignmentGroups.SelectMany(c => c.Assignments);
             NotifyPropertyChanged(nameof(Course));
             NotifyPropertyChanged(nameof(Assignments));
         }

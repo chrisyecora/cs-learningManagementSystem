@@ -16,23 +16,39 @@
             Text="Back"
             Command="{Binding GoBackCommand}"/>
         <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="15">
-            <Label Grid.Column="0" Text="Code" />
+            <Label Grid.Column="0" Text="Code:" />
             <Label Grid.Column="1" Text="{Binding Course.CourseCode}"/>
         </Grid>
         <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="15">
-            <Label Grid.Column="0" Text="Name" />
+            <Label Grid.Column="0" Text="Name:" />
             <Label Grid.Column="1" Text="{Binding Course.Name}"/>
         </Grid>
         <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="15">
-            <Label Grid.Column="0" Text="Description" />
+            <Label Grid.Column="0" Text="Description:" />
             <Label Grid.Column="1" Text="{Binding Course.Description}"/>
         </Grid>
-        <ListView Margin="10"
-            ItemsSource="{Binding Assignments}">
+        <Label Text="Assignments"/>
+        <ListView BackgroundColor="Transparent"
+                  ItemsSource="{Binding Assignments}"
+                  HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:Assignment">
                     <ViewCell>
-                        <Label Text="{Binding Display}" />
+                        <Grid>
+                            <Grid Padding="10" RowDefinitions="Auto, Auto">
+                                <Label Grid.Row="0"
+                                        VerticalOptions="Center"
+                                        Text="{Binding Display}"
+                                        FontSize="Medium"
+                                        Grid.Column="0"
+                                />
+                                <Label Grid.Row="1"
+                                        FontAttributes ="Italic"
+                                        FontSize="Small"
+                                        Text="{Binding Description}"
+                                />
+                            </Grid>
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
