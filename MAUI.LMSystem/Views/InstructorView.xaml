@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUI.LMSystem.Views.InstructorView"
              xmlns:vm="clr-namespace:MAUI.LMSystem.ViewModels"
-             x:DataType="vm:InstructorViewViewModel"
-             Title="InstructorView">
+             x:DataType="vm:InstructorViewViewModel">
     <VerticalStackLayout>
         <Button
             Text="Back"

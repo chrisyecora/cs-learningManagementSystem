@@ -27,16 +27,14 @@
             <Button
                 Grid.Column="1"
                 Margin="5"
-                Text="Professor view"
-                x:Name="ProfessorViewButton"
+                Text="Instructor view"
                 Command="{Binding InstructorViewCommand}"
                 />
             <Button
                 Grid.Column="2"
                 Margin="5"
                 Text="Student view"
-                x:Name="StudentViewButton"
-                Clicked="StudentViewButton_Clicked"
+                Command="{Binding StudentViewCommand}"
                 />
 
         </Grid>

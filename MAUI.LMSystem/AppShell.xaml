@@ -27,6 +27,10 @@
         Title="Persons"
         ContentTemplate="{DataTemplate local2:ViewPersonsPage}"
         Route="PersonsPage" />
+    <ShellContent
+        Title="Course Details"
+        ContentTemplate="{DataTemplate local2:CourseDetailsPage}"
+        Route="CourseDetailsPage" />
 
 </Shell>
 

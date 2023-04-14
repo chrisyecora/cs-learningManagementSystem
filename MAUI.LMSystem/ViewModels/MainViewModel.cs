@@ -27,7 +27,7 @@ namespace MAUI.LMSystem.ViewModels
 
         [RelayCommand]
         void StudentView() {
-            throw new NotImplementedException();
+            Shell.Current.GoToAsync("//Student");
         }
     }
 }
