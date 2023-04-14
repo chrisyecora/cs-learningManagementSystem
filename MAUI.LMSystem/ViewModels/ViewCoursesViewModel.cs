@@ -43,6 +43,14 @@ namespace MAUI.LMSystem.ViewModels
             Shell.Current.GoToAsync("//CourseDetailsPage", parameters);
         }
 
+        [RelayCommand]
+        void ModifyCourse() {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("courseService", courseService);
+            parameters.Add("course", SelectedCourse);
+            Shell.Current.GoToAsync("//ModifyCoursePage", parameters);
+        }
+
         public void ApplyQueryAttributes(IDictionary<string, object> query) {
             courseService = query["courseService"] as CourseService;
             Courses = courseService.GetCourses();
