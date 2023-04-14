@@ -3,19 +3,11 @@ namespace MAUI.LMSystem;
 
 public partial class MainPage : ContentPage
 {
-    public MainPage(MainViewModel vm)
+    public MainPage()
     {
         InitializeComponent();
-        BindingContext = vm;
+        BindingContext = new MainViewModel();
     }
-
-    void ProfessorViewButton_Clicked(System.Object sender, System.EventArgs e) {
-        
-    }
-
-    void StudentViewButton_Clicked(System.Object sender, System.EventArgs e) {
-        Shell.Current.GoToAsync("//Student");
-    } 
 }
 
 

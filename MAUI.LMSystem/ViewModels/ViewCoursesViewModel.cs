@@ -16,6 +16,10 @@ namespace MAUI.LMSystem.ViewModels
         {
         }
 
+        public Course SelectedCourse {
+            get;
+            set;
+        }
 
         public IEnumerable<Course> Courses {
             get; set;
@@ -30,6 +34,13 @@ namespace MAUI.LMSystem.ViewModels
         [RelayCommand]
         async Task GoBack() {
             await Shell.Current.GoToAsync("//Instructor");
+        }
+
+        [RelayCommand]
+        void CourseDetails() {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("course", SelectedCourse);
+            Shell.Current.GoToAsync("//CourseDetailsPage", parameters);
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query) {
