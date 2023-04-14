@@ -2,6 +2,9 @@
 using CommunityToolkit.Mvvm.Input;
 using Library.LMSystem.Models;
 using Library.LMSystem.Services;
+using CommunityToolkit.Maui.Views;
+using MAUI.LMSystem.Popups;
+using MAUI.LMSystem.Views;
 
 namespace MAUI.LMSystem.ViewModels
 {
@@ -16,9 +19,35 @@ namespace MAUI.LMSystem.ViewModels
             set;
         }
 
+        private StudentService studentService {
+            get;
+            set;
+        }
+
         public Course Course {
             get;
             set;
+        }
+
+        [RelayCommand]
+        void AddAssignment() {
+            var popup = new AddAssignmentPopup(Course, courseService);
+            Shell.Current.ShowPopup(popup);
+        }
+
+        [RelayCommand]
+        void AddAnnouncement() {
+
+        }
+
+        [RelayCommand]
+        void CreateModule() {
+
+        }
+
+        [RelayCommand]
+        void AddStudentToRoster() {
+
         }
 
         [RelayCommand]
@@ -30,6 +59,7 @@ namespace MAUI.LMSystem.ViewModels
         {
             Course = query["course"] as Course;
             courseService = query["courseService"] as CourseService;
+            studentService = query["studentService"] as StudentService;
         }
     }
 }

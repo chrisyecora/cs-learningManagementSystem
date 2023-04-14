@@ -32,6 +32,7 @@ namespace MAUI.LMSystem.ViewModels
             Course = query["course"] as Course;
             assignments = Course.AssignmentGroups.SelectMany(c => c.Assignments);
             NotifyPropertyChanged(nameof(Course));
+            NotifyPropertyChanged(nameof(Assignments));
         }
 
         private void NotifyPropertyChanged(String propertyName) {

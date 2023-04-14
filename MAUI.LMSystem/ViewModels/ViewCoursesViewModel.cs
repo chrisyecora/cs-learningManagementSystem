@@ -12,6 +12,12 @@ namespace MAUI.LMSystem.ViewModels
             get;
             set;
         }
+
+        private StudentService studentService {
+            get;
+            set;
+        }
+
         public ViewCoursesViewModel()
         {
         }
@@ -47,12 +53,14 @@ namespace MAUI.LMSystem.ViewModels
         void ModifyCourse() {
             var parameters = new Dictionary<string, object>();
             parameters.Add("courseService", courseService);
+            parameters.Add("studentService", studentService);
             parameters.Add("course", SelectedCourse);
             Shell.Current.GoToAsync("//ModifyCoursePage", parameters);
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query) {
             courseService = query["courseService"] as CourseService;
+            studentService = query["studentService"] as StudentService;
             Courses = courseService.GetCourses();
             NotifyPropertyChanged(nameof(Courses));
         }
