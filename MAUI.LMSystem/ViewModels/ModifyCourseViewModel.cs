@@ -34,6 +34,7 @@ namespace MAUI.LMSystem.ViewModels
             var parameters = new Dictionary<string, object>();
             parameters.Add("course", Course);
             parameters.Add("courseService", courseService);
+            parameters.Add("studentService", studentService);
             Shell.Current.GoToAsync("//AddAssignmentPage", parameters);
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Library.LMSystem.Models;
@@ -21,7 +22,7 @@ namespace MAUI.LMSystem.ViewModels
             set;
         }
 
-        public IEnumerable<AssignmentGroup> AssignmentGroups {
+        public ObservableCollection<AssignmentGroup> AssignmentGroups {
             get;
             set;
         }
@@ -45,11 +46,11 @@ namespace MAUI.LMSystem.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
-        {
+        public void ApplyQueryAttributes(IDictionary<string, object> query) {
             course = query["course"] as Course;
             courseService = query["courseService"] as CourseService;
-            AssignmentGroups = this.course.AssignmentGroups.AsEnumerable();
+            studentService = query["studentService"] as StudentService;
+            AssignmentGroups = new ObservableCollection<AssignmentGroup>(this.course.AssignmentGroups);
             NotifyPropertyChanged(nameof(AssignmentGroups));
         }
 

@@ -32,7 +32,9 @@ namespace MAUI.LMSystem.ViewModels
 
         
         public void Submit() {
-            var newGroup = new AssignmentGroup { Name = this.Name, Weight = weight };
+            var newGroup = new AssignmentGroup();
+            newGroup.Name = Name;
+            newGroup.Weight = weight;
             courseService.AddAssignmentGroup(course, newGroup);
         }
 
