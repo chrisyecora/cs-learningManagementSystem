@@ -6,7 +6,6 @@ namespace Library.LMSystem.Models
         public AssignmentGroup()
         {
             Assignments = new List<Assignment>();
-            Name = string.Empty;
         }
         public List<Assignment> Assignments {
             get;
@@ -16,7 +15,7 @@ namespace Library.LMSystem.Models
             get;
             set;
         }
-        public string Name {
+        public string? Name {
             get;
             set;
         }

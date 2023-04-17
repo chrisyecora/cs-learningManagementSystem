@@ -31,7 +31,15 @@ namespace MAUI.LMSystem.ViewModels
 
         [RelayCommand]
         void AddAssignment() {
-            var popup = new AddAssignmentPopup(Course, courseService);
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("course", Course);
+            parameters.Add("courseService", courseService);
+            Shell.Current.GoToAsync("//AddAssignmentPage", parameters);
+        }
+
+        [RelayCommand]
+        void CreateAssignmentGroup() {
+            var popup = new CreateAssignmentGroupPopup(Course, courseService);
             Shell.Current.ShowPopup(popup);
         }
 

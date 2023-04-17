@@ -1,13 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MAUI.LMSystem.Popups.AddAssignmentPopup"
+             x:Class="MAUI.LMSystem.Popups.CreateAssignmentGroupPopup"
              xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             xmlns:model="clr-namespace:Library.LMSystem.Models;assembly=MAUI.Library.LMSystem"
              xmlns:vm="clr-namespace:MAUI.LMSystem.ViewModels"
-             x:DataType="vm:AddAssignmentViewModel"
+             x:DataType="vm:CreateAssignmentGroupViewModel"
+             CanBeDismissedByTappingOutsideOfPopup="False"
              HorizontalOptions="Center"
              VerticalOptions="Center"
              Size="350, 350">
+
     <Grid RowDefinitions="60, *,60" VerticalOptions="FillAndExpand">
         <Label
             Grid.Row="0"
@@ -18,7 +21,6 @@
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="CenterAndExpand"
             />
-
         <!--start of entry fields stack layout-->
         <VerticalStackLayout Grid.Row="1" Padding="5">
             <Grid ColumnDefinitions="125, 225"
@@ -40,52 +42,22 @@
                   HorizontalOptions="StartAndExpand">
                 <Label
                     Grid.Column="0"
-                    Text="Description"
+                    Text="Weight (%)"
                     TextColor="Black"
                     Margin="10"
                     />
                 <Entry
                     Grid.Column="1"
                     HeightRequest="20"
-                    Placeholder="Description"
-                    Text="{Binding Description, Mode=TwoWay}"
-                    TextColor="Black"
-                    />
-            </Grid>
-            <Grid ColumnDefinitions="125, 225"
-                  HorizontalOptions="StartAndExpand">
-                <Label
-                    Grid.Column="0"
-                    Text="Total Points"
-                    TextColor="Black"
-                    Margin="10"
-                    />
-                <Entry
-                    Grid.Column="1"
                     Keyboard="Numeric"
-                    Placeholder="100"
-                    Text="{Binding TotalPoints, Mode=TwoWay}"
+                    Text="{Binding Weight, Mode=TwoWay}"
                     TextColor="Black"
                     />
-            </Grid>
-            <Grid ColumnDefinitions="125, 225"
-                  HorizontalOptions="StartAndExpand">
-                <Label
-                    Grid.Column="0"
-                    Text="Due Date"
-                    TextColor="Black"
-                    Margin="10"
-                    />
-                <Entry
-                    Grid.Column="1"
-                    Placeholder="MM/DD/YYYY"
-                    Text="{Binding DueDate, Mode=TwoWay}"
-                    TextColor="Black" />
             </Grid>
             
         </VerticalStackLayout>
         <!--cancel and submit button grid-->
-        <Grid Grid.Row="3" Padding="15">
+        <Grid Grid.Row="2" Padding="15">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -108,4 +80,6 @@
                 />
         </Grid>
     </Grid>
+
+
 </toolkit:Popup>

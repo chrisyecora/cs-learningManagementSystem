@@ -5,14 +5,12 @@ using MAUI.LMSystem.ViewModels;
 
 namespace MAUI.LMSystem.Popups;
 
-public partial class AddAssignmentPopup : Popup
+public partial class CreateAssignmentGroupPopup : Popup
 {
-
-    
-    public AddAssignmentPopup(Course course, CourseService service)
+    public CreateAssignmentGroupPopup(Course course, CourseService service)
     {
         InitializeComponent();
-        BindingContext = new AddAssignmentViewModel(course, service);
+        BindingContext = new CreateAssignmentGroupViewModel(course, service);
     }
 
     void CancelButton_Clicked(System.Object sender, System.EventArgs e)
@@ -22,7 +20,7 @@ public partial class AddAssignmentPopup : Popup
 
     void SumbitButton_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as AddAssignmentViewModel).Submit();
+        (BindingContext as CreateAssignmentGroupViewModel).Submit();
         Close();
     }
 }

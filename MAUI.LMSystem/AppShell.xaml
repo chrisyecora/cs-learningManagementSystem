@@ -35,6 +35,10 @@
         Title="Modify Course"
         ContentTemplate="{DataTemplate local2:ModifyCoursePage}"
         Route="ModifyCoursePage" />
+    <ShellContent
+        Title="Add Assignment"
+        ContentTemplate="{DataTemplate local2:AddAssignmentView}"
+        Route="AddAssignmentPage" />
 
 </Shell>
 
