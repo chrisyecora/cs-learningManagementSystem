@@ -46,7 +46,8 @@ namespace MAUI.LMSystem.ViewModels
 
         [RelayCommand]
         void AddAnnouncement() {
-
+            var popup = new AddAnnouncementPopup(courseService, Course);
+            Shell.Current.ShowPopup(popup);
         }
 
         [RelayCommand]

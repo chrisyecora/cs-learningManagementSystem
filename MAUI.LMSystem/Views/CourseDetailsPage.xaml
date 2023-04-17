@@ -53,5 +53,31 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Label Text="Announcements"/>
+        <ListView BackgroundColor="Transparent"
+                  ItemsSource="{Binding Announcements}"
+                  HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Announcement">
+                    <ViewCell>
+                        <Grid>
+                            <Grid Padding="10" RowDefinitions="Auto, Auto">
+                                <Label Grid.Row="0"
+                                        VerticalOptions="Center"
+                                        Text="{Binding Title}"
+                                        FontSize="Medium"
+                                        Grid.Column="0"
+                                />
+                                <Label Grid.Row="1"
+                                        FontAttributes ="Italic"
+                                        FontSize="Small"
+                                        Text="{Binding Body}"
+                                />
+                            </Grid>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </VerticalStackLayout>
 </ContentPage>

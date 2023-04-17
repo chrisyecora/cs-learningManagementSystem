@@ -1,19 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MAUI.LMSystem.Popups.CreateAssignmentGroupPopup"
+             x:Class="MAUI.LMSystem.Popups.AddAnnouncementPopup"
              xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
              xmlns:vm="clr-namespace:MAUI.LMSystem.ViewModels"
-             x:DataType="vm:CreateAssignmentGroupViewModel"
+             x:DataType="vm:AddAnnouncementViewModel"
              CanBeDismissedByTappingOutsideOfPopup="False"
              HorizontalOptions="Center"
              VerticalOptions="Center"
              Size="350, 350">
-
     <Grid RowDefinitions="60, *,60" VerticalOptions="FillAndExpand">
         <Label
             Grid.Row="0"
-            Text="Add Assignment"
+            Text="Add Announcement"
             TextColor="Black"
             FontSize="Title"
             FontAttributes="Bold"
@@ -26,14 +25,14 @@
                   HorizontalOptions="StartAndExpand">
                 <Label
                     Grid.Column="0"
-                    Text="Name"
+                    Text="Title"
                     Margin="10"
                     TextColor="Black"
                     />
                 <Entry
                     Grid.Column="1"
-                    Placeholder="Name"
-                    Text="{Binding Name, Mode=TwoWay}"
+                    Placeholder="Title"
+                    Text="{Binding Title, Mode=TwoWay}"
                     TextColor="Black"
                     />
             </Grid>
@@ -41,15 +40,15 @@
                   HorizontalOptions="StartAndExpand">
                 <Label
                     Grid.Column="0"
-                    Text="Weight (%)"
+                    Text="Body"
                     TextColor="Black"
                     Margin="10"
                     />
                 <Entry
                     Grid.Column="1"
                     HeightRequest="20"
-                    Keyboard="Numeric"
-                    Text="{Binding Weight, Mode=TwoWay}"
+                    Keyboard="Chat"
+                    Text="{Binding Body, Mode=TwoWay}"
                     TextColor="Black"
                     />
             </Grid>
@@ -79,6 +78,4 @@
                 />
         </Grid>
     </Grid>
-
-
 </toolkit:Popup>
