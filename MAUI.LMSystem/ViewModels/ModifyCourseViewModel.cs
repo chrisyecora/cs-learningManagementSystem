@@ -52,7 +52,8 @@ namespace MAUI.LMSystem.ViewModels
 
         [RelayCommand]
         void CreateModule() {
-
+            var popup = new CreateModulePopup(courseService, Course);
+            Shell.Current.ShowPopup(popup);
         }
 
         [RelayCommand]

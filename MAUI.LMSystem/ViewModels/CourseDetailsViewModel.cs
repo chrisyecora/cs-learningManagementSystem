@@ -6,13 +6,24 @@ using Library.LMSystem.Models;
 namespace MAUI.LMSystem.ViewModels
 {
     public partial class CourseDetailsViewModel : IQueryAttributable, INotifyPropertyChanged {
-        public CourseDetailsViewModel()
-        {
+        public CourseDetailsViewModel() {
         }
 
         public Course Course {
             get;
             set;
+        }
+
+        private Module _selectedModule;
+        public Module SelectedModule {
+            get {
+                return _selectedModule;
+            }
+            set {
+                _selectedModule = value;
+                CurrentModuleContent = new ObservableCollection<ContentItem>(value.Content);
+                NotifyPropertyChanged(nameof(CurrentModuleContent));
+            }
         }
 
         public ObservableCollection<Assignment> Assignments {
@@ -21,6 +32,16 @@ namespace MAUI.LMSystem.ViewModels
         }
 
         public ObservableCollection<Announcement> Announcements {
+            get;
+            set;
+        }
+
+        public ObservableCollection<Module> Modules {
+            get;
+            set;
+        }
+
+        public ObservableCollection<ContentItem> CurrentModuleContent {
             get;
             set;
         }
@@ -36,9 +57,11 @@ namespace MAUI.LMSystem.ViewModels
             Course = query["course"] as Course;
             Assignments = new ObservableCollection<Assignment>(Course.AssignmentGroups.SelectMany(c => c.Assignments));
             Announcements = new ObservableCollection<Announcement>(Course.Announcements);
+            Modules = new ObservableCollection<Module>(Course.Modules);
             NotifyPropertyChanged(nameof(Course));
             NotifyPropertyChanged(nameof(Assignments));
             NotifyPropertyChanged(nameof(Announcements));
+            NotifyPropertyChanged(nameof(Modules));
         }
 
         private void NotifyPropertyChanged(String propertyName) {

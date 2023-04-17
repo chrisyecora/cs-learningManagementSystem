@@ -8,7 +8,7 @@
     <ContentPage.Resources>
         <Style TargetType="Label">
             <Setter Property="FontSize"
-                    Value="30" />
+                    Value="25" />
         </Style>
     </ContentPage.Resources>
     <VerticalStackLayout HorizontalOptions="Center">
@@ -27,7 +27,7 @@
             <Label Grid.Column="0" Text="Description:" />
             <Label Grid.Column="1" Text="{Binding Course.Description}"/>
         </Grid>
-        <Label Text="Assignments"/>
+        <Label Text="Assignments" Margin="10"/>
         <ListView BackgroundColor="Transparent"
                   ItemsSource="{Binding Assignments}"
                   HasUnevenRows="True">
@@ -53,7 +53,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Text="Announcements"/>
+        <Label Text="Announcements" Margin="10"/>
         <ListView BackgroundColor="Transparent"
                   ItemsSource="{Binding Announcements}"
                   HasUnevenRows="True">
@@ -76,6 +76,16 @@
                             </Grid>
                         </Grid>
                     </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Label Text="Modules" Margin="10"/>
+        <ListView BackgroundColor="Transparent"
+                  ItemsSource="{Binding Modules}"
+                  HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Module">
+                    <TextCell Text="{Binding Display, Mode=OneWay}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
