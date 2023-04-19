@@ -55,6 +55,14 @@ namespace MAUI.LMSystem.ViewModels
             var popup = new CreateModulePopup(courseService, Course);
             Shell.Current.ShowPopup(popup);
         }
+        [RelayCommand]
+        void CreateContentOnModule() {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("course", Course);
+            parameters.Add("courseService", courseService);
+            parameters.Add("studentService", studentService);
+            Shell.Current.GoToAsync("//CreateContentOnModulePage", parameters);
+        }
 
         [RelayCommand]
         void AddStudentToRoster() {

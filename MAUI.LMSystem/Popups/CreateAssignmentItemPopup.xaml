@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI.LMSystem.Popups.CreateAssignmentItemPopup"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             xmlns:vm="clr-namespace:MAUI.LMSystem.ViewModels"
+             xmlns:model="clr-namespace:Library.LMSystem.Models;assembly=MAUI.Library.LMSystem"
+             x:DataType="vm:CreateAssignmentItemViewModel"
+             CanBeDismissedByTappingOutsideOfPopup="False"
+             HorizontalOptions="Center"
+             VerticalOptions="Center"
+             Size="650, 650">
+    <Grid RowDefinitions="60, *, 150,60" VerticalOptions="FillAndExpand">
+        <Label
+            Grid.Row="0"
+            Text="Add Assignment Item"
+            TextColor="Black"
+            FontSize="Title"
+            FontAttributes="Bold"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            />
+        <ListView Grid.Row="1" ItemsSource="{Binding Assignments, Mode=OneWay}"
+                  SelectedItem="{Binding SelectedAssignment}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Assignment">
+                    <TextCell Text="{Binding Display}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--start of entry fields stack layout-->
+        <VerticalStackLayout Grid.Row="2" Padding="5">
+            <Grid ColumnDefinitions="125, 225"
+                  HorizontalOptions="StartAndExpand">
+                <Label
+                    Grid.Column="0"
+                    Text="Name"
+                    Margin="10"
+                    TextColor="Black"
+                    />
+                <Entry
+                    Grid.Column="1"
+                    Placeholder="Name"
+                    Text="{Binding Name, Mode=TwoWay}"
+                    TextColor="Black"
+                    />
+            </Grid>
+            <Grid ColumnDefinitions="125, 225"
+                  HorizontalOptions="StartAndExpand">
+                <Label
+                    Grid.Column="0"
+                    Text="Description"
+                    TextColor="Black"
+                    Margin="10"
+                    />
+                <Entry
+                    Grid.Column="1"
+                    HeightRequest="20"
+                    Text="{Binding Description, Mode=TwoWay}"
+                    TextColor="Black"
+                    />
+            </Grid>
+            
+        </VerticalStackLayout>
+        <!--cancel and submit button grid-->
+        <Grid Grid.Row="3" Padding="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Text="Cancel"
+                TextColor="White"
+                x:Name="CancelButton"
+                BackgroundColor="Grey"
+                Clicked="CancelButton_Clicked"
+                />
+            <Button
+                Grid.Column="1"
+                Text="Submit"
+                TextColor="White"
+                x:Name="SumbitButton"
+                BackgroundColor="Blue"
+                Clicked="SumbitButton_Clicked"
+                />
+        </Grid>
+    </Grid>
+</toolkit:Popup>

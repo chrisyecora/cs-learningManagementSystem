@@ -16,6 +16,7 @@
             <Button Text="Create Assignment Group" Command="{Binding CreateAssignmentGroupCommand}" />
             <Button Text="Add Announcement" Command="{Binding AddAnnouncementCommand}"/>
             <Button Text="Create Module" Command="{Binding CreateModuleCommand}" />
+            <Button Text="Add Content to Existing Module" Command="{Binding CreateContentOnModuleCommand}" />
             <Button Text="Add Student to Roster" Command="{Binding AddStudentToRosterCommand}" />
 
         </VerticalStackLayout>
