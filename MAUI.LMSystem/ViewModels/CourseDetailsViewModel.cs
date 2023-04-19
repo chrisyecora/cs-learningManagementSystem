@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.Input;
 using Library.LMSystem.Models;
+using MAUI.LMSystem.Popups;
 
 namespace MAUI.LMSystem.ViewModels
 {
@@ -12,18 +14,6 @@ namespace MAUI.LMSystem.ViewModels
         public Course Course {
             get;
             set;
-        }
-
-        private Module _selectedModule;
-        public Module SelectedModule {
-            get {
-                return _selectedModule;
-            }
-            set {
-                _selectedModule = value;
-                CurrentModuleContent = new ObservableCollection<ContentItem>(value.Content);
-                NotifyPropertyChanged(nameof(CurrentModuleContent));
-            }
         }
 
         public ObservableCollection<Assignment> Assignments {
@@ -46,9 +36,20 @@ namespace MAUI.LMSystem.ViewModels
             set;
         }
 
+        public Module SelectedModule {
+            get;
+            set;
+        }
+
         [RelayCommand]
         void GoBack() {
             Shell.Current.GoToAsync("//CoursesPage");
+        }
+
+        [RelayCommand]
+        void ViewModule() {
+            var popup = new ModuleDetailsPopup(SelectedModule);
+            Shell.Current.ShowPopup(popup);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

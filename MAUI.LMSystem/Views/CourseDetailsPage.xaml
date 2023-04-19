@@ -80,14 +80,20 @@
             </ListView.ItemTemplate>
         </ListView>
         <Label Text="Modules" Margin="10"/>
-        <ListView BackgroundColor="Transparent"
+        <Grid RowDefinitions="Auto, Auto">
+            <Grid Grid.Row="0" ColumnDefinitions="*, 200">
+                <Button Grid.Column="1" Margin="10" Text="View Module" Command="{Binding ViewModuleCommand}" />
+            </Grid>
+            <ListView Grid.Row="1" BackgroundColor="Transparent"
                   ItemsSource="{Binding Modules}"
+                  SelectedItem="{Binding SelectedModule}"
                   HasUnevenRows="True">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:Module">
-                    <TextCell Text="{Binding Display, Mode=OneWay}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Module">
+                        <TextCell Text="{Binding ShortDisplay}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>
