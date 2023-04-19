@@ -11,7 +11,8 @@
             Command="{Binding GoBackCommand}"/>
         <ListView ItemsSource="{Binding Modules}"
                   SelectedItem="{Binding SelectedModule}"
-                  HorizontalOptions="Center">
+                  HorizontalOptions="Center"
+                  BackgroundColor="Transparent">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:Module">
                     <TextCell Text="{Binding Display}" />

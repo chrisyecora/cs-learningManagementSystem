@@ -50,12 +50,14 @@ namespace MAUI.LMSystem.ViewModels
 
         [RelayCommand]
         void CreateFileItem() {
-
+            var popup = new CreateFileItemPopup(courseService, SelectedModule);
+            Shell.Current.ShowPopup(popup);
         }
 
         [RelayCommand]
         void CreatePageItem() {
-
+            var popup = new CreatePageItemPopup(courseService, SelectedModule);
+            Shell.Current.ShowPopup(popup);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

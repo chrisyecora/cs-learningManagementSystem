@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI.LMSystem.Popups.CreateFileItemPopup"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             xmlns:vm="clr-namespace:MAUI.LMSystem.ViewModels"
+             x:DataType="vm:CreateFileItemViewModel"
+             CanBeDismissedByTappingOutsideOfPopup="False"
+             HorizontalOptions="Center"
+             VerticalOptions="Center"
+             Size="350, 350"
+             Color="Black">
+    <Grid RowDefinitions="60, *, 60" VerticalOptions="FillAndExpand">
+        <Label
+            Grid.Row="0"
+            Text="Create File Item"
+            FontSize="Title"
+            FontAttributes="Bold"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            />
+        <!--start of entry fields stack layout-->
+        <VerticalStackLayout Grid.Row="1" Padding="5">
+            <Grid ColumnDefinitions="125, 225">
+                <Label
+                    Grid.Column="0"
+                    Text="Name"
+                    Margin="10"
+                    />
+                <Entry
+                    Grid.Column="1"
+                    Placeholder="Name"
+                    Text="{Binding Name, Mode=TwoWay}"
+                    />
+            </Grid>
+            <Grid ColumnDefinitions="125, 225">
+                <Label
+                    Grid.Column="0"
+                    Text="Description"
+                    Margin="10"
+                    />
+                <Entry
+                    Grid.Column="1"
+                    HeightRequest="20"
+                    Text="{Binding Description, Mode=TwoWay}"
+                    />
+            </Grid>
+            
+        </VerticalStackLayout>
+        <!--cancel and submit button grid-->
+        <Grid Grid.Row="2" Padding="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Text="Cancel"
+                TextColor="White"
+                x:Name="CancelButton"
+                BackgroundColor="Grey"
+                Clicked="CancelButton_Clicked"
+                />
+            <Button
+                Grid.Column="1"
+                Text="Submit"
+                TextColor="White"
+                x:Name="SumbitButton"
+                BackgroundColor="Blue"
+                Clicked="SumbitButton_Clicked"
+                />
+        </Grid>
+    </Grid>
+</toolkit:Popup>
