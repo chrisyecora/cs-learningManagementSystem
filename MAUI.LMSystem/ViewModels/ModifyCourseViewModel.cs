@@ -66,7 +66,8 @@ namespace MAUI.LMSystem.ViewModels
 
         [RelayCommand]
         void AddStudentToRoster() {
-
+            var popup = new AddStudentToRosterPopup(courseService, studentService, Course);
+            Shell.Current.ShowPopup(popup);
         }
 
         [RelayCommand]

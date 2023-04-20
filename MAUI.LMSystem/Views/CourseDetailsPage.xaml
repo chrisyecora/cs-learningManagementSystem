@@ -95,5 +95,14 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
+        <Label Text="Roster" Margin="10"/>
+        <ListView BackgroundColor="Transparent"
+                  ItemsSource="{Binding Roster}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Student">
+                    <TextCell Text="{Binding Display}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </VerticalStackLayout>
 </ContentPage>

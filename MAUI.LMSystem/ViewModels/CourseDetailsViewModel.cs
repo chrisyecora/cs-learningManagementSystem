@@ -36,6 +36,11 @@ namespace MAUI.LMSystem.ViewModels
             set;
         }
 
+        public ObservableCollection<Person> Roster {
+            get;
+            set;
+        }
+
         public Module SelectedModule {
             get;
             set;
@@ -59,10 +64,12 @@ namespace MAUI.LMSystem.ViewModels
             Assignments = new ObservableCollection<Assignment>(Course.AssignmentGroups.SelectMany(c => c.Assignments));
             Announcements = new ObservableCollection<Announcement>(Course.Announcements);
             Modules = new ObservableCollection<Module>(Course.Modules);
+            Roster = new ObservableCollection<Person>(Course.Roster);
             NotifyPropertyChanged(nameof(Course));
             NotifyPropertyChanged(nameof(Assignments));
             NotifyPropertyChanged(nameof(Announcements));
             NotifyPropertyChanged(nameof(Modules));
+            NotifyPropertyChanged(nameof(Roster));
         }
 
         private void NotifyPropertyChanged(String propertyName) {
