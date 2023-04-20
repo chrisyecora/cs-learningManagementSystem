@@ -8,12 +8,12 @@
              CanBeDismissedByTappingOutsideOfPopup="False"
              HorizontalOptions="Center"
              VerticalOptions="Center"
-             Size="350, 350">
+             Size="350, 350"
+             Color="Black">
     <Grid RowDefinitions="60, *,60" VerticalOptions="FillAndExpand">
         <Label
             Grid.Row="0"
             Text="Add Announcement"
-            TextColor="Black"
             FontSize="Title"
             FontAttributes="Bold"
             HorizontalOptions="CenterAndExpand"
@@ -27,13 +27,11 @@
                     Grid.Column="0"
                     Text="Title"
                     Margin="10"
-                    TextColor="Black"
                     />
                 <Entry
                     Grid.Column="1"
                     Placeholder="Title"
                     Text="{Binding Title, Mode=TwoWay}"
-                    TextColor="Black"
                     />
             </Grid>
             <Grid ColumnDefinitions="125, 225"
@@ -41,7 +39,6 @@
                 <Label
                     Grid.Column="0"
                     Text="Body"
-                    TextColor="Black"
                     Margin="10"
                     />
                 <Entry
@@ -49,7 +46,6 @@
                     HeightRequest="20"
                     Keyboard="Chat"
                     Text="{Binding Body, Mode=TwoWay}"
-                    TextColor="Black"
                     />
             </Grid>
             

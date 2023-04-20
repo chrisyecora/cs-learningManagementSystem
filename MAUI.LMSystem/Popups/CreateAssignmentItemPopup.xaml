@@ -9,18 +9,19 @@
              CanBeDismissedByTappingOutsideOfPopup="False"
              HorizontalOptions="Center"
              VerticalOptions="Center"
-             Size="650, 650">
+             Size="650, 650"
+             Color="Black">
     <Grid RowDefinitions="60, *, 150,60" VerticalOptions="FillAndExpand">
         <Label
             Grid.Row="0"
             Text="Add Assignment Item"
-            TextColor="Black"
             FontSize="Title"
             FontAttributes="Bold"
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="CenterAndExpand"
             />
         <ListView Grid.Row="1" ItemsSource="{Binding Assignments, Mode=OneWay}"
+                  BackgroundColor="Transparent"
                   SelectedItem="{Binding SelectedAssignment}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:Assignment">
@@ -36,13 +37,11 @@
                     Grid.Column="0"
                     Text="Name"
                     Margin="10"
-                    TextColor="Black"
                     />
                 <Entry
                     Grid.Column="1"
                     Placeholder="Name"
                     Text="{Binding Name, Mode=TwoWay}"
-                    TextColor="Black"
                     />
             </Grid>
             <Grid ColumnDefinitions="125, 225"
@@ -50,14 +49,12 @@
                 <Label
                     Grid.Column="0"
                     Text="Description"
-                    TextColor="Black"
                     Margin="10"
                     />
                 <Entry
                     Grid.Column="1"
                     HeightRequest="20"
                     Text="{Binding Description, Mode=TwoWay}"
-                    TextColor="Black"
                     />
             </Grid>
             

@@ -9,18 +9,18 @@
                CanBeDismissedByTappingOutsideOfPopup="False"
                HorizontalOptions="Center"
                VerticalOptions="Center"
-               Size="350, 350">
+               Size="350, 350"
+               Color="Black">
     <Grid RowDefinitions="60, 60, *,60" VerticalOptions="FillAndExpand">
         <Label
             Grid.Row="0"
             Text="Create Course"
-            TextColor="Black"
             FontSize="Title"
             FontAttributes="Bold"
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="CenterAndExpand"
             />
-        <HorizontalStackLayout Grid.Row="1" Padding="5" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+        <HorizontalStackLayout BackgroundColor="DarkSlateGray" Grid.Row="1" Padding="5" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
             <RadioButton Margin="5" Content="Fall" TextColor="Black" IsChecked="True"/>
             <RadioButton Margin="5" Content="Spring" TextColor="Black"/>
             <RadioButton Margin="5" Content="Summer" TextColor="Black"/>
@@ -34,14 +34,12 @@
                     Grid.Column="0"
                     Text="Course Code"
                     Margin="10"
-                    TextColor="Black"
                     />
                 <Entry
                     Grid.Column="1"
                     x:Name="CourseCode"
                     Placeholder="Code"
                     Text="{Binding Code, Mode=TwoWay}"
-                    TextColor="Black"
                     />
             </Grid>
             <Grid ColumnDefinitions="125, 225"
@@ -49,7 +47,6 @@
                 <Label
                     Grid.Column="0"
                     Text="Name"
-                    TextColor="Black"
                     Margin="10"
                     />
                 <Entry
@@ -57,7 +54,6 @@
                     x:Name="CourseName"
                     Placeholder="Name"
                     Text="{Binding Name, Mode=TwoWay}"
-                    TextColor="Black"
                     />
             </Grid>
             <Grid ColumnDefinitions="125, 225"
@@ -65,7 +61,6 @@
                 <Label
                     Grid.Column="0"
                     Text="Description"
-                    TextColor="Black"
                     Margin="10"
                     />
                 <Entry
@@ -74,7 +69,6 @@
                     Placeholder="Description"
                     Keyboard="Chat"
                     Text="{Binding Description, Mode=TwoWay}"
-                    TextColor="Black"
                     />
             </Grid>
             <Grid ColumnDefinitions="125, 225"
@@ -82,15 +76,13 @@
                 <Label
                     Grid.Column="0"
                     Text="Credit Hours"
-                    TextColor="Black"
                     Margin="10"
                     />
                 <Entry
                     Grid.Column="1"
                     x:Name="CourseCreditHours"
                     Keyboard="Numeric"
-                    Text="{Binding CreditHours, Mode=TwoWay}"
-                    TextColor="Black" />
+                    Text="{Binding CreditHours, Mode=TwoWay}"/>
             </Grid>
             
         </VerticalStackLayout>

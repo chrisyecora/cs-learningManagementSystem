@@ -8,12 +8,12 @@
              CanBeDismissedByTappingOutsideOfPopup="False"
              HorizontalOptions="Center"
              VerticalOptions="Center"
-             Size="350, 350">
+             Size="350, 350"
+             Color="Black">
     <Grid RowDefinitions="60, *,60" VerticalOptions="FillAndExpand">
         <Label
             Grid.Row="0"
             Text="Create Module"
-            TextColor="Black"
             FontSize="Title"
             FontAttributes="Bold"
             HorizontalOptions="CenterAndExpand"
@@ -27,13 +27,11 @@
                     Grid.Column="0"
                     Text="Name"
                     Margin="10"
-                    TextColor="Black"
                     />
                 <Entry
                     Grid.Column="1"
                     Placeholder="Name"
                     Text="{Binding Name, Mode=TwoWay}"
-                    TextColor="Black"
                     />
             </Grid>
             <Grid ColumnDefinitions="125, 225"
@@ -41,14 +39,12 @@
                 <Label
                     Grid.Column="0"
                     Text="Description"
-                    TextColor="Black"
                     Margin="10"
                     />
                 <Entry
                     Grid.Column="1"
                     HeightRequest="20"
                     Text="{Binding Description, Mode=TwoWay}"
-                    TextColor="Black"
                     />
             </Grid>
             
