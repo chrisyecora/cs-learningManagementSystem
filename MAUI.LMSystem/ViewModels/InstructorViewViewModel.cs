@@ -44,6 +44,7 @@ namespace MAUI.LMSystem.ViewModels
         void ViewCourses() {
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("courseService", courseService);
+            parameters.Add("studentService", studentService);
             Shell.Current.GoToAsync("//CoursesPage", parameters);
         }
 

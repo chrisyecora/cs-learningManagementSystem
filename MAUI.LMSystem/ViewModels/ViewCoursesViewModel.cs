@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Library.LMSystem.Models;
 using Library.LMSystem.Services;
 using System.Runtime.CompilerServices;
+using System.Collections.ObjectModel;
 
 namespace MAUI.LMSystem.ViewModels
 {
@@ -12,6 +13,12 @@ namespace MAUI.LMSystem.ViewModels
             get;
             set;
         }
+
+        private StudentService studentService {
+            get;
+            set;
+        }
+
         public ViewCoursesViewModel()
         {
         }
@@ -21,7 +28,7 @@ namespace MAUI.LMSystem.ViewModels
             set;
         }
 
-        public IEnumerable<Course> Courses {
+        public ObservableCollection<Course> Courses {
             get; set;
         }
 
@@ -43,9 +50,19 @@ namespace MAUI.LMSystem.ViewModels
             Shell.Current.GoToAsync("//CourseDetailsPage", parameters);
         }
 
+        [RelayCommand]
+        void ModifyCourse() {
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("courseService", courseService);
+            parameters.Add("studentService", studentService);
+            parameters.Add("course", SelectedCourse);
+            Shell.Current.GoToAsync("//ModifyCoursePage", parameters);
+        }
+
         public void ApplyQueryAttributes(IDictionary<string, object> query) {
             courseService = query["courseService"] as CourseService;
-            Courses = courseService.GetCourses();
+            studentService = query["studentService"] as StudentService;
+            Courses = new ObservableCollection<Course>(courseService.GetCourses());
             NotifyPropertyChanged(nameof(Courses));
         }
 

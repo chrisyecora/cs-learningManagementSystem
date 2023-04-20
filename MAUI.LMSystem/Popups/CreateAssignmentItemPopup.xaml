@@ -1,30 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-               xmlns:local="clr-namespace:MAUI.LMSystem.ViewModels"
-               x:DataType="local:CreatePersonViewModel"
-               x:Class="MAUI.LMSystem.Popups.CreatePersonPopup"
-               xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
-               CanBeDismissedByTappingOutsideOfPopup="False"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
-               Size="350, 350"
-               Color="Black">
-    <Grid RowDefinitions="60, 60, *,60" VerticalOptions="FillAndExpand">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI.LMSystem.Popups.CreateAssignmentItemPopup"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             xmlns:vm="clr-namespace:MAUI.LMSystem.ViewModels"
+             xmlns:model="clr-namespace:Library.LMSystem.Models;assembly=MAUI.Library.LMSystem"
+             x:DataType="vm:CreateAssignmentItemViewModel"
+             CanBeDismissedByTappingOutsideOfPopup="False"
+             HorizontalOptions="Center"
+             VerticalOptions="Center"
+             Size="650, 650"
+             Color="Black">
+    <Grid RowDefinitions="60, *, 150,60" VerticalOptions="FillAndExpand">
         <Label
             Grid.Row="0"
-            Text="Create Person"
+            Text="Add Assignment Item"
             FontSize="Title"
             FontAttributes="Bold"
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="CenterAndExpand"
             />
-        <HorizontalStackLayout BackgroundColor="DarkSlateGray" Grid.Row="1" Padding="5" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-            <RadioButton Margin="5" Content="Student" IsChecked="{Binding IsStudent, Mode=TwoWay}"/>
-            <RadioButton Margin="5" Content="TA" IsChecked="{Binding IsTA, Mode=TwoWay}"/>
-            <RadioButton Margin="5" Content="Professor" IsChecked="{Binding IsProfessor, Mode=TwoWay}"/>
-        </HorizontalStackLayout>
-
+        <ListView Grid.Row="1" ItemsSource="{Binding Assignments, Mode=OneWay}"
+                  BackgroundColor="Transparent"
+                  SelectedItem="{Binding SelectedAssignment}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Assignment">
+                    <TextCell Text="{Binding Display}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <!--start of entry fields stack layout-->
         <VerticalStackLayout Grid.Row="2" Padding="5">
             <Grid ColumnDefinitions="125, 225"
@@ -36,24 +40,21 @@
                     />
                 <Entry
                     Grid.Column="1"
-                    x:Name="PersonName"
-                    Placeholder="Person Name"
+                    Placeholder="Name"
                     Text="{Binding Name, Mode=TwoWay}"
                     />
             </Grid>
             <Grid ColumnDefinitions="125, 225"
-                  HorizontalOptions="StartAndExpand"
-                  IsVisible="{Binding IsStudent, Mode=OneWay}">
+                  HorizontalOptions="StartAndExpand">
                 <Label
                     Grid.Column="0"
-                    Text="Classification"
+                    Text="Description"
                     Margin="10"
                     />
                 <Entry
                     Grid.Column="1"
-                    x:Name="PersonClassification"
-                    Placeholder="Classification"
-                    Text="{Binding Classification, Mode=TwoWay}"
+                    HeightRequest="20"
+                    Text="{Binding Description, Mode=TwoWay}"
                     />
             </Grid>
             

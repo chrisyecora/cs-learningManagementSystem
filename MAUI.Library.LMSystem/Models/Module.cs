@@ -23,6 +23,8 @@ public class Module
         set;
     }
 
+    public string ShortDisplay => $"{Name}: {Description}";
+
     public string Display =>
     $"{Name}: {Description}\n\t{string.Join("\n  ", Content.Select(content => content.Display))}";
 }

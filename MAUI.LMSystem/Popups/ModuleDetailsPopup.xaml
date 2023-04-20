@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI.LMSystem.Popups.ModuleDetailsPopup"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             xmlns:vm="clr-namespace:MAUI.LMSystem.ViewModels"
+             xmlns:model="clr-namespace:Library.LMSystem.Models;assembly=MAUI.Library.LMSystem"
+             x:DataType="vm:ModuleDetailsViewModel"
+             HorizontalOptions="Center"
+             VerticalOptions="Center"
+             Size="500, 500"
+             Color="Black">
+    <Grid RowDefinitions="50, 40, 40, *, 40" RowSpacing="10">
+        <Label Grid.Row="0" Text="Module Details" HorizontalOptions="CenterAndExpand"/>
+        <Label Grid.Row="1" Text="{Binding Name, Mode=OneWay}" FontSize="Medium" HorizontalOptions="CenterAndExpand"/>
+        <Label Grid.Row="2" Text="{Binding Description, Mode=OneWay}" FontSize="Medium" HorizontalOptions="CenterAndExpand"/>
+        <ListView Grid.Row="3" BackgroundColor="Transparent" ItemsSource="{Binding ModuleContent, Mode=OneWay}" HorizontalOptions="Center">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:ContentItem">
+                    <TextCell Text="{Binding Display}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Label Grid.Row="4" Text="Click outside this popup to dismiss" FontSize="Small" FontAttributes="Italic" HorizontalOptions="Center"  Margin="10"/>
+    </Grid>
+</toolkit:Popup>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI.LMSystem.Views.ModifyCoursePage"
+             xmlns:vm="clr-namespace:MAUI.LMSystem.ViewModels"
+             x:DataType="vm:ModifyCourseViewModel">
+    <VerticalStackLayout>
+        <Button
+            Text="Back"
+            Command="{Binding GoBackCommand}"/>
+        <VerticalStackLayout HorizontalOptions="Center"
+              VerticalOptions="Center"
+              Margin="30"
+              Spacing="10">
+            <Button Text="Add Assignment" Command="{Binding AddAssignmentCommand}" />
+            <Button Text="Create Assignment Group" Command="{Binding CreateAssignmentGroupCommand}" />
+            <Button Text="Add Announcement" Command="{Binding AddAnnouncementCommand}"/>
+            <Button Text="Create Module" Command="{Binding CreateModuleCommand}" />
+            <Button Text="Add Content to Existing Module" Command="{Binding CreateContentOnModuleCommand}" />
+            <Button Text="Add Student to Roster" Command="{Binding AddStudentToRosterCommand}" />
+
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

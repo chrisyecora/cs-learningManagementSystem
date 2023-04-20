@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI.LMSystem.Views.CreateContentOnModuleView"
+             xmlns:vm="clr-namespace:MAUI.LMSystem.ViewModels"
+             xmlns:model="clr-namespace:Library.LMSystem.Models;assembly=MAUI.Library.LMSystem"
+             x:DataType="vm:CreateContentOnModuleViewModel">
+    <VerticalStackLayout>
+        <Button
+            Text="Back"
+            Command="{Binding GoBackCommand}"/>
+        <ListView ItemsSource="{Binding Modules}"
+                  SelectedItem="{Binding SelectedModule}"
+                  HorizontalOptions="Center"
+                  BackgroundColor="Transparent">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Module">
+                    <TextCell Text="{Binding Display}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <VerticalStackLayout HorizontalOptions="Center"
+              VerticalOptions="Center"
+              Margin="30"
+              Spacing="10">
+            <Button Text="Create Assignment Item" Command="{Binding CreateAssignmentItemCommand}" />
+            <Button Text="Create File Item" Command="{Binding CreateFileItemCommand}" />
+            <Button Text="Create Page Item" Command="{Binding CreatePageItemCommand}" />
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
