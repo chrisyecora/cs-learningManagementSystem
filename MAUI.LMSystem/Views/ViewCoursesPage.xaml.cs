@@ -9,8 +9,4 @@ public partial class ViewCoursesPage : ContentPage
         InitializeComponent();
         BindingContext = new ViewCoursesViewModel();
     }
-
-    void Search_Clicked(System.Object sender, System.EventArgs e)
-    {
-    }
 }

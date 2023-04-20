@@ -8,12 +8,12 @@
     <VerticalStackLayout>
         <Button Text="Back" Command="{Binding GoBackCommand}"/>
         <Grid RowDefinitions="Auto, Auto">
-            <Grid Grid.Row="0" ColumnDefinitions ="*, 100" Margin="15">
+            <Grid Grid.Row="0" ColumnDefinitions ="*, 150, 150" Margin="15">
                 <Entry Grid.Column="0" Placeholder="Search" Text="{Binding SearchQuery, Mode=TwoWay}"
                        TextColor="Black" FontSize="Medium" BackgroundColor="LightGray"
                        Margin="5"/>
-                <Button Grid.Column="1" Text="Search" Margin="5"
-                        x:Name="Search" Clicked="Search_Clicked"/>
+                <Button Grid.Column="1" Text="Search" Margin="5" Command="{Binding SearchCommand}"/>
+                <Button Grid.Column="2" Text="Clear" Margin="5" Command="{Binding ClearSearchCommand}" />
             </Grid>
             <Grid Grid.Row="1" ColumnDefinitions="*, 100, 100" ColumnSpacing="10">
                 <Button Grid.Column="1"
