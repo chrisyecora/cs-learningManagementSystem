@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 using Library.LMSystem.Models;
 
 namespace Library.LMSystem.Services
@@ -150,6 +151,13 @@ namespace Library.LMSystem.Services
 
         public IEnumerable<Course> QueryByDescription(String description) {
             return Courses.Where(c => c.Description.Contains(description, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        public IEnumerable<Course> SearchCourses(string query) {
+            return Courses
+                .Where(c => c.CourseCode.Contains(query, StringComparison.InvariantCultureIgnoreCase) ||
+                    c.Name.Contains(query, StringComparison.InvariantCultureIgnoreCase) ||
+                    c.Description.Contains(query, StringComparison.InvariantCultureIgnoreCase));
         }
 
         public List<Course> QueryByStudentInRosters(Person student){

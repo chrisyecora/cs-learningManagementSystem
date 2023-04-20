@@ -44,6 +44,20 @@ namespace MAUI.LMSystem.ViewModels
         }
 
         [RelayCommand]
+        void Search() {
+            var results = courseService.SearchCourses(SearchQuery);
+            Courses = new ObservableCollection<Course>(results);
+            NotifyPropertyChanged(nameof(Courses));
+        }
+
+        [RelayCommand]
+        void ClearSearch() {
+            SearchQuery = string.Empty;
+            Courses = new ObservableCollection<Course>(courseService.GetCourses());
+            NotifyPropertyChanged(nameof(Courses));
+        }
+
+        [RelayCommand]
         void CourseDetails() {
             var parameters = new Dictionary<string, object>();
             parameters.Add("course", SelectedCourse);
