@@ -8,8 +8,4 @@ public partial class ViewPersonsPage : ContentPage
         InitializeComponent();
         BindingContext = new ViewPersonsViewModel();
     }
-
-    void Search_Clicked(System.Object sender, System.EventArgs e)
-    {
-    }
 }
