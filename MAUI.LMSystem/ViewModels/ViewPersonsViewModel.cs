@@ -4,6 +4,8 @@ using Library.LMSystem.Models;
 using System.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using MAUI.LMSystem.Popups;
+using CommunityToolkit.Maui.Views;
 
 namespace MAUI.LMSystem.ViewModels
 {
@@ -25,6 +27,23 @@ namespace MAUI.LMSystem.ViewModels
         public string ActiveSearchMessage {
             get;
             set;
+        }
+
+        public Person SelectedPerson {
+            get;
+            set;
+        }
+
+        [RelayCommand]
+        void ModifyPerson() {
+            var popup = new ModifyPersonPopup(SelectedPerson, studentService);
+            Shell.Current.ShowPopup(popup);
+        }
+
+        [RelayCommand]
+        void Refresh() {
+            Persons = new ObservableCollection<Person>(studentService.GetPeople());
+            NotifyPropertyChanged(nameof(Persons));
         }
 
         [RelayCommand]
