@@ -36,6 +36,11 @@ namespace MAUI.LMSystem.ViewModels
             get; set;
         }
 
+        public string ActiveSearchMessage {
+            get;
+            set;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [RelayCommand]
@@ -47,6 +52,8 @@ namespace MAUI.LMSystem.ViewModels
         void Search() {
             var results = courseService.SearchCourses(SearchQuery);
             Courses = new ObservableCollection<Course>(results);
+            ActiveSearchMessage = $"Showing results for '{SearchQuery}'";
+            NotifyPropertyChanged(nameof(ActiveSearchMessage));
             NotifyPropertyChanged(nameof(Courses));
         }
 
@@ -54,7 +61,10 @@ namespace MAUI.LMSystem.ViewModels
         void ClearSearch() {
             SearchQuery = string.Empty;
             Courses = new ObservableCollection<Course>(courseService.GetCourses());
+            ActiveSearchMessage = string.Empty;
             NotifyPropertyChanged(nameof(Courses));
+            NotifyPropertyChanged(nameof(SearchQuery));
+            NotifyPropertyChanged(nameof(ActiveSearchMessage));
         }
 
         [RelayCommand]

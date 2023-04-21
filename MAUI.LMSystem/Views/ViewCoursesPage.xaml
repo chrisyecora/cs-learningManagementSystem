@@ -16,6 +16,7 @@
                 <Button Grid.Column="2" Text="Clear" Margin="5" Command="{Binding ClearSearchCommand}" />
             </Grid>
             <Grid Grid.Row="1" ColumnDefinitions="*, 100, 100" ColumnSpacing="10">
+                <Label Grid.Column="0" Text="{Binding ActiveSearchMessage, Mode=OneWay}" />
                 <Button Grid.Column="1"
                         Text="Modify"
                         Command="{Binding ModifyCourseCommand}"
