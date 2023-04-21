@@ -6,13 +6,20 @@
              x:DataType="local:ViewPersonsViewModel"
              x:Class="MAUI.LMSystem.Views.ViewPersonsPage">
     <StackLayout>
-        <Button Grid.Column="0" Text="Go Back" Command="{Binding GoBackCommand}"/>
-        <Grid ColumnDefinitions="*, 100" Margin="15">
-            <Entry Grid.Column="0" Placeholder="Search" Text="{Binding SearchQuery}"
-                   TextColor="Black" FontSize="Medium" BackgroundColor="LightGray"
-                   Margin="5"/>
-            <Button Grid.Column="1" Text="Search (by name)" Margin="5"
-                    x:Name="Search" Clicked="Search_Clicked"/>
+        <Button Text="Go Back" Command="{Binding GoBackCommand}"/>
+        <Grid RowDefinitions="Auto, Auto">
+            <Grid Grid.Row="0" ColumnDefinitions="*, 150, 150" Margin="15">
+                <Entry Grid.Column="0" Placeholder="Search" Text="{Binding SearchQuery}"
+                       TextColor="Black" FontSize="Medium" BackgroundColor="LightGray"
+                       Margin="5"/>
+                <Button Grid.Column="1" Text="Search" Margin="5" Command="{Binding SearchCommand}"/>
+                <Button Grid.Column="2" Text="Clear" Margin="5" Command="{Binding ClearSearchCommand}" />
+            </Grid>
+            <Grid Grid.Row="1" ColumnDefinitions="*, 100" ColumnSpacing="10">
+                <Label Grid.Column="0" Text="{Binding ActiveSearchMessage, Mode=OneWay}" />
+                <Button Grid.Column="1"
+                        Text="Modify" />
+            </Grid>
         </Grid>
         <ListView BackgroundColor="Transparent"
                   ItemsSource="{Binding Persons}"
