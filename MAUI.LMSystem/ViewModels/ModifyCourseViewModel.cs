@@ -8,25 +8,27 @@ using MAUI.LMSystem.Views;
 
 namespace MAUI.LMSystem.ViewModels
 {
-    public partial class ModifyCourseViewModel : IQueryAttributable
+    public partial class ModifyCourseViewModel : IQueryAttributable, INotifyPropertyChanged
     {
         public ModifyCourseViewModel()
         {
         }
 
-        private CourseService courseService {
-            get;
-            set;
-        }
+        private CourseService courseService;
 
-        private StudentService studentService {
-            get;
-            set;
-        }
+        private StudentService studentService;
 
         public Course Course {
             get;
             set;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [RelayCommand]
+        void EditDetails() {
+            var popup = new ModifyCourseDetailsPopup(courseService, Course);
+            Shell.Current.ShowPopup(popup);
         }
 
         [RelayCommand]
@@ -72,7 +74,10 @@ namespace MAUI.LMSystem.ViewModels
 
         [RelayCommand]
         void GoBack() {
-            Shell.Current.GoToAsync("//CoursesPage");
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("courseService", courseService);
+            parameters.Add("studentService", studentService);
+            Shell.Current.GoToAsync("//CoursesPage", parameters);
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -80,6 +85,10 @@ namespace MAUI.LMSystem.ViewModels
             Course = query["course"] as Course;
             courseService = query["courseService"] as CourseService;
             studentService = query["studentService"] as StudentService;
+        }
+
+        private void NotifyPropertyChanged(String propertyName) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

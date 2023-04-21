@@ -7,11 +7,13 @@
     <VerticalStackLayout>
         <Button
             Text="Back"
-            Command="{Binding GoBackCommand}"/>
+            Command="{Binding GoBackCommand}"
+            Margin="10"/>
         <VerticalStackLayout HorizontalOptions="Center"
               VerticalOptions="Center"
               Margin="30"
               Spacing="10">
+            <Button Text="Edit Code/Name/Description/Credit Hours" Command="{Binding EditDetailsCommand}" />
             <Button Text="Add Assignment" Command="{Binding AddAssignmentCommand}" />
             <Button Text="Create Assignment Group" Command="{Binding CreateAssignmentGroupCommand}" />
             <Button Text="Add Announcement" Command="{Binding AddAnnouncementCommand}"/>

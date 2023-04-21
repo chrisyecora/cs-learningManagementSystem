@@ -39,7 +39,7 @@ namespace Library.LMSystem.Services
             }
         }
 
-        public void UpdateCourse(Course course, string code, string name, string desc) {
+        public void UpdateCourse(Course course, string code, string name, string desc, int creditHrs) {
             if (!code.Equals(string.Empty)) {
                 course.CourseCode = code;
             }
@@ -48,6 +48,9 @@ namespace Library.LMSystem.Services
             }
             if (!desc.Equals(string.Empty)) {
                 course.Description = desc;
+            }
+            if (course.CreditHours != creditHrs) {
+                course.CreditHours = creditHrs;
             }
         }
 
