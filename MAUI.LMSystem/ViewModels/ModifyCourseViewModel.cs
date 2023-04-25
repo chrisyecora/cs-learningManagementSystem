@@ -73,6 +73,12 @@ namespace MAUI.LMSystem.ViewModels
         }
 
         [RelayCommand]
+        void GradeAssignment() {
+            var popup = new GradeAssignmentPopup(Course, studentService);
+            Shell.Current.ShowPopup(popup);
+        }
+
+        [RelayCommand]
         void GoBack() {
             var parameters = new Dictionary<string, object>();
             parameters.Add("courseService", courseService);
