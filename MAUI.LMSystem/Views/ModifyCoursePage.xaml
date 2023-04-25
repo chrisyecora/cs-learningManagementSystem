@@ -20,7 +20,7 @@
             <Button Text="Create Module" Command="{Binding CreateModuleCommand}" />
             <Button Text="Add Content to Existing Module" Command="{Binding CreateContentOnModuleCommand}" />
             <Button Text="Add Student to Roster" Command="{Binding AddStudentToRosterCommand}" />
-
+            <Button Text="Grade an assignment" Command="{Binding GradeAssignmentCommand}" />
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
