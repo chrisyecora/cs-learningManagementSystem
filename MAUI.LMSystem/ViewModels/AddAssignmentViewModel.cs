@@ -72,6 +72,17 @@ namespace MAUI.LMSystem.ViewModels
                 DueDate = DateTime.Parse(this.DueDate)
             };
             courseService.AddAssignmentToCourse(course, assignment, SelectedAssignmentGroup);
+
+            // reset fields
+            Name = string.Empty;
+            Description = string.Empty;
+            TotalPoints = 0;
+            DueDate = string.Empty;
+            NotifyPropertyChanged(nameof(Name));
+            NotifyPropertyChanged(nameof(Description));
+            NotifyPropertyChanged(nameof(TotalPoints));
+            NotifyPropertyChanged(nameof(DueDate));
+
             Dictionary<string, object> parameters = new Dictionary<string, object>();
             parameters.Add("studentService", studentService);
             parameters.Add("courseService", courseService);
