@@ -69,6 +69,7 @@ namespace MAUI.LMSystem.ViewModels
 
         [RelayCommand]
         void CourseDetails() {
+            ClearSearch();
             var parameters = new Dictionary<string, object>();
             parameters.Add("course", SelectedCourse);
             Shell.Current.GoToAsync("//CourseDetailsPage", parameters);
@@ -76,6 +77,7 @@ namespace MAUI.LMSystem.ViewModels
 
         [RelayCommand]
         void ModifyCourse() {
+            ClearSearch();
             var parameters = new Dictionary<string, object>();
             parameters.Add("courseService", courseService);
             parameters.Add("studentService", studentService);
