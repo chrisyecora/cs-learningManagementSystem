@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUI.LMSystem.Views.StudentView"
              xmlns:vm="clr-namespace:MAUI.LMSystem.ViewModels"
+             xmlns:model="clr-namespace:Library.LMSystem.Models;assembly=MAUI.Library.LMSystem"
              x:DataType="vm:StudentViewViewModel">
     <VerticalStackLayout>
-        <HorizontalStackLayout Spacing="20">
+        <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
             <Button
                 Text="Home"
                 Command="{Binding GoHomeCommand}"/>
@@ -14,5 +15,13 @@
                 Text="Someone else?"
                 Command="{Binding SomeoneElseCommand}"/>
         </HorizontalStackLayout>
+        <Label Text="Current Courses" HorizontalOptions="Center" FontSize="Header" Margin="20"/>
+        <ListView ItemsSource="{Binding Courses, Mode=OneWay}" BackgroundColor="Transparent">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Course">
+                    <TextCell Text="{Binding ShortDisplay}" Detail="{Binding Description}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </VerticalStackLayout>
 </ContentPage>
