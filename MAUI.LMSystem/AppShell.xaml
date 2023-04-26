@@ -16,6 +16,10 @@
         ContentTemplate="{DataTemplate local2:InstructorView}"
         Route="Instructor" />
     <ShellContent
+        Title="Select Student"
+        ContentTemplate="{DataTemplate local2:BufferStudentView}"
+        Route="BufferStudent" />
+    <ShellContent
         Title="Student"
         ContentTemplate="{DataTemplate local2:StudentView}"
         Route="Student" />
