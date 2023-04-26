@@ -27,7 +27,10 @@ namespace MAUI.LMSystem.ViewModels
 
         [RelayCommand]
         void StudentView() {
-            Shell.Current.GoToAsync("//Student");
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("studentService", studentService);
+            parameters.Add("courseService", courseService);
+            Shell.Current.GoToAsync("//BufferStudent", parameters);
         }
     }
 }
