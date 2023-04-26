@@ -73,6 +73,12 @@ namespace MAUI.LMSystem.ViewModels
         }
 
         [RelayCommand]
+        void RemoveStudentToRoster() {
+            var popup = new RemoveStudentFromRosterPopup(courseService, Course);
+            Shell.Current.ShowPopup(popup);
+        }
+
+        [RelayCommand]
         void GradeAssignment() {
             var popup = new GradeAssignmentPopup(Course, studentService);
             Shell.Current.ShowPopup(popup);
