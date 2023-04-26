@@ -8,101 +8,81 @@
     <ContentPage.Resources>
         <Style TargetType="Label">
             <Setter Property="FontSize"
-                    Value="25" />
+                    Value="20" />
         </Style>
     </ContentPage.Resources>
-    <VerticalStackLayout HorizontalOptions="Center">
-        <Button
-            Text="Back"
-            Command="{Binding GoBackCommand}"/>
-        <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="15">
-            <Label Grid.Column="0" Text="Code:" />
-            <Label Grid.Column="1" Text="{Binding Course.CourseCode}"/>
-        </Grid>
-        <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="15">
-            <Label Grid.Column="0" Text="Name:" />
-            <Label Grid.Column="1" Text="{Binding Course.Name}"/>
-        </Grid>
-        <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="15">
-            <Label Grid.Column="0" Text="Description:" />
-            <Label Grid.Column="1" Text="{Binding Course.Description}"/>
-        </Grid>
-        <Label Text="Assignments" Margin="10"/>
-        <ListView BackgroundColor="Transparent"
-                  ItemsSource="{Binding Assignments}"
-                  HasUnevenRows="True">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:Assignment">
-                    <ViewCell>
-                        <Grid>
-                            <Grid Padding="10" RowDefinitions="Auto, Auto">
-                                <Label Grid.Row="0"
-                                        VerticalOptions="Center"
-                                        Text="{Binding Display}"
-                                        FontSize="Medium"
-                                        Grid.Column="0"
-                                />
-                                <Label Grid.Row="1"
-                                        FontAttributes ="Italic"
-                                        FontSize="Small"
-                                        Text="{Binding Description}"
-                                />
-                            </Grid>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Label Text="Announcements" Margin="10"/>
-        <ListView BackgroundColor="Transparent"
-                  ItemsSource="{Binding Announcements}"
-                  HasUnevenRows="True">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:Announcement">
-                    <ViewCell>
-                        <Grid>
-                            <Grid Padding="10" RowDefinitions="Auto, Auto">
-                                <Label Grid.Row="0"
-                                        VerticalOptions="Center"
-                                        Text="{Binding Title}"
-                                        FontSize="Medium"
-                                        Grid.Column="0"
-                                />
-                                <Label Grid.Row="1"
-                                        FontAttributes ="Italic"
-                                        FontSize="Small"
-                                        Text="{Binding Body}"
-                                />
-                            </Grid>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Label Text="Modules" Margin="10"/>
-        <Grid RowDefinitions="Auto, Auto">
-            <Grid Grid.Row="0" ColumnDefinitions="*, 200">
-                <Button Grid.Column="1" Margin="10" Text="View Module" Command="{Binding ViewModuleCommand}" />
+    <ScrollView>
+        <VerticalStackLayout HorizontalOptions="Center" Spacing="15" Margin="15">
+            <Button
+                Text="Back"
+                Command="{Binding GoBackCommand}"/>
+            <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="15">
+                <Label Grid.Column="0" Text="Code:" />
+                <Label Grid.Column="1" Text="{Binding Course.CourseCode}"/>
             </Grid>
-            <ListView Grid.Row="1" BackgroundColor="Transparent"
-                  ItemsSource="{Binding Modules}"
-                  SelectedItem="{Binding SelectedModule}"
-                  HasUnevenRows="True">
+            <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="15">
+                <Label Grid.Column="0" Text="Name:" />
+                <Label Grid.Column="1" Text="{Binding Course.Name}"/>
+            </Grid>
+            <Grid ColumnDefinitions="Auto, Auto" ColumnSpacing="15">
+                <Label Grid.Column="0" Text="Description:" />
+                <Label Grid.Column="1" Text="{Binding Course.Description}"/>
+            </Grid>
+
+
+            <Label Text="Assignments"/>
+            <ListView BackgroundColor="Transparent"
+                      ItemsSource="{Binding Assignments}"
+                      SelectionMode="None">
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Module">
-                        <TextCell Text="{Binding ShortDisplay}" />
+                    <DataTemplate x:DataType="model:Assignment">
+                        <TextCell Text="{Binding Display}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </Grid>
-        <Label Text="Roster" Margin="10"/>
-        <ListView BackgroundColor="Transparent"
-                  ItemsSource="{Binding Roster}">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:Student">
-                    <TextCell Text="{Binding Display}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </VerticalStackLayout>
+
+
+            <Label Text="Announcements" />
+            <ListView BackgroundColor="Transparent"
+                      ItemsSource="{Binding Announcements}"
+                      SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Announcement">
+                        <TextCell Text="{Binding Title}" Detail="{Binding Body}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+
+            
+            <Grid RowDefinitions="Auto, Auto">
+                <Grid Grid.Row="0" ColumnDefinitions="*, 200">
+                    <Label Grid.Row="0" Text="Modules"  VerticalOptions="Center"/>
+                    <Button Grid.Column="1" Margin="10" Text="View Module" Command="{Binding ViewModuleCommand}" />
+                </Grid>
+                <ListView Grid.Row="1" BackgroundColor="Transparent"
+                      ItemsSource="{Binding Modules}"
+                      SelectedItem="{Binding SelectedModule}"
+                      HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Module">
+                            <TextCell Text="{Binding ShortDisplay}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+
+            <Label Text="Roster" />
+            <ListView BackgroundColor="Transparent"
+                      ItemsSource="{Binding Roster}"
+                      SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Student">
+                        <TextCell Text="{Binding Display}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
