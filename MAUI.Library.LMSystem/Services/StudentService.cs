@@ -77,17 +77,16 @@ namespace Library.LMSystem.Services
                 if (group.Name.Equals("Uncategorized")) {
                     continue;
                 }
-                int sumOfTotalPoints = 0;
+                int numAssignments = group.Assignments.Count();
                 double groupGrades = 0;
                 // loop through all assignments and find student's grades
                 foreach (var assignment in group.Assignments) {
                     if (student.Grades.ContainsKey(assignment.Id)) {
                         groupGrades += student.Grades[assignment.Id];
-                        sumOfTotalPoints += assignment.TotalPoints;
                     }
                 }
                 // cacluate averageForGroup and add the KV pair to list
-                var averageForGroup = groupGrades / (double)sumOfTotalPoints;
+                var averageForGroup = groupGrades / numAssignments;
                 grades.Add(new KeyValuePair<double, double>(group.Weight, averageForGroup));
             }
 

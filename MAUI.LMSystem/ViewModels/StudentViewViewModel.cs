@@ -18,6 +18,11 @@ namespace MAUI.LMSystem.ViewModels
             set;
         }
 
+        public string GPA {
+            get;
+            set;
+        }
+
         private StudentService studentService;
         private CourseService courseService;
         private Student student;
@@ -32,6 +37,8 @@ namespace MAUI.LMSystem.ViewModels
             courseService = query["courseService"] as CourseService;
             student = query["student"] as Student;
             Courses = new ObservableCollection<Course>(courseService.QueryByStudentInRosters(student));
+            GPA = studentService.CalcStudentGPA(courseService.QueryByStudentInRosters(student), student).ToString();
+            NotifyPropertyChanged(nameof(GPA));
             NotifyPropertyChanged(nameof(Courses));
         }
 

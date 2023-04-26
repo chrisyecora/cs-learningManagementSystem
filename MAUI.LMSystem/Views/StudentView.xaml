@@ -15,6 +15,12 @@
                 Text="Someone else?"
                 Command="{Binding SomeoneElseCommand}"/>
         </HorizontalStackLayout>
+
+        <HorizontalStackLayout Spacing="20" HorizontalOptions="Center" Margin="20">
+            <Label Text="Current GPA:" FontSize="Body" FontAttributes="Bold"/>
+            <Label Text="{Binding GPA, Mode=OneWay}" FontSize="Body" FontAttributes="Bold" />
+        </HorizontalStackLayout>
+
         <Label Text="Current Courses" HorizontalOptions="Center" FontSize="Header" Margin="20"/>
         <ListView ItemsSource="{Binding Courses, Mode=OneWay}" BackgroundColor="Transparent">
             <ListView.ItemTemplate>
