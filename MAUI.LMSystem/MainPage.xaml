@@ -4,41 +4,15 @@
              x:Class="MAUI.LMSystem.MainPage"
              xmlns:local="clr-namespace:MAUI.LMSystem.ViewModels"
              x:DataType="local:MainViewModel">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="3*"/>
-        </Grid.RowDefinitions>
-       <!--Top Row with title message and View buttons-->
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Label
-                Grid.Column="0"
-                Margin="5"
-                FontSize="Header"
-                VerticalOptions="Center"
-                Text="Learning Management System"
-                />
-            <Button
-                Grid.Column="1"
-                Margin="5"
-                Text="Instructor view"
-                Command="{Binding InstructorViewCommand}"
-                />
-            <Button
-                Grid.Column="2"
-                Margin="5"
-                Text="Student view"
-                Command="{Binding StudentViewCommand}"
-                />
-
-        </Grid>
-        
-    </Grid>
+    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <HorizontalStackLayout Spacing="20">
+            <Button Grid.Column="1" Margin="5" Text="Instructor view"
+                    WidthRequest="300" HeightRequest="200"
+                    Command="{Binding InstructorViewCommand}" />
+            <Button Grid.Column="2" Margin="5" Text="Student view"
+                    WidthRequest="300" HeightRequest="200"
+                    Command="{Binding StudentViewCommand}" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
 </ContentPage>
 

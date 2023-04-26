@@ -22,22 +22,21 @@ namespace MAUI.LMSystem.ViewModels
             set;
         }
 
-        public void CreatePerson(ContentPage page) {
+        [RelayCommand]
+        void GoBack() {
+            Shell.Current.GoToAsync("//MainPage");
+        }
+
+        [RelayCommand]
+        void CreatePerson() {
             var popup = new CreatePersonPopup(studentService);
-            if (popup != null) {
-                page.ShowPopup(popup);
-            }
+            Shell.Current.ShowPopup(popup);
         }
 
-        public void ViewPersons(ContentPage page) {
-            
-        }
-
-        public void CreateCourse(ContentPage page) {
+        [RelayCommand]
+        void CreateCourse(ContentPage page) {
             var popup = new CreateCoursePopup(courseService);
-            if (popup != null) {
-                page.ShowPopup(popup);
-            }
+            Shell.Current.ShowPopup(popup);
         }
 
         [RelayCommand]

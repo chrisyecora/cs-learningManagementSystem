@@ -4,79 +4,57 @@
              x:Class="MAUI.LMSystem.Views.InstructorView"
              xmlns:vm="clr-namespace:MAUI.LMSystem.ViewModels"
              x:DataType="vm:InstructorViewViewModel">
-    <VerticalStackLayout>
-        <Button
-            Text="Back"
-            Clicked="BackClicked"/>
-        <Grid RowDefinitions="Auto, *, *">
+    <Grid RowDefinitions="60, *" HorizontalOptions="CenterAndExpand">
+
+        <Button Grid.Row="0" Text="Back" Command="{Binding GoBackCommand}"/>
+
+        <Grid Grid.Row="1" RowDefinitions="Auto, Auto" HorizontalOptions="Center" VerticalOptions="Center">
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Margin="30"
+                    WidthRequest="300"
+                    HeightRequest="200"
+                    Text="Create Person"
+                    Command="{Binding CreatePersonCommand}"
+                />
+                <Button
+                    Grid.Column="1"
+                    Margin="30"
+                    WidthRequest="300"
+                    HeightRequest="200"
+                    Text="View Persons"
+                    x:Name="ViewPersonButton"
+                    Command="{Binding ViewPersonsCommand}"
+                    />
+            </Grid>
+
             <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button
-                Grid.Column="0"
-                Margin="30"
-                WidthRequest="300"
-                HeightRequest="200"
-                Text="Create Person"
-                x:Name="CreatePersonButton"
-                Clicked="CreatePersonButton_Clicked"
-            />
-            <Button
-                Grid.Column="1"
-                Margin="30"
-                WidthRequest="300"
-                HeightRequest="200"
-                Text="Manage Persons"
-                x:Name="UpdatePersonButton"
-                Clicked="UpdatePersonButton_Clicked"
-                />
-            <Button
-                Grid.Column="2"
-                Margin="30"
-                WidthRequest="300"
-                HeightRequest="200"
-                Text="View Persons"
-                x:Name="ViewPersonButton"
-                Command="{Binding ViewPersonsCommand}"
-                />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Margin="30"
+                    WidthRequest="300"
+                    HeightRequest="200"
+                    Text="Create Course"
+                    Command="{Binding CreateCourseCommand}"
+                    />
+                <Button
+                    Grid.Column="1"
+                    Margin="30"
+                    WidthRequest="300"
+                    HeightRequest="200"
+                    Text="View Courses"
+                    Command="{Binding ViewCoursesCommand}"
+                    />
+            </Grid>
         </Grid>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button
-                Grid.Column="0"
-                Margin="30"
-                WidthRequest="300"
-                HeightRequest="200"
-                Text="Create Course"
-                x:Name="CreateCourseButton"
-                Clicked="CreateCourseButton_Clicked"
-                />
-            <Button
-                Grid.Column="1"
-                Margin="30"
-                WidthRequest="300"
-                HeightRequest="200"
-                Text="Manage Courses"
-                x:Name="ManageCoursesButton"
-                Clicked="ManageCoursesButton_Clicked"
-                />
-            <Button
-                Grid.Column="2"
-                Margin="30"
-                WidthRequest="300"
-                HeightRequest="200"
-                Text="View Courses"
-                Command="{Binding ViewCoursesCommand}"
-                />
-        </Grid>
-        </Grid>
-        
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>
