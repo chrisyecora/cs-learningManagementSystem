@@ -39,6 +39,10 @@ namespace Library.LMSystem.Services
             }
         }
 
+        public void RemovePersonFromRoster(Course course, Person person) {
+            course.Roster.Remove(person);
+        }
+
         public void UpdateCourse(Course course, string code, string name, string desc, int creditHrs) {
             if (!code.Equals(string.Empty)) {
                 course.CourseCode = code;
